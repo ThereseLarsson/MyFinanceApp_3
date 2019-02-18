@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText firstName;
     private EditText lastName;
     private Button btn;
+    private Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initiateComponents();
         registerListeners();
-        //CHECK IF USER HAS USED APPLICATION BEFORE, IF SO --> CHANGE NAME IN GREETING MESSAGE
+        //updateGreetingMessage();
     }
 
     /**
@@ -43,6 +44,38 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(clickListener);
     }
 
+    public void updateGreetingMessage() {
+        if(userExists()) {
+            //setGreetingMessage();
+        } else {
+            //setGreetingMessage();
+        }
+    }
+
+    /**
+     * checks if the user has used the application before
+     */
+    public boolean userExists() {
+        return db.personExists();
+    }
+
+    /**
+     * changes the greeting message
+     */
+    public void setGreetingMessage(String string) {
+        greeting.setText(string);
+    }
+
+    /**
+     * shows the user a message when they fail to create a valid account
+     */
+    public void showMessage(String message) {
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, message, duration);
+        toast.show();
+    }
+
     /**
      * checks if the firstname and lastname are both filled, if so return true.
      * Otherwise, return false
@@ -57,30 +90,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * shows the user a message when they fail to create a valid account
-     */
-    public void showMessage(String message) {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, message, duration);
-        toast.show();
-    }
-
-    /**
-     * checks if the user has used the application before
-     */
-    public void checkName() {
-
-    }
-
-    /**
-     * changes the greeting message
-     */
-    public void changeGreeting(String string) {
-        greeting.setText(string);
-    }
-
-    /**
      * inner class to handle clicks
      */
     private class ClickListener implements View.OnClickListener {
@@ -89,10 +98,11 @@ public class MainActivity extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.start_btn:
                     if(validNames()) {
-                        Intent intent = new Intent(getApplicationContext(), NEXT_ACTIVITY.class);
+                        db.addPerson(firstName.getText().toString(), lastName.getText().toString());
+                        Intent intent = new Intent(getApplicationContext(), TestActivity.class);
                         startActivity(intent);
                     } else {
-                        showMessage("Please enter both firstname and a lastname");
+                        showMessage("Please enter both a firstname and a lastname");
                     }
                     break;
             }
