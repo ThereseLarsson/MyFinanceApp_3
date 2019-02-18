@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText firstName;
     private EditText lastName;
     private Button btn;
-    private static Database db;
+    public static Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initiateComponents();
         registerListeners();
+        createDatabase(getApplicationContext());
         //updateGreetingMessage();
     }
 
@@ -42,6 +43,13 @@ public class MainActivity extends AppCompatActivity {
     private void registerListeners() {
         ClickListener clickListener = new ClickListener();
         btn.setOnClickListener(clickListener);
+    }
+
+    public static Database createDatabase(Context context){
+        if(db == null) {
+            db = new Database(context);
+        }
+        return db;
     }
 
     public void updateGreetingMessage() {
@@ -99,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.start_btn:
                     if(validNames()) {
                         db.addPerson(firstName.getText().toString(), lastName.getText().toString());
+                        db.printTablePersonAsString();
                         Intent intent = new Intent(getApplicationContext(), TestActivity.class);
                         startActivity(intent);
                     } else {

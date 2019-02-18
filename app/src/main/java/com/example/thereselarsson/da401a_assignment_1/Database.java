@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * class for storing the entered user data
@@ -150,5 +151,27 @@ public class Database extends SQLiteOpenHelper {
 
     public String getOutcomeFromDate() {
         return "";
+    }
+
+    /**
+     * testing purposes
+     */
+    public void printTablePersonAsString() {
+        SQLiteDatabase dbHandler = this.getReadableDatabase();
+        String tableString = String.format("TABLE %s:\n", TABLE_PERSONS);
+        Cursor allRows  = dbHandler.rawQuery("SELECT * FROM " + TABLE_PERSONS, null);
+        if (allRows.moveToFirst() ){
+            String[] columnNames = allRows.getColumnNames();
+            do {
+                for (String name: columnNames) {
+                    tableString += String.format("%s: %s\n", name,
+                            allRows.getString(allRows.getColumnIndex(name)));
+                }
+                tableString += "\n";
+
+            } while (allRows.moveToNext());
+        }
+        allRows.close();
+        Log.d(null, tableString);
     }
 }
