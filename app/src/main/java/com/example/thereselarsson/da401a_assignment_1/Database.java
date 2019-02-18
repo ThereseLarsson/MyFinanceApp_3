@@ -2,6 +2,7 @@ package com.example.thereselarsson.da401a_assignment_1;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -18,14 +19,23 @@ public class Database extends SQLiteOpenHelper {
     private static final String PERSONS_COLUMN_FIRST_NAME = "firstName";
     private static final String PERSONS_COLUMN_LAST_NAME = "lastName";
 
-    //table 2 - income/outcome
-    private static final String TABLE_FINANCES = "FINANCES";
-    private static final String FINANCES_COLUMN_ID = "_id";
-    private static final String FINANCES_COLUMN_TYPE = "type"; //income or outcome
-    private static final String FINANCES_COLUMN_TITLE = "title";
-    private static final String FINANCES_COLUMN_DATE = "date"; //FIXA TILL DATE-OBJEKT
-    private static final String FINANCES_COLUMN_AMOUNT = "amount";
-    private static final String FINANCES_COLUMN_CATEGORY = "category";
+    //table 2 - income
+    private static final String TABLE_INCOME = "income";
+    private static final String INCOME_COLUMN_ID = "_id";
+    private static final String INCOME_COLUMN_TYPE = "type"; //income or outcome
+    private static final String INCOME_COLUMN_TITLE = "title";
+    private static final String INCOME_COLUMN_DATE = "date"; //FIXA TILL DATE-OBJEKT
+    private static final String INCOME_COLUMN_AMOUNT = "amount";
+    private static final String INCOME_COLUMN_CATEGORY = "category";
+
+    //table 3 - outcome
+    private static final String TABLE_OUTCOME = "outcome";
+    private static final String OUTCOME_COLUMN_ID = "_id";
+    private static final String OUTCOME_COLUMN_TYPE = "type"; //income or outcome
+    private static final String OUTCOME_COLUMN_TITLE = "title";
+    private static final String OUTCOME_COLUMN_DATE = "date"; //FIXA TILL DATE-OBJEKT
+    private static final String OUTCOME_COLUMN_AMOUNT = "amount";
+    private static final String OUTCOME_COLUMN_CATEGORY = "category";
 
     public Database(Context context) {
         super(context, DATABASE_NAME , null, DATABASE_VERSION);
@@ -39,13 +49,22 @@ public class Database extends SQLiteOpenHelper {
                 PERSONS_COLUMN_LAST_NAME + " TEXT) "
         );
 
-        db.execSQL("CREATE TABLE " + TABLE_FINANCES + "(" +
-                FINANCES_COLUMN_ID + " INTEGER PRIMARY KEY, " +
-                FINANCES_COLUMN_TYPE + " TEXT, " +
-                FINANCES_COLUMN_TITLE + " TEXT, " +
-                FINANCES_COLUMN_DATE + " TEXT, " + //FIXA TILL DATE-OBJEKT
-                FINANCES_COLUMN_AMOUNT + " INTEGER, " +
-                FINANCES_COLUMN_CATEGORY + " TEXT)"
+        db.execSQL("CREATE TABLE " + TABLE_INCOME + "(" +
+                INCOME_COLUMN_ID + " INTEGER PRIMARY KEY, " +
+                INCOME_COLUMN_TYPE + " TEXT, " +
+                INCOME_COLUMN_TITLE + " TEXT, " +
+                INCOME_COLUMN_DATE + " TEXT, " + //FIXA TILL DATE-OBJEKT
+                INCOME_COLUMN_AMOUNT + " INTEGER, " +
+                INCOME_COLUMN_CATEGORY + " TEXT)"
+        );
+
+        db.execSQL("CREATE TABLE " + TABLE_OUTCOME + "(" +
+                OUTCOME_COLUMN_ID + " INTEGER PRIMARY KEY, " +
+                OUTCOME_COLUMN_TYPE + " TEXT, " +
+                OUTCOME_COLUMN_TITLE + " TEXT, " +
+                OUTCOME_COLUMN_DATE + " TEXT, " + //FIXA TILL DATE-OBJEKT
+                OUTCOME_COLUMN_AMOUNT + " INTEGER, " +
+                OUTCOME_COLUMN_CATEGORY + " TEXT)"
         );
     }
 
@@ -64,18 +83,68 @@ public class Database extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean personExists() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_PERSONS, new String[] {"*"}, null, null, null, null, null, null );
+        if(cursor != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public String getPersonName() {
+        String firstName = "";
+        String lastName = "";
+        String fullName = "";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_PERSONS, new String[] {"*"}, null, null, null, null, null, null );
+        if(cursor != null) {
+            if(cursor.moveToFirst()) {
+                firstName = cursor.getString(1);
+                lastName = cursor.getString(2);
+                fullName = firstName + " " + lastName;
+            }
+            cursor.close();
+        }
+        db.close();
+        return fullName;
+    }
+
     //FIXA TILL DATE-OBJEKT --> ARGUMENT
-    public boolean addFinance(String type, String title, String date, int amount, String category) {
+    public boolean addIncome(String type, String title, String date, int amount, String category) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(FINANCES_COLUMN_TYPE, type);
-        contentValues.put(FINANCES_COLUMN_TITLE, title);
-        contentValues.put(FINANCES_COLUMN_DATE, date); //FIXA TILL DATE-OBJEKT
-        contentValues.put(FINANCES_COLUMN_AMOUNT, amount);
-        contentValues.put(FINANCES_COLUMN_CATEGORY, category);
-        db.insert(TABLE_FINANCES, null, contentValues);
+        contentValues.put(INCOME_COLUMN_TYPE, type);
+        contentValues.put(INCOME_COLUMN_TITLE, title);
+        contentValues.put(INCOME_COLUMN_DATE, date); //FIXA TILL DATE-OBJEKT
+        contentValues.put(INCOME_COLUMN_AMOUNT, amount);
+        contentValues.put(INCOME_COLUMN_CATEGORY, category);
+        db.insert(TABLE_INCOME, null, contentValues);
         return true;
     }
 
-    //+ update- och get-metoder för varje table
+    public int getTotalIncome() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        //Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_INCOME, null );
+        return -1;
+    }
+
+    //FIXA TILL DATE-OBJEKT --> ARGUMENT
+    public boolean addOutcome(String type, String title, String date, int amount, String category) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(OUTCOME_COLUMN_TYPE, type);
+        contentValues.put(OUTCOME_COLUMN_TITLE, title);
+        contentValues.put(OUTCOME_COLUMN_DATE, date); //FIXA TILL DATE-OBJEKT
+        contentValues.put(OUTCOME_COLUMN_AMOUNT, amount);
+        contentValues.put(OUTCOME_COLUMN_CATEGORY, category);
+        db.insert(TABLE_OUTCOME, null, contentValues);
+        return true;
+    }
+
+    public int getTotalOutcome() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        //Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_OUTCOME, null );
+        return -1;
+    }
 }
