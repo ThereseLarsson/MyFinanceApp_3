@@ -29,9 +29,9 @@ public class CreateAccount extends AppCompatActivity {
      */
     private void initiateComponents() {
         greeting = findViewById(R.id.start_headline);
-        firstName = findViewById(R.id.start_firstName);
-        lastName = findViewById(R.id.start_lastName);
-        btn = findViewById(R.id.start_btn);
+        firstName = findViewById(R.id.newAccount_firstName);
+        lastName = findViewById(R.id.newAccount_lastName);
+        btn = findViewById(R.id.newAccount_btn);
     }
 
     /**
@@ -72,7 +72,7 @@ public class CreateAccount extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.start_btn:
+                case R.id.newAccount_btn:
                     if(validNames()) {
                         MainActivity.db.addPerson(firstName.getText().toString(), lastName.getText().toString());
                         MainActivity.db.printTablePersonAsString();

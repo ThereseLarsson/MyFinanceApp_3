@@ -8,12 +8,12 @@
     <string name="message">Loading... </string>
 
     <!-- Create new account view-->
-    <string name="start_headline">Welcome new user! </string>
-    <string name="start_message">As a new user, please enter your first name and
-    surname down below before you continue </string>
-    <string name="start_enterFName">Enter first name </string>
-    <string name="start_enterLName">Enter lastname </string>
-    <string name="start_btn">Continue </string>
+    <string name="newAccount_headline">Welcome new user! </string>
+    <string name="newAccount_message">As a new user, please enter your first name and
+    last name down below before you continue </string>
+    <string name="newAccount_enterFName">Enter first name </string>
+    <string name="newAccount_enterLName">Enter last name </string>
+    <string name="newAccount_btn">Continue </string>
 
     <!-- Enter New Income view-->
     <string name="enterIncome_headline">Enter new income </string>

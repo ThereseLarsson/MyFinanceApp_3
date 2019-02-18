@@ -7,20 +7,20 @@
     tools:context=".CreateAccount">
 
     <TextView
-        android:id="@+id/start_headline"
+        android:id="@+id/newAccount_headline"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_height="22dp"
         android:layout_centerInParent="true"
-        android:text="@string/start_headline"
-        android:textSize="18sp"
+        android:layout_marginTop="44dp"
         android:gravity="center"
+        android:text="@string/newAccount_headline"
+        android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/start_message"
+        android:id="@+id/newAccount_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -29,14 +29,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="28dp"
         android:layout_centerInParent="true"
-        android:text="@string/start_message"
+        android:text="@string/newAccount_message"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_headline" />
+        app:layout_constraintTop_toBottomOf="@+id/newAccount_headline" />
 
     <EditText
-        android:id="@+id/start_firstName"
+        android:id="@+id/newAccount_firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -45,15 +45,15 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="48dp"
         android:ems="10"
-        android:hint="@string/start_enterFName"
+        android:hint="@string/newAccount_enterFName"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_message" />
+        app:layout_constraintTop_toBottomOf="@+id/newAccount_message" />
 
     <EditText
-        android:id="@+id/start_lastName"
+        android:id="@+id/newAccount_lastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -62,14 +62,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/start_enterLName"
+        android:hint="@string/newAccount_enterLName"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_firstName" />
+        app:layout_constraintTop_toBottomOf="@+id/newAccount_firstName" />
 
     <Button
-        android:id="@+id/start_btn"
+        android:id="@+id/newAccount_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -80,12 +80,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="@string/start_btn"
+        android:text="@string/newAccount_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_lastName"
+        app:layout_constraintTop_toBottomOf="@+id/newAccount_lastName"
         app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>
