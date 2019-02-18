@@ -75,10 +75,15 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public boolean addPerson(String firstName, String lastName) {
+        // Gets the data repository in write mode
         SQLiteDatabase db = getWritableDatabase();
+
+        // Create a new map of values, where column names are the keys
         ContentValues contentValues = new ContentValues();
         contentValues.put(PERSONS_COLUMN_FIRST_NAME, firstName);
         contentValues.put(PERSONS_COLUMN_LAST_NAME, lastName);
+
+        // Insert the new row, returning the primary key value of the new row
         db.insert(TABLE_PERSONS, null, contentValues);
         return true;
     }
