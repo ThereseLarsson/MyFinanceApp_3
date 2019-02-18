@@ -4,13 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    Intent intent;
     public static Database db;
     public static boolean accountCreated = false;
 
@@ -18,27 +14,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        createDatabase(getApplicationContext());
+        initiateDatabase(getApplicationContext());
 
         if(accountCreated) {
-            //"logga in" användaren
+            //Intent intent = new Intent(getApplicationContext(), "LOGIN".class);
+            //startActivity(intent);
+
         } else {
-            Intent intent = new Intent(getApplicationContext(), CreateAccount.class);
+            intent = new Intent(getApplicationContext(), CreateAccount.class);
             startActivity(intent);
         }
     }
 
-    public static Database createDatabase(Context context){
+    /**
+     * initiates and returns the database
+     * @param context
+     * @return
+     */
+    public static Database initiateDatabase(Context context){
         if(db == null) {
             db = new Database(context);
         }
         return db;
-    }
-
-    /**
-     * checks if the user has used the application before
-     */
-    public boolean userExists() {
-        return db.personExists();
     }
 }
