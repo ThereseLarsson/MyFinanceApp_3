@@ -40,6 +40,12 @@ public class Database extends SQLiteOpenHelper {
     }
 
     @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERSONS + TABLE_INCOME + TABLE_OUTCOME);
+        onCreate(db); //recreate tables
+    }
+
+    @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + TABLE_PERSONS + "(" +
                 PERSONS_COLUMN_ID + " INTEGER PRIMARY KEY, " +
@@ -62,12 +68,6 @@ public class Database extends SQLiteOpenHelper {
                 OUTCOME_COLUMN_AMOUNT + " INTEGER, " +
                 OUTCOME_COLUMN_CATEGORY + " TEXT)"
         );
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERSONS + TABLE_FINANCES);
-        //onCreate(db);
     }
 
     public void addPerson(String firstName, String lastName) {

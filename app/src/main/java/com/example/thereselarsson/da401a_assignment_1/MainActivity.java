@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText firstName;
     private EditText lastName;
     private Button btn;
-    private Database db;
+    private static Database db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
