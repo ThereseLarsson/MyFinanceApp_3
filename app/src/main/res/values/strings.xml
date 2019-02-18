@@ -19,10 +19,10 @@
     <string name="enterOutcome_headline">Enter new outcome </string>
 
     <!-- Enter New Income/Outcome view-->
-    <string name="enter_title">Enter title for transaction </string>
-    <string name="enter_date">Enter date </string>
+    <string name="enter_title">Enter title: </string>
+    <string name="enter_date">Enter date: </string>
     <string name="enter_category">Enter category: </string>
-    <string name="enter_amount">Enter amount </string>
+    <string name="enter_amount">Enter amount: </string>
     <string name="enter_btn">Confirm </string>
 
 </resources>
