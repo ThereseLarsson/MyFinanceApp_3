@@ -11,8 +11,8 @@
     <string name="newAccount_headline">Welcome new user! </string>
     <string name="newAccount_message">As a new user, please enter your first name and
     last name down below before you continue </string>
-    <string name="newAccount_enterFName">Enter first name </string>
-    <string name="newAccount_enterLName">Enter last name </string>
+    <string name="newAccount_enterFName"><i>Enter first name </i></string>
+    <string name="newAccount_enterLName"><i>Enter last name </i></string>
     <string name="newAccount_btn">Continue </string>
 
     <!-- Enter New Income view-->
