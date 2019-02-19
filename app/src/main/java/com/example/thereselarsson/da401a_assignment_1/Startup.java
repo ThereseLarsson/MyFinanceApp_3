@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 public class Startup extends AppCompatActivity {
     Intent intent;
@@ -19,12 +18,9 @@ public class Startup extends AppCompatActivity {
 
         if(db.userExists()) {
             accountCreated = true;
-            db.printTablePersonAsString();
         } else {
             accountCreated = false;
         }
-
-        //accountCreated = false;
 
         if(accountCreated) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
