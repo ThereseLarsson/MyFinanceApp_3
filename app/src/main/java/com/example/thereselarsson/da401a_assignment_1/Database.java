@@ -89,9 +89,9 @@ public class Database extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_PERSONS, null);
         if(cursor != null) {
             cursor.moveToFirst();
-            if(cursor.getInt(0) == 0) {
+            if(cursor.getInt(0) == 0) { //table is empty
                 cursor.close();
-                return false; //empty
+                return false;
             } else {
                 cursor.close();
                 return true;
@@ -130,13 +130,19 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public int getTotalIncome() {
+        int totalIncome = 0;
         SQLiteDatabase db = this.getReadableDatabase();
-        //Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_INCOME, null ); //rad3
-        return -1;
+        Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_INCOME, null ); //rad3
+
+
+        return totalIncome;
     }
 
     public String getIncomeFromDate() {
-        return "";
+        String result = "";
+
+
+        return result;
     }
 
     //FIXA TILL DATE-OBJEKT --> ARGUMENT
@@ -151,13 +157,19 @@ public class Database extends SQLiteOpenHelper {
     }
 
     public int getTotalOutcome() {
+        int totalOutcome = 0;
         SQLiteDatabase db = this.getReadableDatabase();
-        //Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_OUTCOME, null );
-        return -1;
+        Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_OUTCOME, null );
+
+
+        return totalOutcome;
     }
 
     public String getOutcomeFromDate() {
-        return "";
+        String result = "";
+
+
+        return result;
     }
 
     /**
