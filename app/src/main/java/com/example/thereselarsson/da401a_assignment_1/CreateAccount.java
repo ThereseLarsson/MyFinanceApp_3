@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class CreateAccount extends AppCompatActivity {
-    private TextView greeting;
     private EditText firstName;
     private EditText lastName;
     private Button btn;
@@ -28,7 +27,6 @@ public class CreateAccount extends AppCompatActivity {
      * initiates necessary components
      */
     private void initiateComponents() {
-        greeting = findViewById(R.id.start_headline);
         firstName = findViewById(R.id.newAccount_firstName);
         lastName = findViewById(R.id.newAccount_lastName);
         btn = findViewById(R.id.newAccount_btn);
@@ -75,8 +73,8 @@ public class CreateAccount extends AppCompatActivity {
                 case R.id.newAccount_btn:
                     if(validNames()) {
                         MainActivity.db.addPerson(firstName.getText().toString(), lastName.getText().toString());
-                        MainActivity.db.printTablePersonAsString();
-                        Intent intent = new Intent(getApplicationContext(), TestActivity.class);
+                        MainActivity.db.printTablePersonAsString(); //testing purpose
+                        Intent intent = new Intent(getApplicationContext(), TestActivity.class); //"LOGIN" USER
                         startActivity(intent);
                         MainActivity.accountCreated = true;
                     } else {
