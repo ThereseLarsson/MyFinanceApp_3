@@ -4,13 +4,14 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <!-- Test strings-->
+    <!-- Strings for testing purposes -->
     <string name="test_1">SUCCESS!</string>
+    <string name="test_2">TESTING</string>
 
-    <!-- Startup view-->
+    <!-- Startup view -->
     <string name="message">Loading... </string>
 
-    <!-- Create new account view-->
+    <!-- Create new account view -->
     <string name="newAccount_headline">Welcome new user! </string>
     <string name="newAccount_message">As a new user, please enter your first name and
     last name down below before you continue </string>
@@ -18,17 +19,23 @@
     <string name="newAccount_enterLName"><i>Enter last name </i></string>
     <string name="newAccount_btn">Continue </string>
 
-    <!-- Enter New Income view-->
+    <!-- Enter New Income view -->
     <string name="enterIncome_headline">Enter new income </string>
 
-    <!-- Enter New Income view-->
+    <!-- Enter New Income view -->
     <string name="enterOutcome_headline">Enter new outcome </string>
 
-    <!-- Enter New Income/Outcome view-->
+    <!-- Enter New Income/Outcome view -->
     <string name="enter_title">Enter title: </string>
     <string name="enter_date">Enter date: </string>
     <string name="enter_category">Enter category: </string>
     <string name="enter_amount">Enter amount: </string>
     <string name="enter_btn">Confirm </string>
+
+    <!-- Main view -->
+
+    <!-- Results view -->
+    <string name="result_title1">Dear! </string>
+    <string name="result_title2">Here are your financial results! </string>
 
 </resources>

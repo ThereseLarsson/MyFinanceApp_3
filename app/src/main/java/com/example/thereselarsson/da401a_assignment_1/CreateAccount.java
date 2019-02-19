@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class CreateAccount extends AppCompatActivity {
@@ -72,11 +71,11 @@ public class CreateAccount extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.newAccount_btn:
                     if(validNames()) {
-                        MainActivity.db.addPerson(firstName.getText().toString(), lastName.getText().toString());
-                        MainActivity.db.printTablePersonAsString(); //testing purpose
-                        Intent intent = new Intent(getApplicationContext(), TestActivity.class); //"LOGIN" USER
+                        Startup.db.addPerson(firstName.getText().toString(), lastName.getText().toString());
+                        Startup.db.printTablePersonAsString(); //testing purpose
+                        Startup.accountCreated = true;
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
-                        MainActivity.accountCreated = true;
                     } else {
                         showMessage("Please enter both a firstname and a lastname");
                     }

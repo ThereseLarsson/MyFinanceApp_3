@@ -84,11 +84,18 @@ public class Database extends SQLiteOpenHelper {
         db.insert(TABLE_PERSONS, null, contentValues);
     }
 
-    public boolean personExists() {
+    public boolean userExists() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_PERSONS, new String[] {"*"}, null, null, null, null, null, null );
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_PERSONS, null);
         if(cursor != null) {
-            return true;
+            cursor.moveToFirst();
+            if(cursor.getInt(0) == 0) {
+                cursor.close();
+                return false; //empty
+            } else {
+                cursor.close();
+                return true;
+            }
         }
         return false;
     }
