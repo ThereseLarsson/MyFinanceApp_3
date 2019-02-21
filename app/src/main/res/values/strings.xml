@@ -36,7 +36,7 @@
 
     <!-- Main view -->
     <string name="main_greeting_1">Dear! </string>
-    <string name="main_greeting_2">Choose a option from the navigation menu
+    <string name="main_greeting_2">Choose an option from the navigation menu
         to the left to get started! </string>
 
     <!-- Results view -->
