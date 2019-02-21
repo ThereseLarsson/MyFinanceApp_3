@@ -35,9 +35,11 @@
     <string name="enter_btn">Confirm </string>
 
     <!-- Main view -->
+    <string name="main_greeting_1">Dear! </string>
+    <string name="main_greeting_2">Choose a option from the navigation menu
+        to the left to get started! </string>
 
     <!-- Results view -->
-    <string name="result_title1">Dear! </string>
-    <string name="result_title2">Here are your financial results! </string>
+    <string name="result_title">Here are your financial results! </string>
 
 </resources>
