@@ -21,9 +21,11 @@
 
     <!-- Enter New Income view -->
     <string name="enterIncome_headline">Enter new income </string>
+    <string name="enterIncome_toggleHeadline">Enter new outcome instead </string>
 
     <!-- Enter New Income view -->
     <string name="enterOutcome_headline">Enter new outcome </string>
+    <string name="enterOutcome_toggleHeadline">Enter new income instead </string>
 
     <!-- Enter New Income/Outcome view -->
     <string name="enter_title">Enter title: </string>

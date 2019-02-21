@@ -3,6 +3,7 @@ package com.example.thereselarsson.da401a_assignment_1;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+//Main Menu in the app
 public class MainActivity extends AppCompatActivity {
 
     @Override
