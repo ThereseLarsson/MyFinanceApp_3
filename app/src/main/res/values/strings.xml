@@ -19,6 +19,11 @@
     <string name="newAccount_enterLName"><i>Enter last name </i></string>
     <string name="newAccount_btn">Continue </string>
 
+    <!-- Main view -->
+    <string name="main_greeting_1">Dear! </string>
+    <string name="main_greeting_2">Choose an option from the navigation menu
+        to the left to get started! </string>
+
     <!-- Enter New Income view -->
     <string name="enterIncome_headline">Enter new income </string>
     <string name="enterIncome_toggleHeadline">Enter new outcome instead </string>
@@ -33,11 +38,6 @@
     <string name="enter_category">Enter category: </string>
     <string name="enter_amount">Enter amount: </string>
     <string name="enter_btn">Confirm </string>
-
-    <!-- Main view -->
-    <string name="main_greeting_1">Dear! </string>
-    <string name="main_greeting_2">Choose an option from the navigation menu
-        to the left to get started! </string>
 
     <!-- Results view -->
     <string name="result_title">Here are your financial results! </string>
