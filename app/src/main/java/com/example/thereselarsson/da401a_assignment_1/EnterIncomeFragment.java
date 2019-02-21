@@ -11,6 +11,10 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class EnterIncomeFragment extends Fragment {
     private EditText title;
@@ -20,6 +24,9 @@ public class EnterIncomeFragment extends Fragment {
     private Button confirmBtn;
     private Switch toggleBtn;
     private View rootView;
+    private DateFormat formatter;
+    private Date dateObject;
+    private String dateDate;
 
     public EnterIncomeFragment() {
         // Required empty public constructor
@@ -54,8 +61,19 @@ public class EnterIncomeFragment extends Fragment {
 
     }
 
-    public void getDate() {
+    public String getDate() {
+        formatter = new SimpleDateFormat("dd/MM/yyyy"); // Make sure user insert date into edittext in this format.
+        String dateString = date.getText().toString();
+        try {
+            dateObject = formatter.parse(dateString);
+            dateDate = new SimpleDateFormat("dd/MM/yyyy").format(dateObject);
 
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+
+        Toast.makeText(getActivity(), dateDate, Toast.LENGTH_LONG).show(); //testing
+        return dateDate;
     }
 
     /**
