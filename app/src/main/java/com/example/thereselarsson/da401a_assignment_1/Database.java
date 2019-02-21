@@ -71,6 +71,11 @@ public class Database extends SQLiteOpenHelper {
         );
     }
 
+    /**
+     * adds a person into the database
+     * @param firstName
+     * @param lastName
+     */
     public void addPerson(String firstName, String lastName) {
         // Gets the data repository in write mode
         SQLiteDatabase db = getWritableDatabase();
@@ -84,6 +89,10 @@ public class Database extends SQLiteOpenHelper {
         db.insert(TABLE_PERSONS, null, contentValues);
     }
 
+    /**
+     * checks if a user existss
+     * @return
+     */
     public boolean userExists() {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_PERSONS, null);
@@ -100,6 +109,11 @@ public class Database extends SQLiteOpenHelper {
         return false;
     }
 
+    /**
+     * gets the users first name and last name and
+     * returns these as one string
+     * @return
+     */
     public String getPersonName() {
         String firstName = "";
         String lastName = "";
@@ -173,7 +187,8 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * testing purposes
+     * prints the contents of the person table
+     * used for testing purposes (to see that the data is stored correctly)
      */
     public void printTablePersonAsString() {
         SQLiteDatabase dbHandler = this.getReadableDatabase();
