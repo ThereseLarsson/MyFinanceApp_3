@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,36 +18,43 @@ import android.widget.TextView;
 //Main Menu in the app
 public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
     private TextView greeting;
+    private TextView userName;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        name = Startup.db.getPersonName();
+
+        //navigation drawer
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                userName = findViewById(R.id.navigation_userName);
+                userName.setText(name);
+            }
+        };
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
         //initiateComponents();
-        //updatePersonalGreeting();
     }
 
     public void initiateComponents() {
         //greeting = findViewById(R.id.main_greeting_1);
-    }
-
-    public void updatePersonalGreeting() {
-        String name = Startup.db.getPersonName();
-        greeting.setText("Welcome " + name + "!");
+        //greeting.setText("Dear " + name);
     }
 
     @Override
@@ -66,6 +74,11 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         return true;
     }
 
+    /**
+     * opens the drawer when the user taps on the nav drawer button
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -77,24 +90,23 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_result) {
-            // Handle the camera action
+            //show fragment result
+
         } else if (id == R.id.nav_add) {
+            //show fragment add income/outcome
 
         } else if (id == R.id.nav_view) {
-
+            //show fragment view income/outcome
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
