@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!-- Use DrawerLayout as root container for activity -->
-<android.support.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/pic_5"
-    tools:context=".MainActivity">
+    tools:context=".Greeting">
 
     <TextView
         android:id="@+id/greeting_name"
@@ -49,4 +47,4 @@
         app:layout_constraintTop_toBottomOf="@+id/greeting_name"
         app:layout_constraintVertical_bias="0.055" />
 
-</android.support.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

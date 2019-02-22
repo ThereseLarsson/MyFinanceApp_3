@@ -19,9 +19,9 @@
     <string name="newAccount_enterLName"><i>Enter last name </i></string>
     <string name="newAccount_btn">Continue </string>
 
-    <!-- Main view -->
-    <string name="main_greeting_1">Dear! </string>
-    <string name="main_greeting_2">Choose an option from the navigation menu
+    <!-- Greeting view -->
+    <string name="greeting_name">Dear! </string>
+    <string name="greeting_info">Choose an option from the navigation menu
         to the left to get started! </string>
 
     <!-- Enter New Income view -->

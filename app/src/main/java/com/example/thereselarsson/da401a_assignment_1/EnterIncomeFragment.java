@@ -36,6 +36,9 @@ public class EnterIncomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_enter_income, container, false);
+        initiateComponents();
+        registerListeners();
+        provideCategories();
         return rootView;
     }
 

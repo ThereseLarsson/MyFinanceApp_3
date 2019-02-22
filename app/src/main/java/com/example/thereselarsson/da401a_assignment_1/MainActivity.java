@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 //Main Menu in the app
 public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
-    private TextView greeting;
     private TextView userName;
     private String name;
 
@@ -46,12 +45,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //initiateComponents();
-    }
-
-    public void initiateComponents() {
-        //greeting = findViewById(R.id.main_greeting_1);
-        //greeting.setText("Dear " + name);
+        //ladda rätt fragment!
     }
 
     @Override
