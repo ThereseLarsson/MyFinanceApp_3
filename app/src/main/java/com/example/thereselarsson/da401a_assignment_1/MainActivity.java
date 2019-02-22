@@ -1,6 +1,9 @@
 package com.example.thereselarsson.da401a_assignment_1;
 
+import android.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+//import android.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -46,6 +49,20 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         navigationView.setNavigationItemSelectedListener(this);
 
         //ladda rätt fragment!
+    }
+
+    public void replaceFragment_EnterIncome() {
+        // Create new fragment and transaction
+        Fragment newFragment = new EnterIncomeFragment();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment_container view with this fragment,
+        // and add the transaction to the back stack if needed
+        transaction.replace(R.id.main_fragment, newFragment);
+        transaction.addToBackStack(null);
+
+        // Commit the transaction
+        transaction.commit();
     }
 
     @Override
