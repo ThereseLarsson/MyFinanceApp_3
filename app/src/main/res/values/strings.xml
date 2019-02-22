@@ -42,4 +42,17 @@
     <!-- Results view -->
     <string name="result_title">Here are your financial results! </string>
 
+    <!-- Navigation drawer view -->
+    <string name="navigation_item_results">Results </string>
+    <string name="navigation_item_add">Add new income/outcome </string>
+    <string name="navigation_item_view">View income/outcome </string>
+    <string name="navigation_header_title">TITLE HERE </string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
 </resources>

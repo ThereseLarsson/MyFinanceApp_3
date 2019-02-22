@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".TestActivity" />
         <activity android:name=".CreateAccount" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
