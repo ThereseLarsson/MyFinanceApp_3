@@ -26,7 +26,7 @@
     <string name="navigation_header_title">Loading username...</string>
     <string name="action_settings">Settings</string>
 
-    <!-- Greeting view -->
+    <!-- GreetingFragment view -->
     <string name="greeting_name">Dear! </string>
     <string name="greeting_info">Choose an option from the navigation menu
         to the left to get started! </string>

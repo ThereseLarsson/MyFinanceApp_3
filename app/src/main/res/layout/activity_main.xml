@@ -19,8 +19,7 @@
         android:fitsSystemWindows="true">
 
         <fragment
-            android:id="@+id/main_fragment"
-            android:name="com.example.thereselarsson.da401a_assignment_1.Greeting"
+            android:id="@+id/main_fragmentContainer"
             android:layout_width="435dp"
             android:layout_height="560dp"
             android:layout_marginEnd="8dp"
@@ -31,7 +30,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.492"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:name="com.example.thereselarsson.da401a_assignment_1.TestFragment"
+            />
 
     </android.support.constraint.ConstraintLayout>
 

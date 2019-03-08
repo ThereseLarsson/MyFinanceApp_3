@@ -11,12 +11,12 @@ import android.widget.TextView;
  * the greeting page that is displayed before the user has
  * chosen an option in the navigation drawer
  */
-public class Greeting extends Fragment {
+public class GreetingFragment extends Fragment {
     private View rootView;
     private TextView greetingName;
     private String name;
 
-    public Greeting() {
+    public GreetingFragment() {
         // Required empty public constructor
     }
 

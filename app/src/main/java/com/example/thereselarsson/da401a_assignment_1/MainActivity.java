@@ -1,9 +1,9 @@
 package com.example.thereselarsson.da401a_assignment_1;
 
-import android.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
-//import android.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -19,6 +19,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
     private TextView userName;
     private String name;
+    private ResultFragment resultFragment;
+    private EnterIncomeFragment enterIncomeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,21 +50,20 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //ladda rätt fragment!
+        GreetingFragment greetingFragment = new GreetingFragment();
+        setFragment(greetingFragment, false);
     }
 
-    public void replaceFragment_EnterIncome() {
-        // Create new fragment and transaction
-        Fragment newFragment = new EnterIncomeFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+    private void setFragment(Fragment fragment, boolean backstack) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.main_fragmentContainer, fragment);
 
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack if needed
-        //transaction.replace(R.id.main_fragment, newFragment);
-        transaction.addToBackStack(null);
-
-        // Commit the transaction
-        transaction.commit();
+        if(backstack) {
+            fragmentTransaction.addToBackStack(null);
+        }
+        fragmentTransaction.commit();
+        fragmentManager.executePendingTransactions(); //try to force the commit to run immediately
     }
 
     @Override
@@ -107,13 +108,19 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         int id = item.getItemId();
 
         if (id == R.id.nav_result) {
-            //show fragment result
+            //resultFragment = new ResultFragment();
+            //setFragment(resultFragment, false);
+
+            TestFragment testFragment = new TestFragment();
+            setFragment(testFragment, false);
 
         } else if (id == R.id.nav_add) {
-            //show fragment add income/outcome
+            enterIncomeFragment = new EnterIncomeFragment();
+            setFragment(enterIncomeFragment, false);
 
         } else if (id == R.id.nav_view) {
-            //show fragment view income/outcome
+            //ViewIncomeFragment
+            //setFragment(viewIncomeFragment, false);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
