@@ -166,14 +166,15 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="56dp"
+        android:gravity="center"
         android:text="@string/enterIncome_toggleHeadline"
         android:textColor="#ffffff"
         android:textStyle="bold"
-        android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/enterIncome_toggleBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterIncome_confirmBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/enterIncome_confirmBtn"
+        app:layout_constraintVertical_bias="0.934" />
 
     <Switch
         android:id="@+id/enterIncome_toggleBtn"

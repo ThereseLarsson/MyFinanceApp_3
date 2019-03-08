@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
 
         // Replace whatever is in the fragment_container view with this fragment,
         // and add the transaction to the back stack if needed
-        transaction.replace(R.id.main_fragment, newFragment);
+        //transaction.replace(R.id.main_fragment, newFragment);
         transaction.addToBackStack(null);
 
         // Commit the transaction
