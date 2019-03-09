@@ -18,18 +18,27 @@ import java.util.Date;
 
 
 public class EnterTransactionFragment extends Fragment {
+    private View rootView;
+
+    //elements to change when income/outcome is toggles
     private TextView headline;
+    private Switch toggleBtn;
+    private boolean isIncome; //if false --> =outcome
+
+    //variables to get input from user
     private EditText title;
     private Button datePicker;
     private EditText amount;
     private Spinner category;
+
+    //interaction
     private Button confirmBtn;
-    private Switch toggleBtn;
-    private View rootView;
+
+    //variables to handle date picking
     private DateFormat formatter;
     private Date dateObject;
     private String dateDate;
-    private boolean isIncome; //if false --> =outcome
+
 
     public EnterTransactionFragment() {
         // Required empty public constructor
