@@ -101,11 +101,11 @@ public class EnterTransactionFragment extends Fragment {
         return false;
     }
 
-    private void addNewIncome() {
+    private void addNewIncomeToDatabase() {
 
     }
 
-    private void addNewOutcome() {
+    private void addNewOutcomeToDatabase() {
 
     }
 
