@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private TextView userName;
     private String name;
     private ResultFragment resultFragment;
-    private EnterIncomeFragment enterIncomeFragment;
+    private EnterTransactionFragment enterIncomeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
             setFragment(testFragment, false);
 
         } else if (id == R.id.nav_add) {
-            enterIncomeFragment = new EnterIncomeFragment();
+            enterIncomeFragment = new EnterTransactionFragment();
             setFragment(enterIncomeFragment, false);
 
         } else if (id == R.id.nav_view) {

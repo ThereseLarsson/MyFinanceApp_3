@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class EnterIncomeFragment extends Fragment {
+public class EnterTransactionFragment extends Fragment {
     private EditText title;
     private Button datePicker;
     private EditText amount;
@@ -27,15 +27,16 @@ public class EnterIncomeFragment extends Fragment {
     private DateFormat formatter;
     private Date dateObject;
     private String dateDate;
+    private boolean isIncome; //if false --> =outcome
 
-    public EnterIncomeFragment() {
+    public EnterTransactionFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_enter_income, container, false);
+        rootView = inflater.inflate(R.layout.fragment_enter_transaction, container, false);
         initiateComponents();
         registerListeners();
         provideCategories();
@@ -43,11 +44,11 @@ public class EnterIncomeFragment extends Fragment {
     }
 
     public void initiateComponents() {
-        title = rootView.findViewById(R.id.enterIncome_title);
-        datePicker = rootView.findViewById(R.id.enterIncome_date);
-        amount = rootView.findViewById(R.id.enterIncome_amount);
-        category = rootView.findViewById(R.id.enterIncome_category);
-        confirmBtn = rootView.findViewById(R.id.enterIncome_confirmBtn);
+        title = rootView.findViewById(R.id.enterTransaction_title);
+        datePicker = rootView.findViewById(R.id.enterTransaction_datePicker);
+        amount = rootView.findViewById(R.id.enterTransaction_amount);
+        category = rootView.findViewById(R.id.enterTransaction_category);
+        confirmBtn = rootView.findViewById(R.id.enterTransaction_confirmBtn);
         toggleBtn = rootView.findViewById(R.id.enterIncome_toggleBtn);
     }
 
@@ -103,7 +104,11 @@ public class EnterIncomeFragment extends Fragment {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.enterIncome_confirmBtn:
+                case R.id.enterTransaction_datePicker:
+                    //öppna datumväljare
+                    break;
+
+                case R.id.enterTransaction_confirmBtn:
                     if(validData()) {
                         //lägg till inkomst i databas
                     } else {
