@@ -110,7 +110,6 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         if (id == R.id.nav_result) {
             //resultFragment = new ResultFragment();
             //setFragment(resultFragment, false);
-
             TestFragment testFragment = new TestFragment();
             setFragment(testFragment, false);
 
@@ -121,6 +120,8 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         } else if (id == R.id.nav_view) {
             //ViewIncomeFragment
             //setFragment(viewIncomeFragment, false);
+            TestFragment testFragment = new TestFragment();
+            setFragment(testFragment, false);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

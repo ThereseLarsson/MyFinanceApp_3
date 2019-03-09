@@ -5,6 +5,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+/**
+ * the first thing that loads upon app launch.
+ * if a account is already created --> go to main menu / MainActivity
+ * otherwise, --> go to Create new account activity
+ */
 public class Startup extends AppCompatActivity {
     Intent intent;
     public static Database db;
