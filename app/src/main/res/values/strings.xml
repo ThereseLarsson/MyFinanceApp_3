@@ -34,15 +34,13 @@
     <!-- Enter New Transaction view -->
     <string name="enterTransaction_headline">Enter new income </string>
     <string name="enterTransaction_toggleHeadline">Toggle to enter new outcome instead </string>
-
-    <!-- Enter New Income/Outcome view -->
-    <string name="enter_title">Enter title: </string>
-    <string name="enter_date">Enter date: </string>
-    <string name="enter_date_button">Pick a date </string>
-    <string name="enter_category">Enter category: </string>
-    <string name="enter_amount">Enter amount: </string>
-    <string name="enter_amount_hint"><i>(kr) </i></string>
-    <string name="enter_btn">Confirm </string>
+    <string name="enterTransaction_title">Enter title: </string>
+    <string name="enterTransaction_date">Enter date: </string>
+    <string name="enterTransaction_date_button">Pick a date </string>
+    <string name="enterTransaction_category">Enter category: </string>
+    <string name="enterTransaction_amount">Enter amount: </string>
+    <string name="enterTransaction_amount_hint"><i>(kr) </i></string>
+    <string name="enterTransaction_btn">Confirm </string>
 
     <!-- Results view -->
     <string name="result_title">Here are your financial results! </string>
