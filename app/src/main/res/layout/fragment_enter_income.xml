@@ -30,7 +30,7 @@
         android:layout_height="19dp"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         android:text="@string/enter_title"
         android:textColor="#ffffff"
         android:textStyle="bold"
@@ -78,7 +78,7 @@
         android:ems="10"
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterIncome_titleHeadline" />
+        app:layout_constraintTop_toBottomOf="@+id/enterIncome_title" />
 
     <TextView
         android:id="@+id/enterIncome_amountHeadline"
@@ -107,7 +107,7 @@
         android:textColor="#ffffff"
         android:textColorHint="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterIncome_dateHeadline" />
+        app:layout_constraintTop_toBottomOf="@+id/enterIncome_date" />
 
     <TextView
         android:id="@+id/enterIncome_categoryHeadline"
@@ -133,7 +133,7 @@
         android:layout_marginTop="24dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterIncome_amountHeadline" />
+        app:layout_constraintTop_toBottomOf="@+id/enterIncome_amount" />
 
     <Button
         android:id="@+id/enterIncome_confirmBtn"
