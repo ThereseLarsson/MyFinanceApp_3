@@ -47,4 +47,7 @@
     <!-- Results view -->
     <string name="result_title">Here are your financial results! </string>
 
+    <!-- View transaction view -->
+    <string name="viewTransaction_toggleHeadline">Toggle to view outcome instead</string>
+
 </resources>

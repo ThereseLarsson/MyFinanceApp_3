@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private TextView userName;
     private String name;
     private ResultFragment resultFragment;
-    private EnterTransactionFragment enterIncomeFragment;
+    private EnterTransactionFragment enterTransactionFragment;
+    private ViewTransactionFragment viewTransactionFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,20 +109,16 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         int id = item.getItemId();
 
         if (id == R.id.nav_result) {
-            //resultFragment = new ResultFragment();
-            //setFragment(resultFragment, false);
-            TestFragment testFragment = new TestFragment();
-            setFragment(testFragment, false);
+            resultFragment = new ResultFragment();
+            setFragment(resultFragment, false);
 
         } else if (id == R.id.nav_add) {
-            enterIncomeFragment = new EnterTransactionFragment();
-            setFragment(enterIncomeFragment, false);
+            enterTransactionFragment = new EnterTransactionFragment();
+            setFragment(enterTransactionFragment, false);
 
         } else if (id == R.id.nav_view) {
-            //ViewIncomeFragment
-            //setFragment(viewIncomeFragment, false);
-            TestFragment testFragment = new TestFragment();
-            setFragment(testFragment, false);
+            viewTransactionFragment = new ViewTransactionFragment();
+            setFragment(viewTransactionFragment, false);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 
 public class ResultFragment extends Fragment {
+    private View rootView;
 
     public ResultFragment() {
         // Required empty public constructor
@@ -16,7 +17,11 @@ public class ResultFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_result, container, false);
+        rootView = inflater.inflate(R.layout.fragment_result, container, false);
+        return rootView;
+    }
+
+    public void initiateComponents() {
+        //?? = rootView.findViewById(R.id.???);
     }
 }
