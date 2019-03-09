@@ -18,7 +18,7 @@ import java.util.Date;
 
 public class EnterIncomeFragment extends Fragment {
     private EditText title;
-    private EditText date;
+    private Button datePicker;
     private EditText amount;
     private Spinner category;
     private Button confirmBtn;
@@ -44,7 +44,7 @@ public class EnterIncomeFragment extends Fragment {
 
     public void initiateComponents() {
         title = rootView.findViewById(R.id.enterIncome_title);
-        date = rootView.findViewById(R.id.enterIncome_date);
+        datePicker = rootView.findViewById(R.id.enterIncome_date);
         amount = rootView.findViewById(R.id.enterIncome_amount);
         category = rootView.findViewById(R.id.enterIncome_category);
         confirmBtn = rootView.findViewById(R.id.enterIncome_confirmBtn);
@@ -66,7 +66,7 @@ public class EnterIncomeFragment extends Fragment {
 
     public String getDate() {
         formatter = new SimpleDateFormat("dd/MM/yyyy"); // Make sure user insert date into edittext in this format.
-        String dateString = date.getText().toString();
+        String dateString = datePicker.getText().toString();
         try {
             dateObject = formatter.parse(dateString);
             dateDate = new SimpleDateFormat("dd/MM/yyyy").format(dateObject);
