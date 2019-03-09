@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
@@ -17,6 +18,7 @@ import java.util.Date;
 
 
 public class EnterTransactionFragment extends Fragment {
+    private TextView headline;
     private EditText title;
     private Button datePicker;
     private EditText amount;
@@ -40,16 +42,18 @@ public class EnterTransactionFragment extends Fragment {
         initiateComponents();
         registerListeners();
         provideCategories();
+        isIncome = true;
         return rootView;
     }
 
     public void initiateComponents() {
+        headline = rootView.findViewById(R.id.enterTransaction_headline);
         title = rootView.findViewById(R.id.enterTransaction_title);
         datePicker = rootView.findViewById(R.id.enterTransaction_datePicker);
         amount = rootView.findViewById(R.id.enterTransaction_amount);
         category = rootView.findViewById(R.id.enterTransaction_category);
         confirmBtn = rootView.findViewById(R.id.enterTransaction_confirmBtn);
-        toggleBtn = rootView.findViewById(R.id.enterIncome_toggleBtn);
+        toggleBtn = rootView.findViewById(R.id.enterTransaction_toggleBtn);
     }
 
     /**
@@ -97,6 +101,14 @@ public class EnterTransactionFragment extends Fragment {
         return false;
     }
 
+    private void addNewIncome() {
+
+    }
+
+    private void addNewOutcome() {
+
+    }
+
     /**
      * inner class to handle clicks
      */
@@ -110,14 +122,26 @@ public class EnterTransactionFragment extends Fragment {
 
                 case R.id.enterTransaction_confirmBtn:
                     if(validData()) {
-                        //lägg till inkomst i databas
+                        if(isIncome) {
+                            //lägg till INcome i databas
+                        } else {
+                            //lägg till OUTcome i databas
+                        }
                     } else {
                         showMessage("Please enter all data above");
                     }
                     break;
 
-                case R.id.enterIncome_toggleBtn:
-                    //toggle till enterOutcome fragment
+                case R.id.enterTransaction_toggleBtn:
+                    if(isIncome) {
+                        headline.setText("Enter new outcome");
+                        toggleBtn.setText("Toggle to enter new income instead");
+                        isIncome = false;
+                    } else {
+                        headline.setText("Enter new income");
+                        toggleBtn.setText("Toggle to enter new outcome instead");
+                        isIncome = true;
+                    }
                     break;
             }
         }
