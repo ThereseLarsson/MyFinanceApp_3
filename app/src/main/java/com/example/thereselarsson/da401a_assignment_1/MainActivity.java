@@ -1,5 +1,6 @@
 package com.example.thereselarsson.da401a_assignment_1;
 
+import android.content.Context;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private ResultFragment resultFragment;
     private EnterTransactionFragment enterTransactionFragment;
     private ViewTransactionFragment viewTransactionFragment;
+    public static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         setContentView(R.layout.activity_main);
 
         name = Startup.db.getPersonName();
+        context = getApplicationContext();
 
         //navigation drawer
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

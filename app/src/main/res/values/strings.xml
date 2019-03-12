@@ -20,7 +20,6 @@
     <string name="navigation_item_results">Financial results </string>
     <string name="navigation_item_add">Add new income/outcome </string>
     <string name="navigation_item_view">View income/outcome </string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="navigation_header_title">Loading username...</string>

@@ -46,7 +46,7 @@ public class ViewTransactionFragment extends Fragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.viewTransaction_toggleBtn:
-                    //do something
+                    //view outcome instead
                     break;
             }
         }

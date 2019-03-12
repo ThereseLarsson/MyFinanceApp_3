@@ -2,9 +2,12 @@ package com.example.thereselarsson.da401a_assignment_1;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -29,7 +32,8 @@ public class EnterTransactionFragment extends Fragment {
     private EditText title;
     private Button datePicker;
     private EditText amount;
-    private Spinner category;
+    private Spinner spinner;
+    private String category;
 
     //interaction
     private Button confirmBtn;
@@ -50,7 +54,7 @@ public class EnterTransactionFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_enter_transaction, container, false);
         initiateComponents();
         registerListeners();
-        provideCategories();
+        setIncomeCategories();
         isIncome = true;
         return rootView;
     }
@@ -60,7 +64,7 @@ public class EnterTransactionFragment extends Fragment {
         title = rootView.findViewById(R.id.enterTransaction_title);
         datePicker = rootView.findViewById(R.id.enterTransaction_datePicker);
         amount = rootView.findViewById(R.id.enterTransaction_amount);
-        category = rootView.findViewById(R.id.enterTransaction_category);
+        spinner = rootView.findViewById(R.id.enterTransaction_category);
         confirmBtn = rootView.findViewById(R.id.enterTransaction_confirmBtn);
         toggleBtn = rootView.findViewById(R.id.enterTransaction_toggleBtn);
     }
@@ -72,10 +76,28 @@ public class EnterTransactionFragment extends Fragment {
         ClickListener clickListener = new ClickListener();
         confirmBtn.setOnClickListener(clickListener);
         toggleBtn.setOnClickListener(clickListener);
+
+        SpinnerActivity spinnerActivity = new SpinnerActivity();
+        spinner.setOnItemSelectedListener(spinnerActivity);
     }
 
-    public void provideCategories() {
+    public void setIncomeCategories() {
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.context,
+                R.array.categories_income, android.R.layout.simple_spinner_item);
 
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+    }
+
+    public void setOutcomeCategories() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.context,
+                R.array.categories_outcome, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
     }
 
     public String getDate() {
@@ -132,9 +154,9 @@ public class EnterTransactionFragment extends Fragment {
                 case R.id.enterTransaction_confirmBtn:
                     if(validData()) {
                         if(isIncome) {
-                            //lägg till INcome i databas
+                            addNewIncomeToDatabase();
                         } else {
-                            //lägg till OUTcome i databas
+                            addNewOutcomeToDatabase();
                         }
                     } else {
                         showMessage("Please enter all data above");
@@ -145,10 +167,12 @@ public class EnterTransactionFragment extends Fragment {
                     if(isIncome) {
                         headline.setText("Enter new outcome");
                         toggleBtn.setText("Toggle to enter new income instead");
+                        setOutcomeCategories();
                         isIncome = false;
                     } else {
                         headline.setText("Enter new income");
                         toggleBtn.setText("Toggle to enter new outcome instead");
+                        setIncomeCategories();
                         isIncome = true;
                     }
                     break;
@@ -156,4 +180,17 @@ public class EnterTransactionFragment extends Fragment {
         }
     }
 
+    /**
+     * gets the selected category from the spinner
+     */
+    private class SpinnerActivity implements AdapterView.OnItemSelectedListener {
+        // An item was selected
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            category = parent.getItemAtPosition(pos).toString();
+        }
+
+        public void onNothingSelected(AdapterView<?> parent) {
+            // Another interface callback
+        }
+    }
 }
