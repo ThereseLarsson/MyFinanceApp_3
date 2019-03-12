@@ -190,7 +190,11 @@ public class EnterTransactionFragment extends Fragment {
         }
 
         public void onNothingSelected(AdapterView<?> parent) {
-            // Another interface callback
+            if(isIncome) {
+                category = "Salary"; //automatically select first income item
+            } else {
+                category = "Food"; ////automatically select first outcome item
+            }
         }
     }
 }
