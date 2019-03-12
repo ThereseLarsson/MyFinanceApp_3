@@ -1,5 +1,6 @@
 package com.example.thereselarsson.da401a_assignment_1;
 
+import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -16,12 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 public class EnterTransactionFragment extends Fragment {
     private View rootView;
+    private DialogFragment datePickerFragment;
 
     //elements to change when income/outcome is toggles
     private TextView headline;
@@ -30,7 +31,7 @@ public class EnterTransactionFragment extends Fragment {
 
     //variables to get input from user
     private EditText title;
-    private Button datePicker;
+    private Button datePickerBtn;
     private EditText amount;
     private Spinner spinner;
     private String category;
@@ -62,7 +63,7 @@ public class EnterTransactionFragment extends Fragment {
     public void initiateComponents() {
         headline = rootView.findViewById(R.id.enterTransaction_headline);
         title = rootView.findViewById(R.id.enterTransaction_title);
-        datePicker = rootView.findViewById(R.id.enterTransaction_datePicker);
+        datePickerBtn = rootView.findViewById(R.id.enterTransaction_datePicker);
         amount = rootView.findViewById(R.id.enterTransaction_amount);
         spinner = rootView.findViewById(R.id.enterTransaction_category);
         confirmBtn = rootView.findViewById(R.id.enterTransaction_confirmBtn);
@@ -74,6 +75,7 @@ public class EnterTransactionFragment extends Fragment {
      */
     private void registerListeners() {
         ClickListener clickListener = new ClickListener();
+        datePickerBtn.setOnClickListener(clickListener);
         confirmBtn.setOnClickListener(clickListener);
         toggleBtn.setOnClickListener(clickListener);
 
@@ -100,8 +102,13 @@ public class EnterTransactionFragment extends Fragment {
         spinner.setAdapter(adapter);
     }
 
+    public void showDatePickerDialog() {
+        datePickerFragment = new DatePickerFragment();
+        datePickerFragment.show(getFragmentManager(), "datePicker");
+    }
+
     public String getDate() {
-        formatter = new SimpleDateFormat("dd/MM/yyyy"); // Make sure user insert date into edittext in this format.
+        /*formatter = new SimpleDateFormat("dd/MM/yyyy"); // Make sure user insert date into edittext in this format.
         String dateString = datePicker.getText().toString();
         try {
             dateObject = formatter.parse(dateString);
@@ -112,7 +119,8 @@ public class EnterTransactionFragment extends Fragment {
         }
 
         Toast.makeText(getActivity(), dateDate, Toast.LENGTH_LONG).show(); //testing
-        return dateDate;
+        return dateDate;*/
+        return "";
     }
 
     /**
@@ -148,7 +156,7 @@ public class EnterTransactionFragment extends Fragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.enterTransaction_datePicker:
-                    //öppna datumväljare
+                    showDatePickerDialog();
                     break;
 
                 case R.id.enterTransaction_confirmBtn:
