@@ -16,9 +16,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.util.Date;
-
 
 public class EnterTransactionFragment extends Fragment {
     private View rootView;
@@ -33,6 +30,7 @@ public class EnterTransactionFragment extends Fragment {
     private EditText titleTxt;
     private String title;
     private Button datePickerBtn;
+    private String date;
     private EditText amountTxt;
     private double amount;
     private Spinner spinner;
@@ -40,11 +38,6 @@ public class EnterTransactionFragment extends Fragment {
 
     //interaction
     private Button confirmBtn;
-
-    //variables to handle date picking
-    private DateFormat formatter;
-    private Date dateObject;
-    private String date;
 
 
     public EnterTransactionFragment() {
@@ -86,6 +79,10 @@ public class EnterTransactionFragment extends Fragment {
         spinner.setOnItemSelectedListener(spinnerActivity);
     }
 
+    /**
+     * Methods for setting up categories
+     * --------------------------------------------------------------------------------------
+     */
     public void setIncomeCategories() {
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.context,
@@ -105,25 +102,21 @@ public class EnterTransactionFragment extends Fragment {
         spinner.setAdapter(adapter);
     }
 
+    /**
+     * Methods for handling date picking
+     * --------------------------------------------------------------------------------------
+     */
     public void showDatePickerDialog() {
         datePickerFragment = new DatePickerFragment();
         datePickerFragment.show(getFragmentManager(), "datePicker");
     }
 
-    public String getDate() {
-        /*formatter = new SimpleDateFormat("dd/MM/yyyy"); // Make sure user insert date into edittext in this format.
-        String dateString = datePicker.getText().toString();
-        try {
-            dateObject = formatter.parse(dateString);
-            dateDate = new SimpleDateFormat("dd/MM/yyyy").format(dateObject);
+    public void setDate(String string) {
+        date = string;
+    }
 
-        } catch (java.text.ParseException e) {
-            e.printStackTrace();
-        }
-
-        Toast.makeText(getActivity(), dateDate, Toast.LENGTH_LONG).show(); //testing
-        return dateDate;*/
-        return "";
+    public void setDateButtonText(String string) {
+        datePickerBtn.setText(string);
     }
 
     /**
@@ -148,6 +141,10 @@ public class EnterTransactionFragment extends Fragment {
         }
     }
 
+    /**
+     * Methods that connects to the database
+     * -----------------------------------------------------------------------------
+     */
     private void addNewIncomeToDatabase() {
         Startup.db.addIncome(title, date, amount, category);
     }
@@ -155,6 +152,11 @@ public class EnterTransactionFragment extends Fragment {
     private void addNewOutcomeToDatabase() {
         Startup.db.addOutcome(title, date, amount, category);
     }
+
+    /**
+     * Inner classes that handle events from the user
+     * -----------------------------------------------------------------------------
+     */
 
     /**
      * inner class to handle clicks
