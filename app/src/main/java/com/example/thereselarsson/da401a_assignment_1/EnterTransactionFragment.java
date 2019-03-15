@@ -228,10 +228,9 @@ public class EnterTransactionFragment extends Fragment {
         public int year;
         public int month;
         public int day;
-        public String date;
 
         public DatePickerFragment2() {
-
+            // Required empty public constructor
         }
 
         @Override
