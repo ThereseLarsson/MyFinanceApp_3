@@ -58,7 +58,7 @@ public class Database extends SQLiteOpenHelper {
                 INCOME_COLUMN_ID + " INTEGER PRIMARY KEY, " +
                 INCOME_COLUMN_TITLE + " TEXT, " +
                 INCOME_COLUMN_DATE + " TEXT, " + //FIXA TILL DATE-OBJEKT
-                INCOME_COLUMN_AMOUNT + " INTEGER, " +
+                INCOME_COLUMN_AMOUNT + " DOUBLE, " +
                 INCOME_COLUMN_CATEGORY + " TEXT)"
         );
 
@@ -66,7 +66,7 @@ public class Database extends SQLiteOpenHelper {
                 OUTCOME_COLUMN_ID + " INTEGER PRIMARY KEY, " +
                 OUTCOME_COLUMN_TITLE + " TEXT, " +
                 OUTCOME_COLUMN_DATE + " TEXT, " + //FIXA TILL DATE-OBJEKT
-                OUTCOME_COLUMN_AMOUNT + " INTEGER, " +
+                OUTCOME_COLUMN_AMOUNT + " DOUBLE, " +
                 OUTCOME_COLUMN_CATEGORY + " TEXT)"
         );
     }
@@ -133,7 +133,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     //FIXA TILL DATE-OBJEKT --> ARGUMENT
-    public void addIncome(String type, String title, String date, int amount, String category) {
+    public void addIncome(String title, String date, double amount, String category) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(INCOME_COLUMN_TITLE, title);
@@ -143,11 +143,12 @@ public class Database extends SQLiteOpenHelper {
         db.insert(TABLE_INCOME, null, contentValues);
     }
 
-    public int getTotalIncome() {
-        int totalIncome = 0;
+    public double getTotalIncome() {
+        double totalIncome = 0;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_INCOME, null ); //rad3
 
+        //do something
 
         return totalIncome;
     }
@@ -155,12 +156,13 @@ public class Database extends SQLiteOpenHelper {
     public String getIncomeFromDate() {
         String result = "";
 
+        //do something
 
         return result;
     }
 
     //FIXA TILL DATE-OBJEKT --> ARGUMENT
-    public void addOutcome(String type, String title, String date, int amount, String category) {
+    public void addOutcome(String title, String date, double amount, String category) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(OUTCOME_COLUMN_TITLE, title);
@@ -170,11 +172,12 @@ public class Database extends SQLiteOpenHelper {
         db.insert(TABLE_OUTCOME, null, contentValues);
     }
 
-    public int getTotalOutcome() {
-        int totalOutcome = 0;
+    public double getTotalOutcome() {
+        double totalOutcome = 0;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_OUTCOME, null );
 
+        //do something
 
         return totalOutcome;
     }
@@ -182,6 +185,7 @@ public class Database extends SQLiteOpenHelper {
     public String getOutcomeFromDate() {
         String result = "";
 
+        //do something
 
         return result;
     }

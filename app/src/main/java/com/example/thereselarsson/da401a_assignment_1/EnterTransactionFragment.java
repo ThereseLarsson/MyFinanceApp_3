@@ -30,9 +30,11 @@ public class EnterTransactionFragment extends Fragment {
     private boolean isIncome; //if false --> =outcome
 
     //variables to get input from user
-    private EditText title;
+    private EditText titleTxt;
+    private String title;
     private Button datePickerBtn;
-    private EditText amount;
+    private EditText amountTxt;
+    private double amount;
     private Spinner spinner;
     private String category;
 
@@ -42,7 +44,7 @@ public class EnterTransactionFragment extends Fragment {
     //variables to handle date picking
     private DateFormat formatter;
     private Date dateObject;
-    private String dateDate;
+    private String date;
 
 
     public EnterTransactionFragment() {
@@ -57,14 +59,15 @@ public class EnterTransactionFragment extends Fragment {
         registerListeners();
         setIncomeCategories();
         isIncome = true;
+        date = "";
         return rootView;
     }
 
     public void initiateComponents() {
         headline = rootView.findViewById(R.id.enterTransaction_headline);
-        title = rootView.findViewById(R.id.enterTransaction_title);
+        titleTxt = rootView.findViewById(R.id.enterTransaction_title);
         datePickerBtn = rootView.findViewById(R.id.enterTransaction_datePicker);
-        amount = rootView.findViewById(R.id.enterTransaction_amount);
+        amountTxt = rootView.findViewById(R.id.enterTransaction_amount);
         spinner = rootView.findViewById(R.id.enterTransaction_category);
         confirmBtn = rootView.findViewById(R.id.enterTransaction_confirmBtn);
         toggleBtn = rootView.findViewById(R.id.enterTransaction_toggleBtn);
@@ -136,16 +139,21 @@ public class EnterTransactionFragment extends Fragment {
      * @return
      */
     private boolean validData() {
-
-        return false;
+        if(titleTxt.getText().toString().matches(".*[a-zA-Z]+.*") && !(date.equals("")) && !(amountTxt.getText().toString().equals(""))) {
+            title = titleTxt.getText().toString();
+            amount = Double.parseDouble(amountTxt.getText().toString());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void addNewIncomeToDatabase() {
-
+        Startup.db.addIncome(title, date, amount, category);
     }
 
     private void addNewOutcomeToDatabase() {
-
+        Startup.db.addOutcome(title, date, amount, category);
     }
 
     /**
@@ -162,9 +170,11 @@ public class EnterTransactionFragment extends Fragment {
                 case R.id.enterTransaction_confirmBtn:
                     if(validData()) {
                         if(isIncome) {
-                            addNewIncomeToDatabase();
+                            showMessage("ALL DATA IS VALID!, INCOME");
+                            //addNewIncomeToDatabase();
                         } else {
-                            addNewOutcomeToDatabase();
+                            showMessage("ALL DATA IS VALID!, OUTCOME");
+                            //addNewOutcomeToDatabase();
                         }
                     } else {
                         showMessage("Please enter all data above");
