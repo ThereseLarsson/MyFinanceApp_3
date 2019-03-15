@@ -113,6 +113,7 @@ public class EnterTransactionFragment extends Fragment {
 
     public void setDate(String string) {
         date = string;
+        Log.d(null, date);
     }
 
     public void setDateButtonText(String string) {
