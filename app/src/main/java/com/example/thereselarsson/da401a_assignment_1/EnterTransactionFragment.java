@@ -1,5 +1,7 @@
 package com.example.thereselarsson.da401a_assignment_1;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,11 +12,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 
 public class EnterTransactionFragment extends Fragment {
@@ -29,8 +34,8 @@ public class EnterTransactionFragment extends Fragment {
     //variables to get input from user
     private EditText titleTxt;
     private String title;
-    private Button datePickerBtn;
-    private String date;
+    private static Button datePickerBtn;
+    private static String date;
     private EditText amountTxt;
     private double amount;
     private Spinner spinner;
@@ -107,16 +112,16 @@ public class EnterTransactionFragment extends Fragment {
      * --------------------------------------------------------------------------------------
      */
     public void showDatePickerDialog() {
-        datePickerFragment = new DatePickerFragment();
+        datePickerFragment = new DatePickerFragment2();
         datePickerFragment.show(getFragmentManager(), "datePicker");
     }
 
-    public void setDate(String string) {
+    public static void setDate(String string) {
         date = string;
         Log.d(null, date);
     }
 
-    public void setDateButtonText(String string) {
+    public static void setDateButtonText(String string) {
         datePickerBtn.setText(string);
     }
 
@@ -216,6 +221,38 @@ public class EnterTransactionFragment extends Fragment {
             } else {
                 category = "Food"; ////automatically select first outcome item
             }
+        }
+    }
+
+    public static class DatePickerFragment2 extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+        public int year;
+        public int month;
+        public int day;
+        public String date;
+
+        public DatePickerFragment2() {
+
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            year = c.get(Calendar.YEAR);
+            month = c.get(Calendar.MONTH);
+            day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        /**
+         * Do something with the date chosen by the user
+         */
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            date = Integer.toString(day) + "/" + Integer.toString(month) + "-" + Integer.toString(year);
+            setDateButtonText(date); //gives null
+            setDate(date);
         }
     }
 }
