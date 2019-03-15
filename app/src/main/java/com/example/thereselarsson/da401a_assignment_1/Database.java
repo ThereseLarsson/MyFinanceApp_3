@@ -153,7 +153,7 @@ public class Database extends SQLiteOpenHelper {
         return totalIncome;
     }
 
-    public String getIncomeFromDate() {
+    public String getTotalIncomeFromDate() {
         String result = "";
 
         //do something
@@ -182,7 +182,7 @@ public class Database extends SQLiteOpenHelper {
         return totalOutcome;
     }
 
-    public String getOutcomeFromDate() {
+    public String getTotalOutcomeFromDate() {
         String result = "";
 
         //do something
