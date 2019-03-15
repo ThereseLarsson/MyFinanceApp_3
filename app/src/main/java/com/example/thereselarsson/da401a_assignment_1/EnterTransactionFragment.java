@@ -29,7 +29,7 @@ public class EnterTransactionFragment extends Fragment {
     //elements to change when income/outcome is toggles
     private TextView headline;
     private Switch toggleBtn;
-    private boolean isIncome; //if false --> =outcome
+    private boolean isIncome; //if false --> = outcome
 
     //variables to get input from user
     private EditText titleTxt;
@@ -118,7 +118,6 @@ public class EnterTransactionFragment extends Fragment {
 
     public static void setDate(String string) {
         date = string;
-        Log.d(null, date);
     }
 
     public static void setDateButtonText(String string) {
@@ -178,11 +177,13 @@ public class EnterTransactionFragment extends Fragment {
                 case R.id.enterTransaction_confirmBtn:
                     if(validData()) {
                         if(isIncome) {
-                            showMessage("ALL DATA IS VALID!, INCOME");
-                            //addNewIncomeToDatabase();
+                            addNewIncomeToDatabase();
+                            showMessage("Income successfully added!");
+                            Startup.db.printTableIncomeAsString(); //testing purpose
                         } else {
-                            showMessage("ALL DATA IS VALID!, OUTCOME");
-                            //addNewOutcomeToDatabase();
+                            addNewOutcomeToDatabase();
+                            showMessage("Outcome successfully added!");
+                            Startup.db.printTableOutcomeAsString(); //testing purpose
                         }
                     } else {
                         showMessage("Please enter all data above");
@@ -224,6 +225,9 @@ public class EnterTransactionFragment extends Fragment {
         }
     }
 
+    /**
+     * provides a date picker dialog
+     */
     public static class DatePickerFragment2 extends DialogFragment implements DatePickerDialog.OnDateSetListener {
         public int year;
         public int month;
@@ -250,7 +254,7 @@ public class EnterTransactionFragment extends Fragment {
          */
         public void onDateSet(DatePicker view, int year, int month, int day) {
             date = Integer.toString(day) + "/" + Integer.toString(month) + "-" + Integer.toString(year);
-            setDateButtonText(date); //gives null
+            setDateButtonText(date);
             setDate(date);
         }
     }

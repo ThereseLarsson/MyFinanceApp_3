@@ -212,4 +212,50 @@ public class Database extends SQLiteOpenHelper {
         allRows.close();
         Log.d(null, tableString);
     }
+
+    /**
+     * prints the contents of the income table
+     * used for testing purposes (to see that the data is stored correctly)
+     */
+    public void printTableIncomeAsString() {
+        SQLiteDatabase dbHandler = this.getReadableDatabase();
+        String tableString = String.format("TABLE %s:\n", TABLE_INCOME);
+        Cursor allRows  = dbHandler.rawQuery("SELECT * FROM " + TABLE_INCOME, null);
+        if (allRows.moveToFirst() ){
+            String[] columnNames = allRows.getColumnNames();
+            do {
+                for (String name: columnNames) {
+                    tableString += String.format("%s: %s\n", name,
+                            allRows.getString(allRows.getColumnIndex(name)));
+                }
+                tableString += "\n";
+
+            } while (allRows.moveToNext());
+        }
+        allRows.close();
+        Log.d(null, tableString);
+    }
+
+    /**
+     * prints the contents of the outcome table
+     * used for testing purposes (to see that the data is stored correctly)
+     */
+    public void printTableOutcomeAsString() {
+        SQLiteDatabase dbHandler = this.getReadableDatabase();
+        String tableString = String.format("TABLE %s:\n", TABLE_OUTCOME);
+        Cursor allRows  = dbHandler.rawQuery("SELECT * FROM " + TABLE_OUTCOME, null);
+        if (allRows.moveToFirst() ){
+            String[] columnNames = allRows.getColumnNames();
+            do {
+                for (String name: columnNames) {
+                    tableString += String.format("%s: %s\n", name,
+                            allRows.getString(allRows.getColumnIndex(name)));
+                }
+                tableString += "\n";
+
+            } while (allRows.moveToNext());
+        }
+        allRows.close();
+        Log.d(null, tableString);
+    }
 }
