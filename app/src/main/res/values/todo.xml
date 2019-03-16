@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- TODO (ViewTransactionFragment, Database) Get list items for listview from database -->
+    <!-- TODO (ViewTransactionFragment, Database) add functionality to filter income/outcome after date -->
+</resources>
