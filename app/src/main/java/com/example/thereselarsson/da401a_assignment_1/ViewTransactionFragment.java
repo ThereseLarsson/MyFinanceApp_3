@@ -7,11 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class ViewTransactionFragment extends Fragment {
     private View rootView;
+    private TextView headline;
     private Switch toggleBtn;
     private Button filterDateBtn;
     private boolean isIncome; //if false --> = outcome
@@ -32,6 +34,7 @@ public class ViewTransactionFragment extends Fragment {
     }
 
     public void initiateComponents() {
+        headline = rootView.findViewById(R.id.viewTransaction_headline);
         toggleBtn = rootView.findViewById(R.id.viewTransaction_toggleBtn);
         filterDateBtn = rootView.findViewById(R.id.viewTransaction_filterDateBtn);
     }
@@ -60,10 +63,12 @@ public class ViewTransactionFragment extends Fragment {
             switch (view.getId()) {
                 case R.id.viewTransaction_toggleBtn:
                     if(isIncome) {
+                        headline.setText("All outcome");
                         toggleBtn.setText("Toggle to show income instead");
                         //show list of income items from table in database
                         isIncome = false;
                     } else {
+                        headline.setText("All income");
                         toggleBtn.setText("Toggle to show outcome instead");
                         //show list of outcome items from table in database
                         isIncome = true;

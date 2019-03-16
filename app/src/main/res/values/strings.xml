@@ -49,6 +49,7 @@
     <string name="summary_temp">TEMP </string>
 
     <!-- View transaction view -->
+    <string name="viewTransaction_headline">All income</string>
     <string name="viewTransaction_toggleHeadline">Toggle to show outcome instead</string>
     <string name="viewTransaction_filterDateBtnText">Filter date</string>
 
