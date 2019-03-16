@@ -20,7 +20,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
     private TextView userName;
     private String name;
-    private ResultFragment resultFragment;
+    private SummaryFragment resultFragment;
     private EnterTransactionFragment enterTransactionFragment;
     private ViewTransactionFragment viewTransactionFragment;
     public static Context context;
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         int id = item.getItemId();
 
         if (id == R.id.nav_result) {
-            resultFragment = new ResultFragment();
+            resultFragment = new SummaryFragment();
             setFragment(resultFragment, false);
 
         } else if (id == R.id.nav_add) {
