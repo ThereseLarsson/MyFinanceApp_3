@@ -24,7 +24,7 @@ public class Database extends SQLiteOpenHelper {
     private static final String TABLE_INCOME = "income";
     private static final String INCOME_COLUMN_ID = "_id";
     private static final String INCOME_COLUMN_TITLE = "title";
-    private static final String INCOME_COLUMN_DATE = "date"; //FIXA TILL DATE-OBJEKT
+    private static final String INCOME_COLUMN_DATE = "date";
     private static final String INCOME_COLUMN_AMOUNT = "amount";
     private static final String INCOME_COLUMN_CATEGORY = "category";
 
@@ -32,7 +32,7 @@ public class Database extends SQLiteOpenHelper {
     private static final String TABLE_OUTCOME = "outcome";
     private static final String OUTCOME_COLUMN_ID = "_id";
     private static final String OUTCOME_COLUMN_TITLE = "title";
-    private static final String OUTCOME_COLUMN_DATE = "date"; //FIXA TILL DATE-OBJEKT
+    private static final String OUTCOME_COLUMN_DATE = "date";
     private static final String OUTCOME_COLUMN_AMOUNT = "amount";
     private static final String OUTCOME_COLUMN_CATEGORY = "category";
 
@@ -146,7 +146,7 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(INCOME_COLUMN_TITLE, title);
-        contentValues.put(INCOME_COLUMN_DATE, date); //FIXA TILL DATE-OBJEKT
+        contentValues.put(INCOME_COLUMN_DATE, date);
         contentValues.put(INCOME_COLUMN_AMOUNT, amount);
         contentValues.put(INCOME_COLUMN_CATEGORY, category);
         db.insert(TABLE_INCOME, null, contentValues);
@@ -156,9 +156,14 @@ public class Database extends SQLiteOpenHelper {
         double totalIncome = 0;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_INCOME, null ); //rad3
-
-        //do something
-
+        if(cursor != null) {
+            if(cursor.moveToFirst()) {
+                do {
+                    totalIncome = totalIncome + cursor.getDouble(3);
+                } while(cursor.moveToNext());
+            }
+        }
+        cursor.close();
         return totalIncome;
     }
 
@@ -179,7 +184,7 @@ public class Database extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(OUTCOME_COLUMN_TITLE, title);
-        contentValues.put(OUTCOME_COLUMN_DATE, date); //FIXA TILL DATE-OBJEKT
+        contentValues.put(OUTCOME_COLUMN_DATE, date);
         contentValues.put(OUTCOME_COLUMN_AMOUNT, amount);
         contentValues.put(OUTCOME_COLUMN_CATEGORY, category);
         db.insert(TABLE_OUTCOME, null, contentValues);
@@ -189,9 +194,14 @@ public class Database extends SQLiteOpenHelper {
         double totalOutcome = 0;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_OUTCOME, null );
-
-        //do something
-
+        if(cursor != null) {
+            if(cursor.moveToFirst()) {
+                do {
+                    totalOutcome = totalOutcome + cursor.getDouble(3);
+                } while(cursor.moveToNext());
+            }
+        }
+        cursor.close();
         return totalOutcome;
     }
 
