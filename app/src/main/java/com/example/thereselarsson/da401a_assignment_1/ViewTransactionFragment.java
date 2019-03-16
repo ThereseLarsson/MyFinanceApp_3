@@ -6,22 +6,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 public class ViewTransactionFragment extends Fragment {
     private View rootView;
+    private ListView listView;
+    private boolean isIncome; //if false --> = outcome
+
+    //variables for UI
     private TextView headline;
     private Switch toggleBtn;
     private Button filterDateBtn;
-    private boolean isIncome; //if false --> = outcome
+
 
     public ViewTransactionFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,6 +36,10 @@ public class ViewTransactionFragment extends Fragment {
         initiateComponents();
         registerListeners();
         isIncome = true;
+
+        //set up the custom list adapter view
+        initiateCustomListAdapter();
+
         return rootView;
     }
 
@@ -45,6 +55,31 @@ public class ViewTransactionFragment extends Fragment {
     private void registerListeners() {
         ClickListener clickListener = new ClickListener();
         toggleBtn.setOnClickListener(clickListener);
+    }
+
+    /**
+     * methods for creating custom list adapter
+     * ---------------------------------------------------------------------------------------
+     */
+    public void initiateCustomListAdapter() {
+        ArrayList<Item> itemArrayList = generateItemsList();
+        CustomListAdapter customListAdapter = new CustomListAdapter(MainActivity.context, itemArrayList);
+        listView = rootView.findViewById(R.id.viewTransaction_list);
+        listView.setAdapter(customListAdapter);
+    }
+
+    public ArrayList<Item> generateItemsList() {
+        ArrayList<Item> items = new ArrayList<Item>();
+        String strings[] = {"Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"};
+        int icons[] = {R.drawable.icon_acc_big, R.drawable.icon_food_big, R.drawable.icon_sparetime_big, R.drawable.icon_travel_big, R.drawable.icon_other_big, R.drawable.icon_salary_big};
+        Item item;
+
+        for(int i = 0; i < 6; i++) {
+            item = new Item(icons[i], strings[i]);
+            items.add(item);
+        }
+
+        return items;
     }
 
     /**
@@ -82,7 +117,6 @@ public class ViewTransactionFragment extends Fragment {
                         //filter from date
                     }
                     break;
-
             }
         }
     }
