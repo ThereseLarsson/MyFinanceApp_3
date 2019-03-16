@@ -72,6 +72,11 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
+     * Methods regarding Person-table
+     * -----------------------------------------------------------------------------
+     */
+
+    /**
      * adds a person into the database
      * @param firstName
      * @param lastName
@@ -132,7 +137,11 @@ public class Database extends SQLiteOpenHelper {
         return fullName;
     }
 
-    //FIXA TILL DATE-OBJEKT --> ARGUMENT
+    /**
+     * Methods regarding Income-table
+     * -----------------------------------------------------------------------------
+     */
+
     public void addIncome(String title, String date, double amount, String category) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -161,7 +170,11 @@ public class Database extends SQLiteOpenHelper {
         return result;
     }
 
-    //FIXA TILL DATE-OBJEKT --> ARGUMENT
+    /**
+     * Methods regarding Outcome-table
+     * -----------------------------------------------------------------------------
+     */
+
     public void addOutcome(String title, String date, double amount, String category) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -189,6 +202,11 @@ public class Database extends SQLiteOpenHelper {
 
         return result;
     }
+
+    /**
+     * Methods for printing contents of tables
+     * -----------------------------------------------------------------------------
+     */
 
     /**
      * prints the contents of the person table
