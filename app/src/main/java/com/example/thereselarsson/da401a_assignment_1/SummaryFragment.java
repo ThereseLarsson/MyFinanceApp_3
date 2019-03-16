@@ -48,7 +48,7 @@ public class SummaryFragment extends Fragment {
      */
     public void setTotalIncome() {
         totalIncome = Startup.db.getTotalIncome();
-        totalIncomeTxt.setText(Double.toString(totalIncome));
+        totalIncomeTxt.setText(Double.toString(totalIncome) + " kr");
     }
 
     /**
@@ -56,7 +56,7 @@ public class SummaryFragment extends Fragment {
      */
     public void setTotalOutcome() {
         totalOutcome = Startup.db.getTotalOutcome();
-        totalOutcomeTxt.setText(Double.toString(totalOutcome));
+        totalOutcomeTxt.setText(Double.toString(totalOutcome) + (" kr"));
     }
 
     /**
