@@ -175,6 +175,22 @@ public class Database extends SQLiteOpenHelper {
         return result;
     }
 
+    public boolean incomeTitleExists(String title) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_INCOME, null );
+        if(cursor != null) {
+            if(cursor.moveToFirst()) {
+                do {
+                    if(title.equals(cursor.getString(1))) {
+                        return true;
+                    }
+                } while(cursor.moveToNext());
+            }
+        }
+        cursor.close();
+        return false;
+    }
+
     /**
      * Methods regarding Outcome-table
      * -----------------------------------------------------------------------------
@@ -211,6 +227,22 @@ public class Database extends SQLiteOpenHelper {
         //do something
 
         return result;
+    }
+
+    public boolean outcomeTitleExists(String title) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_OUTCOME, null );
+        if(cursor != null) {
+            if(cursor.moveToFirst()) {
+                do {
+                    if(title.equals(cursor.getString(1))) {
+                        return true;
+                    }
+                } while(cursor.moveToNext());
+            }
+        }
+        cursor.close();
+        return false;
     }
 
     /**

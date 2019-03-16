@@ -53,6 +53,4 @@
     <string name="viewTransaction_toggleHeadline">Toggle to show outcome instead</string>
     <string name="viewTransaction_filterDateBtnText">Filter after date</string>
 
-    <!-- TODO remember to make titles unique in EnterTransactionFragment-->
-
 </resources>

@@ -146,6 +146,24 @@ public class EnterTransactionFragment extends Fragment {
         }
     }
 
+    private boolean uniqueTitle() {
+        title = titleTxt.getText().toString();
+        if(isIncome) {
+            if(Startup.db.incomeTitleExists(title)) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            if(Startup.db.outcomeTitleExists(title)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+    }
+
     /**
      * Methods that connects to the database
      * -----------------------------------------------------------------------------
@@ -176,15 +194,20 @@ public class EnterTransactionFragment extends Fragment {
 
                 case R.id.enterTransaction_confirmBtn:
                     if(validData()) {
-                        if(isIncome) {
-                            addNewIncomeToDatabase();
-                            showMessage("Income successfully added!");
-                            Startup.db.printTableIncomeAsString(); //testing purpose
+                        if(uniqueTitle()) {
+                            if(isIncome) {
+                                addNewIncomeToDatabase();
+                                showMessage("Income successfully added!");
+                                Startup.db.printTableIncomeAsString(); //testing purpose
+                            } else {
+                                addNewOutcomeToDatabase();
+                                showMessage("Outcome successfully added!");
+                                Startup.db.printTableOutcomeAsString(); //testing purpose
+                            }
                         } else {
-                            addNewOutcomeToDatabase();
-                            showMessage("Outcome successfully added!");
-                            Startup.db.printTableOutcomeAsString(); //testing purpose
+                            showMessage("Please enter a unique title");
                         }
+
                     } else {
                         showMessage("Please enter all data above");
                     }

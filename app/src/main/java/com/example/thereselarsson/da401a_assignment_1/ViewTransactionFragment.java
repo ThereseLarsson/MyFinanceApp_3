@@ -80,7 +80,6 @@ public class ViewTransactionFragment extends Fragment {
             item = new Item(iconList[i], titleList[i]);
             items.add(item);
         }
-
         return items;
     }
 
