@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -12,6 +13,8 @@ import android.widget.Toast;
 public class ViewTransactionFragment extends Fragment {
     private View rootView;
     private Switch toggleBtn;
+    private Button filterDateBtn;
+    private boolean isIncome; //if false --> = outcome
 
     public ViewTransactionFragment() {
         // Required empty public constructor
@@ -24,11 +27,13 @@ public class ViewTransactionFragment extends Fragment {
         rootView = inflater.inflate(R.layout.fragment_view_transaction, container, false);
         initiateComponents();
         registerListeners();
+        isIncome = true;
         return rootView;
     }
 
     public void initiateComponents() {
         toggleBtn = rootView.findViewById(R.id.viewTransaction_toggleBtn);
+        filterDateBtn = rootView.findViewById(R.id.viewTransaction_filterDateBtn);
     }
 
     /**
@@ -54,8 +59,25 @@ public class ViewTransactionFragment extends Fragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.viewTransaction_toggleBtn:
-                    //view outcome instead
+                    if(isIncome) {
+                        toggleBtn.setText("Toggle to show income instead");
+                        //show list of income items from table in database
+                        isIncome = false;
+                    } else {
+                        toggleBtn.setText("Toggle to show outcome instead");
+                        //show list of outcome items from table in database
+                        isIncome = true;
+                    }
                     break;
+
+                case R.id.viewTransaction_filterDateBtn:
+                    if(isIncome) {
+                        //filter from date
+                    } else {
+                        //filter from date
+                    }
+                    break;
+
             }
         }
     }

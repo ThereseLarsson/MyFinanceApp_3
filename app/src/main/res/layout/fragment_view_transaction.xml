@@ -16,6 +16,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:switchPadding="10sp"
         android:text="@string/viewTransaction_toggleHeadline"
         android:textColor="#ffffff"
@@ -23,5 +24,25 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewTransaction_filterDateBtn" />
+
+    <Button
+        android:id="@+id/viewTransaction_filterDateBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="376dp"
+        android:text="@string/viewTransaction_filterDateBtnText"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:alpha="0.8"
+        android:background="@drawable/buttondesign"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
