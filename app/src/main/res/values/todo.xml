@@ -2,4 +2,5 @@
 <resources>
     <!-- TODO (ViewTransactionFragment, Database) Get list items for listview from database -->
     <!-- TODO (ViewTransactionFragment, Database) add functionality to filter income/outcome after date -->
+    <!-- TODO (SummaryFragment) add icons to SummaryFragment -->
 </resources>
