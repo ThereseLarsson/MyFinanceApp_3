@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
+import android.widget.Toast;
 
 
 public class ViewTransactionFragment extends Fragment {
@@ -36,6 +37,13 @@ public class ViewTransactionFragment extends Fragment {
     private void registerListeners() {
         ClickListener clickListener = new ClickListener();
         toggleBtn.setOnClickListener(clickListener);
+    }
+
+    /**
+     * shows the user a message when they fail to create a valid account
+     */
+    public void showMessage(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
     /**

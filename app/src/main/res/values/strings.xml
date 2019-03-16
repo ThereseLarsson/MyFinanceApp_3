@@ -17,7 +17,7 @@
     <string name="newAccount_btn">Continue </string>
 
     <!-- Navigation drawer view -->
-    <string name="navigation_item_results">Financial results </string>
+    <string name="navigation_item_summary">Financial summary </string>
     <string name="navigation_item_add">Add new income/outcome </string>
     <string name="navigation_item_view">View income/outcome </string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -41,8 +41,12 @@
     <string name="enterTransaction_amount_hint"><i>(kr) </i></string>
     <string name="enterTransaction_btn">Confirm </string>
 
-    <!-- Results view -->
-    <string name="result_title">Here are your financial results! </string>
+    <!-- Summary view -->
+    <string name="summary_headline">Financial summary </string>
+    <string name="summary_income_headline">Total income: </string>
+    <string name="summary_outcome_headline">Total outcome: </string>
+    <string name="summary_sum_headline">Sum: </string>
+    <string name="summary_temp">TEMP </string>
 
     <!-- View transaction view -->
     <string name="viewTransaction_toggleHeadline">Toggle to view outcome instead</string>
