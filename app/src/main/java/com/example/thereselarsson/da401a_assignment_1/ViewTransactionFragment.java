@@ -71,7 +71,7 @@ public class ViewTransactionFragment extends Fragment {
     public ArrayList<Item> generateItemsList() {
         ArrayList<Item> items = new ArrayList<Item>();
         String strings[] = {"Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"};
-        int icons[] = {R.drawable.icon_acc_big, R.drawable.icon_food_big, R.drawable.icon_sparetime_big, R.drawable.icon_travel_big, R.drawable.icon_other_big, R.drawable.icon_salary_big};
+        int icons[] = {R.drawable.icon_acc, R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_other, R.drawable.icon_salary};
         Item item;
 
         for(int i = 0; i < 6; i++) {
