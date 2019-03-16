@@ -17,6 +17,8 @@ import java.util.ArrayList;
 public class ViewTransactionFragment extends Fragment {
     private View rootView;
     private ListView listView;
+    private String[] titleList = {};
+    private int[] iconList = {};
     private boolean isIncome; //if false --> = outcome
 
     //variables for UI
@@ -70,12 +72,12 @@ public class ViewTransactionFragment extends Fragment {
 
     public ArrayList<Item> generateItemsList() {
         ArrayList<Item> items = new ArrayList<Item>();
-        String strings[] = {"Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"};
-        int icons[] = {R.drawable.icon_acc, R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_other, R.drawable.icon_salary};
+        titleList = new String[] {"Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"};
+        iconList = new int[] {R.drawable.icon_acc, R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_other, R.drawable.icon_salary};
         Item item;
 
         for(int i = 0; i < 6; i++) {
-            item = new Item(icons[i], strings[i]);
+            item = new Item(iconList[i], titleList[i]);
             items.add(item);
         }
 

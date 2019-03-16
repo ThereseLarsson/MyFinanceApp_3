@@ -51,6 +51,8 @@
     <!-- View transaction view -->
     <string name="viewTransaction_headline">All income</string>
     <string name="viewTransaction_toggleHeadline">Toggle to show outcome instead</string>
-    <string name="viewTransaction_filterDateBtnText">Filter date</string>
+    <string name="viewTransaction_filterDateBtnText">Filter after date</string>
+
+    <!-- TODO remember to make titles unique in EnterTransactionFragment-->
 
 </resources>
