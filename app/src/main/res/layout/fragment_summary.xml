@@ -96,11 +96,27 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="@string/summary_sum_headline"
         android:textColor="#ffffff"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/summary_line" />
+
+    <TextView
+        android:id="@+id/summary_line"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/summary_line"
+        android:textColor="#ffffff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/summary_outcome_headline" />
 
@@ -112,7 +128,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="168dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:text="@string/summary_temp"
         android:textColor="#ffffff"
         android:textSize="16sp"
@@ -120,6 +136,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/summary_sum_headline"
-        app:layout_constraintTop_toBottomOf="@+id/summary_outcome" />
+        app:layout_constraintTop_toBottomOf="@+id/summary_line" />
 
 </android.support.constraint.ConstraintLayout>
