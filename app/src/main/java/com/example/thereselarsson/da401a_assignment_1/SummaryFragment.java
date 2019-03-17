@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -17,6 +18,7 @@ public class SummaryFragment extends Fragment {
     private TextView sumTxt;
     private double totalIncome;
     private double totalOutcome;
+    private ImageView icon;
     private String sum;
 
     public SummaryFragment() {
@@ -41,6 +43,7 @@ public class SummaryFragment extends Fragment {
         totalIncomeTxt = rootView.findViewById(R.id.summary_income);
         totalOutcomeTxt = rootView.findViewById(R.id.summary_outcome);
         sumTxt = rootView.findViewById(R.id.summary_sum);
+        icon = rootView.findViewById(R.id.summary_icon);
     }
 
     /**
@@ -65,10 +68,13 @@ public class SummaryFragment extends Fragment {
     public void setSum() {
         if(totalIncome > totalOutcome) {
             sum = "+" + Double.toString(totalIncome - totalOutcome) + " kr";
+            icon.setImageResource(R.drawable.icon_increase_big);
         } else if(totalOutcome > totalIncome) {
             sum = "-" + Double.toString(totalOutcome - totalIncome) + " kr";
+            icon.setImageResource(R.drawable.icon_decrease_big);
         } else {
             sum = "0 kr";
+            icon.setImageResource(R.drawable.icon_no_difference_big);
         }
         sumTxt.setText(sum);
     }
