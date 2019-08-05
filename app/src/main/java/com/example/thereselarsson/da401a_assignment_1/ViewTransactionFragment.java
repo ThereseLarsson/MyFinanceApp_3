@@ -77,9 +77,9 @@ public class ViewTransactionFragment extends Fragment {
 
         //should get items from database (income respektive outcome)
         outcome_itemTitleList = new String[] {"Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"};
-        //income_itemTitleList = ....;
+        //income_itemTitleList = ...;
         outcome_itemIconList = new int[] {R.drawable.icon_acc, R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_other, R.drawable.icon_salary};
-        //income_itemIconList = ....;
+        //income_itemIconList = ...;
 
         Item item;
 
