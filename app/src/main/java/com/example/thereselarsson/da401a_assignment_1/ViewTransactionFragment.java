@@ -76,15 +76,16 @@ public class ViewTransactionFragment extends Fragment {
         ArrayList<Item> items = new ArrayList<Item>();
 
         //should get items from database (income respektive outcome)
-        outcome_itemTitleList = new String[] {"Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"};
-        //income_itemTitleList = ...;
-        outcome_itemIconList = new int[] {R.drawable.icon_acc, R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_other, R.drawable.icon_salary};
-        //income_itemIconList = ...;
+        income_itemTitleList = new String[] {"Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"};
+        //outcome_itemTitleList = ...;
+        income_itemIconList = new int[] {R.drawable.icon_acc, R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_other, R.drawable.icon_salary};
+        //outcome_itemIconList = ...;
 
         Item item;
 
-        for(int i = 0; i < outcome_itemIconList.length; i++) { //längden på listan är ekvivalent med antalet items
-            item = new Item(outcome_itemIconList[i], outcome_itemTitleList[i]);
+        //shows the items from income as default when the list is generated into the interface for the first time
+        for(int i = 0; i < income_itemIconList.length; i++) { //längden på listan är ekvivalent med antalet items
+            item = new Item(income_itemIconList[i], income_itemTitleList[i]);
             items.add(item);
         }
         return items;
