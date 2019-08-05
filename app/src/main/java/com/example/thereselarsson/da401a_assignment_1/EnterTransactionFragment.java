@@ -276,7 +276,7 @@ public class EnterTransactionFragment extends Fragment {
          * Do something with the date chosen by the user
          */
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            date = Integer.toString(day) + "/" + Integer.toString(month) + "-" + Integer.toString(year);
+            date = Integer.toString(day) + "/" + Integer.toString(month + 1) + "-" + Integer.toString(year); //month + 1 eftersom indexeringen börjar på noll
             setDateButtonText(date);
             setDate(date);
         }
