@@ -4,3 +4,6 @@ Inlämningsuppgift 1
 Kurs: Application Development for Android (DA401A) 
 
 Gick: Termin 5 Systemutvecklare, ht 2018.
+
+# Run the application
+- Run MainActivity.java
