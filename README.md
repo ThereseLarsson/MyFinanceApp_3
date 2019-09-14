@@ -30,4 +30,7 @@ Gick: Termin 5 Systemutvecklare, ht 2018.
     - ViewTransactionFragment 
 
 - Improve UI (make it look sleek!) (4)
+  - background image
+  - buttons
+  - textcolor
 
