@@ -53,6 +53,7 @@
     <string name="viewTransaction_headline">All income</string>
     <string name="viewTransaction_toggleHeadline">Toggle to show outcome instead</string>
     <string name="viewTransaction_filterDateBtnText">Filter after date</string>
+    <string name="viewTransaction_resetDateBtnText">Reset date filter</string>
 
     <!-- DetailActivity -->
     <string name="detailActivity_titleTxt">Title: </string>

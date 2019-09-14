@@ -1,6 +1,7 @@
 package com.example.thereselarsson.da401a_assignment_1;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,6 +25,8 @@ public class ViewTransactionFragment extends Fragment {
     private CustomListAdapter customListAdapter;
     private Item item;
     private ArrayList<Item> items;
+    private DialogFragment datePickerFragment;
+    private static String date;
 
     //variables for storing data from database
     private String[] income_itemTitleList = {}; //for storing the each items title
@@ -43,6 +46,7 @@ public class ViewTransactionFragment extends Fragment {
     private TextView headline;
     private Switch toggleBtn;
     private Button filterDateBtn;
+    private Button resetDateBtn;
 
 
     public ViewTransactionFragment() {
@@ -67,6 +71,7 @@ public class ViewTransactionFragment extends Fragment {
         headline = rootView.findViewById(R.id.viewTransaction_headline);
         toggleBtn = rootView.findViewById(R.id.viewTransaction_toggleBtn);
         filterDateBtn = rootView.findViewById(R.id.viewTransaction_filterDateBtn);
+        resetDateBtn = rootView.findViewById(R.id.viewTransaction_resetDateBtn);
     }
 
     /**
@@ -75,6 +80,8 @@ public class ViewTransactionFragment extends Fragment {
     private void registerListeners() {
         ClickListener clickListener = new ClickListener();
         toggleBtn.setOnClickListener(clickListener);
+        filterDateBtn.setOnClickListener(clickListener);
+        resetDateBtn.setOnClickListener(clickListener);
     }
 
     /**
@@ -179,6 +186,24 @@ public class ViewTransactionFragment extends Fragment {
     }
 
     /**
+     * Methods for handling date picking
+     * --------------------------------------------------------------------------------------
+     */
+    public void showDatePickerDialog() {
+        datePickerFragment = new EnterTransactionFragment.DatePickerFragment2();
+        datePickerFragment.show(getFragmentManager(), "datePicker");
+    }
+
+    public static void setDate(String string) {
+        date = string;
+    }
+
+    public static void setDateButtonText(String string) {
+        //filterDateBtn.setText(string);
+    }
+
+
+    /**
      * inner class to handle clicks
      */
     private class ClickListener implements View.OnClickListener {
@@ -201,9 +226,21 @@ public class ViewTransactionFragment extends Fragment {
 
                 case R.id.viewTransaction_filterDateBtn:
                     if(isIncome) {
-                        //filter from date --> show list of outcome items from table in database
+                        Log.d(null, "FILTERDATEBUTTON IS PRESSED");
+                        //TODO: filter from date --> show list of outcome items from table in database
                     } else {
-                        //filter from date --> show list of outcome items from table in database
+                        Log.d(null, "FILTERDATEBUTTON IS PRESSED");
+                        //TODO: filter from date --> show list of outcome items from table in database
+                    }
+                    break;
+
+                case R.id.viewTransaction_resetDateBtn:
+                    if(isIncome) {
+                        Log.d(null, "RESETBUTTON IS PRESSED");
+                        //TODO: visa alla inkomster
+                    } else {
+                        Log.d(null, "RESETBUTTON IS PRESSED");
+                        //TODO: visa alla utgofter
                     }
                     break;
             }
