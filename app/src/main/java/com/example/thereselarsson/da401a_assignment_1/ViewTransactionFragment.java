@@ -228,9 +228,11 @@ public class ViewTransactionFragment extends Fragment {
                     if(isIncome) {
                         Log.d(null, "FILTERDATEBUTTON IS PRESSED");
                         //TODO: filter from date --> show list of outcome items from table in database
+                        //TODO: headline.setText("Income from *insert date*");
                     } else {
                         Log.d(null, "FILTERDATEBUTTON IS PRESSED");
                         //TODO: filter from date --> show list of outcome items from table in database
+                        //TODO: headline.setText("Outcome from *insert date*");
                     }
                     break;
 
@@ -238,9 +240,11 @@ public class ViewTransactionFragment extends Fragment {
                     if(isIncome) {
                         Log.d(null, "RESETBUTTON IS PRESSED");
                         //TODO: visa alla inkomster
+                        headline.setText("All income");
                     } else {
                         Log.d(null, "RESETBUTTON IS PRESSED");
                         //TODO: visa alla utgofter
+                        headline.setText("All outcome");
                     }
                     break;
             }
