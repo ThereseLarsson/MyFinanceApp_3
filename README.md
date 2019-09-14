@@ -10,6 +10,9 @@ Gick: Termin 5 Systemutvecklare, ht 2018.
 
 ### Left TODO (last updated 9/14-2019, kl. 13:14)
 - Get list items for listview from database (1)
+  - Still need to:
+    - Toggle between income/outcome
+    - Display correct icon
   - Relevant classes
     - ViewTransactionFragment
     - Database
