@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Switch;
@@ -85,6 +86,14 @@ public class ViewTransactionFragment extends Fragment {
         customListAdapter = new CustomListAdapter(MainActivity.context, itemArrayList);
         listView = rootView.findViewById(R.id.viewTransaction_list);
         listView.setAdapter(customListAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                //starta DetailActivity + skicka med värden
+                Log.d(null, "CLICKED row number: " + arg2);
+            }
+        });
     }
 
     public ArrayList<Item> generateItemsList() {
