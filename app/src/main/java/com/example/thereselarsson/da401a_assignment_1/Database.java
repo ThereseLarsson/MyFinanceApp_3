@@ -3,6 +3,7 @@ package com.example.thereselarsson.da401a_assignment_1;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -69,6 +70,14 @@ public class Database extends SQLiteOpenHelper {
                 OUTCOME_COLUMN_AMOUNT + " DOUBLE, " +
                 OUTCOME_COLUMN_CATEGORY + " TEXT)"
         );
+    }
+
+    public int getNbrOfIncomeTableRows() {
+        return (int) DatabaseUtils.queryNumEntries(getReadableDatabase(), TABLE_INCOME);
+    }
+
+    public int getNbrOfOutcomeTableRows() {
+        return (int) DatabaseUtils.queryNumEntries(getReadableDatabase(), TABLE_OUTCOME);
     }
 
     /**
@@ -192,6 +201,32 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
+     * gets the titles of all the items from the IncomeTable and returns them in a list
+     * returns these as one string
+     * @return
+     */
+    public String[] getIncomeTitles() {
+        String title = "";
+        String[] itemTitleList = new String[getNbrOfIncomeTableRows()];
+        int index = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_INCOME, new String[] {"*"}, null, null, null, null, null, null );
+        if(cursor != null) {
+            if(cursor.moveToFirst()) {
+                do {
+                    title = cursor.getString(1);
+                    Log.d(null, "Title at index " + index + " is: " + title);
+                    itemTitleList[index] = title;
+                    index++;
+                } while(cursor.moveToNext()) ;
+            }
+        }
+        cursor.close();
+        db.close();
+        return itemTitleList;
+    }
+
+    /**
      * Methods regarding Outcome-table
      * -----------------------------------------------------------------------------
      */
@@ -243,6 +278,32 @@ public class Database extends SQLiteOpenHelper {
         }
         cursor.close();
         return false;
+    }
+
+    /**
+     * gets the titles of all the items from the OutcomeTable and returns them in a list
+     * returns these as one string
+     * @return
+     */
+    public String[] getOutcomeTitles() {
+        String title = "";
+        String[] itemTitleList = new String[getNbrOfOutcomeTableRows()];
+        int index = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_OUTCOME, new String[] {"*"}, null, null, null, null, null, null );
+        if(cursor != null) {
+            if(cursor.moveToFirst()) {
+                do {
+                    title = cursor.getString(1);
+                    Log.d(null, "Title at index " + index + " is: " + title);
+                    itemTitleList[index] = title;
+                    index++;
+                } while(cursor.moveToNext()) ;
+            }
+        }
+        cursor.close();
+        db.close();
+        return itemTitleList;
     }
 
     /**

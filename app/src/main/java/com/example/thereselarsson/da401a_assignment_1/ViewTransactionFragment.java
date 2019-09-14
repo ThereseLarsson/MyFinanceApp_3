@@ -2,6 +2,7 @@ package com.example.thereselarsson.da401a_assignment_1;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,19 +76,19 @@ public class ViewTransactionFragment extends Fragment {
     public ArrayList<Item> generateItemsList() {
         ArrayList<Item> items = new ArrayList<Item>();
 
-        //should get items from database (income respektive outcome)
-        income_itemTitleList = new String[] {"Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"};
-        //outcome_itemTitleList = ...;
+        income_itemTitleList = Startup.db.getIncomeTitles();
+        outcome_itemTitleList = Startup.db.getOutcomeTitles(); //is created here but not used as income is the default
         income_itemIconList = new int[] {R.drawable.icon_acc, R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_other, R.drawable.icon_salary};
-        //outcome_itemIconList = ...;
+        //outcome_itemIconList = ...; //is created here but not used as income is the default
 
         Item item;
 
         //shows the items from income as default when the list is generated into the interface for the first time
-        for(int i = 0; i < income_itemIconList.length; i++) { //längden på listan är ekvivalent med antalet items
+        for(int i = 0; i < income_itemTitleList.length; i++) { //längden på listan är ekvivalent med antalet items
             item = new Item(income_itemIconList[i], income_itemTitleList[i]);
             items.add(item);
         }
+
         return items;
     }
 
@@ -109,12 +110,12 @@ public class ViewTransactionFragment extends Fragment {
                     if(isIncome) {
                         headline.setText("All outcome");
                         toggleBtn.setText("Toggle to show income instead");
-                        //show list of income items from table in database
+                        //TODO: show list of income items from table in database
                         isIncome = false;
                     } else {
                         headline.setText("All income");
                         toggleBtn.setText("Toggle to show outcome instead");
-                        //show list of outcome items from table in database
+                        //TODO: show list of outcome items from table in database
                         isIncome = true;
                     }
                     break;
