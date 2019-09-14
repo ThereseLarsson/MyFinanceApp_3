@@ -201,29 +201,34 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * gets the titles of all the items from the IncomeTable and returns them in a list
-     * returns these as one string
+     * gets the values of all the items from the IncomeTable and returns them in a list
+     *
+     * row 0 - id
+     * row 1 - title
+     * row 2 - date
+     * row 3 - amount
+     * row 4- category
      * @return
      */
-    public String[] getIncomeTitles() {
-        String title = "";
-        String[] itemTitleList = new String[getNbrOfIncomeTableRows()];
+    public String[] getIncomeValuesFromRowNbr(int indexInTable) {
+        String rowValue = "";
+        String[] rowValueList = new String[getNbrOfIncomeTableRows()];
         int index = 0;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_INCOME, new String[] {"*"}, null, null, null, null, null, null );
         if(cursor != null) {
             if(cursor.moveToFirst()) {
                 do {
-                    title = cursor.getString(1);
-                    Log.d(null, "Title at index " + index + " is: " + title);
-                    itemTitleList[index] = title;
+                    rowValue = cursor.getString(indexInTable);
+                    //Log.d(null, "Row value at index " + index + " is: " + rowValue);
+                    rowValueList[index] = rowValue;
                     index++;
                 } while(cursor.moveToNext()) ;
             }
         }
         cursor.close();
         db.close();
-        return itemTitleList;
+        return rowValueList;
     }
 
     /**
@@ -281,30 +286,36 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * gets the titles of all the items from the OutcomeTable and returns them in a list
-     * returns these as one string
+     * gets the values of all the items from the OutcomeTable and returns them in a list
+     *
+     * row 0 - id
+     * row 1 - title
+     * row 2 - date
+     * row 3 - amount
+     * row 4- category
      * @return
      */
-    public String[] getOutcomeTitles() {
-        String title = "";
-        String[] itemTitleList = new String[getNbrOfOutcomeTableRows()];
+    public String[] getOutcomeValuesFromRowNbr(int indexInTable) {
+        String rowValue = "";
+        String[] rowValueList = new String[getNbrOfOutcomeTableRows()];
         int index = 0;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_OUTCOME, new String[] {"*"}, null, null, null, null, null, null );
         if(cursor != null) {
             if(cursor.moveToFirst()) {
                 do {
-                    title = cursor.getString(1);
-                    Log.d(null, "Title at index " + index + " is: " + title);
-                    itemTitleList[index] = title;
+                    rowValue = cursor.getString(indexInTable);
+                    //Log.d(null, "Row value at index " + index + " is: " + rowValue);
+                    rowValueList[index] = rowValue;
                     index++;
                 } while(cursor.moveToNext()) ;
             }
         }
         cursor.close();
         db.close();
-        return itemTitleList;
+        return rowValueList;
     }
+
 
     /**
      * Methods for printing contents of tables

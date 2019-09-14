@@ -19,8 +19,8 @@ public class ViewTransactionFragment extends Fragment {
     private View rootView;
     private ListView listView;
     private String[] income_itemTitleList = {}; //for storing the each items title
-    private String[] outcome_itemTitleList = {}; //for storing the each items icon
-    private int[] income_itemIconList = {};
+    private String[] outcome_itemTitleList = {};
+    private int[] income_itemIconList = {}; //for storing the each items icon
     private int[] outcome_itemIconList = {};
     private boolean isIncome; //if false --> = outcome
 
@@ -76,20 +76,36 @@ public class ViewTransactionFragment extends Fragment {
     public ArrayList<Item> generateItemsList() {
         ArrayList<Item> items = new ArrayList<Item>();
 
-        income_itemTitleList = Startup.db.getIncomeTitles();
-        outcome_itemTitleList = Startup.db.getOutcomeTitles(); //is created here but not used as income is the default
-        income_itemIconList = new int[] {R.drawable.icon_acc, R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_other, R.drawable.icon_salary};
-        //outcome_itemIconList = ...; //is created here but not used as income is the default
+        /*
+        row 0 - id
+        row 1 - title
+        row 2 - date
+        row 3 - amount
+        row 4- category
+         */
+        income_itemTitleList = Startup.db.getIncomeValuesFromRowNbr(1);
+        outcome_itemTitleList = Startup.db.getOutcomeValuesFromRowNbr(1); //is created here but not used as income is the default
+
+        income_itemIconList = new int[] {R.drawable.icon_salary, R.drawable.icon_other};
+        outcome_itemIconList = new int[] {R.drawable.icon_acc, R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_other, R.drawable.icon_salary}; //is created here but not used as income is the default
 
         Item item;
 
         //shows the items from income as default when the list is generated into the interface for the first time
         for(int i = 0; i < income_itemTitleList.length; i++) { //längden på listan är ekvivalent med antalet items
-            item = new Item(income_itemIconList[i], income_itemTitleList[i]);
+            item = new Item(income_itemIconList[0], income_itemTitleList[i]);
             items.add(item);
         }
 
         return items;
+    }
+
+    public void setItemListToIncome() {
+
+    }
+
+    public void setItemListToOutcome() {
+
     }
 
     /**
