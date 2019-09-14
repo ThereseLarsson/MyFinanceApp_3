@@ -54,4 +54,10 @@
     <string name="viewTransaction_toggleHeadline">Toggle to show outcome instead</string>
     <string name="viewTransaction_filterDateBtnText">Filter after date</string>
 
+    <!-- DetailActivity -->
+    <string name="detailActivity_titleTxt">Title: </string>
+    <string name="detailActivity_dateTxt">Added: </string>
+    <string name="detailActivity_amountTxt">Balance: </string>
+    <string name="detailActivity_categoryTxt">Category: </string>
+
 </resources>
