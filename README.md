@@ -8,10 +8,28 @@ Gick: Termin 5 Systemutvecklare, ht 2018.
 ## Run the application
 - Run MainActivity.java
 
-### Left TODO
+### Left TODO (last updated 9/14-2019, kl. 13:14)
 - Get list items for listview from database
--   Relevant classes: (ViewTransactionFragment, Database) 
-- add functionality to filter income/outcome after date, Relevant classes: (ViewTransactionFragment, Database)
-- Make it possible to view a specific item in a detailed view, Relevant classes: (ViewTransactionFragment, DetailActivity)
-- Fix so the app can handle screen rotation, Relevant classes: (CreateAccount, DetailActivity, EnterTransactionActivity, GreetingFragment, SummaryFragment, ViewTransactionFragment) 
+  - Relevant classes
+    - ViewTransactionFragment
+    - Database
+    
+- Add functionality to filter income/outcome after date
+  - Relevant classes:
+    - ViewTransactionFragment
+    - Database)
+    
+- Make it possible to view a specific item in a detailed view
+  - Relevant classes
+    - ViewTransactionFragment
+    - DetailActivity
+    
+- Fix so the app can handle screen rotation
+  - Relevant classes:
+    - CreateAccount
+    - DetailActivity
+    - EnterTransactionActivity
+    - GreetingFragment
+    - SummaryFragment
+    - ViewTransactionFragment 
 
