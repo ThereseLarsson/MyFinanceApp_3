@@ -8,7 +8,7 @@ Gick: Termin 5 Systemutvecklare, ht 2018.
 ## Run the application
 - Run MainActivity.java
 
-### Left TODO (last updated 9/14-2019, kl. 21:44)
+### Left TODO (last updated 9/14-2019, kl. 22:14)
 
 - Add functionality to filter income/outcome after date (1)
   - Relevant classes:
