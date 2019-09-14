@@ -8,15 +8,8 @@ Gick: Termin 5 Systemutvecklare, ht 2018.
 ## Run the application
 - Run MainActivity.java
 
-### Left TODO (last updated 9/14-2019, kl. 13:14)
-~~- Get list items for listview from database (1)
-  - Still need to:
-    ~~- Toggle between income/outcome
-    ~~- Display correct icon
-  ~~- Relevant classes
-    - ViewTransactionFragment
-    - Database~~
-    
+### Left TODO (last updated 9/14-2019, kl. 21:05)
+
 - Add functionality to filter income/outcome after date (3)
   - Relevant classes:
     - ViewTransactionFragment
