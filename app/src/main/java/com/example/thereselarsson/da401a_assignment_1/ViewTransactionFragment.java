@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class ViewTransactionFragment extends Fragment {
+public class ViewTransactionFragment extends Fragment implements DatePickerFragment.Listener {
     private View rootView;
     private ListView listView;
     private boolean isIncome; //if false --> = outcome
@@ -25,8 +26,8 @@ public class ViewTransactionFragment extends Fragment {
     private CustomListAdapter customListAdapter;
     private Item item;
     private ArrayList<Item> items;
-    private DialogFragment datePickerFragment;
-    private static String date;
+    //private DialogFragment datePickerFragment;
+    private String date;
 
     //variables for storing data from database
     private String[] income_itemTitleList = {}; //for storing the each items title
@@ -140,6 +141,10 @@ public class ViewTransactionFragment extends Fragment {
         return items;
     }
 
+    /**
+     * methods for changing the content of the list view
+     * ---------------------------------------------------------------------------------------
+     */
     public void setItemListContentToIncome() {
         items = new ArrayList<Item>();
 
@@ -179,32 +184,51 @@ public class ViewTransactionFragment extends Fragment {
     }
 
     /**
-     * shows the user a message when they fail to create a valid account
-     */
-    public void showMessage(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
      * Methods for handling date picking
      * --------------------------------------------------------------------------------------
      */
-    public void showDatePickerDialog() {
-        datePickerFragment = new EnterTransactionFragment.DatePickerFragment2();
-        datePickerFragment.show(getFragmentManager(), "datePicker");
+    @Override
+    public void returnDate(String date) {
+        this.date = date;
+        setDate(date);
+        if(isIncome) {
+            setHeadlineText("Income from " + date);
+        } else {
+            setHeadlineText("Outcome from " + date);
+        }
     }
 
-    public static void setDate(String string) {
+    public void showDatePickerDialog() {
+        DatePickerFragment datePicker = new DatePickerFragment();
+        datePicker.onDateSetListener(this);
+        datePicker.show(getActivity().getSupportFragmentManager(), "datePicker");
+    }
+
+    public void setDate(String string) {
         date = string;
     }
 
-    public static void setDateButtonText(String string) {
-        //filterDateBtn.setText(string);
+    public void setHeadlineText(String string) {
+        headline.setText(string);
     }
 
+    /**
+     * methods for resetting list view
+     * --------------------------------------------------------------------------------------
+     */
+    public void showAllIncome() {
+        //TODO: visa alla inkomster
+        setHeadlineText("All income");
+    }
+
+    public void showAllOutcome() {
+        //TODO: visa alla utgifter
+        setHeadlineText("All outcome");
+    }
 
     /**
      * inner class to handle clicks
+     * --------------------------------------------------------------------------------------
      */
     private class ClickListener implements View.OnClickListener {
         @Override
@@ -228,23 +252,21 @@ public class ViewTransactionFragment extends Fragment {
                     if(isIncome) {
                         Log.d(null, "FILTERDATEBUTTON IS PRESSED");
                         //TODO: filter from date --> show list of outcome items from table in database
-                        //TODO: headline.setText("Income from *insert date*");
+                        showDatePickerDialog();
                     } else {
                         Log.d(null, "FILTERDATEBUTTON IS PRESSED");
                         //TODO: filter from date --> show list of outcome items from table in database
-                        //TODO: headline.setText("Outcome from *insert date*");
+                        showDatePickerDialog();
                     }
                     break;
 
                 case R.id.viewTransaction_resetDateBtn:
                     if(isIncome) {
                         Log.d(null, "RESETBUTTON IS PRESSED");
-                        //TODO: visa alla inkomster
-                        headline.setText("All income");
+                        showAllIncome();
                     } else {
                         Log.d(null, "RESETBUTTON IS PRESSED");
-                        //TODO: visa alla utgofter
-                        headline.setText("All outcome");
+                        showAllOutcome();
                     }
                     break;
             }

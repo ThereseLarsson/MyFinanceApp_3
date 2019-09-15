@@ -20,13 +20,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.Date;
 
 
-public class EnterTransactionFragment extends Fragment {
+public class EnterTransactionFragment extends Fragment implements DatePickerFragment.Listener {
     private View rootView;
     private DialogFragment datePickerFragment;
 
-    //elements to change when income/outcome is toggles
+    //variables to change when income/outcome is toggles
     private TextView headline;
     private Switch toggleBtn;
     private boolean isIncome; //if false --> = outcome
@@ -34,8 +35,8 @@ public class EnterTransactionFragment extends Fragment {
     //variables to get input from user
     private EditText titleTxt;
     private String title;
-    private static Button datePickerBtn;
-    private static String date;
+    private Button datePickerBtn;
+    private String date;
     private EditText amountTxt;
     private double amount;
     private Spinner spinner;
@@ -85,8 +86,15 @@ public class EnterTransactionFragment extends Fragment {
     }
 
     /**
+     * shows the user a message when they fail to create a valid account
+     */
+    public void showMessage(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
      * Methods for setting up categories
-     * --------------------------------------------------------------------------------------
+     * -----------------------------------------------------------------------------------------------
      */
     public void setIncomeCategories() {
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -108,33 +116,10 @@ public class EnterTransactionFragment extends Fragment {
     }
 
     /**
-     * Methods for handling date picking
-     * --------------------------------------------------------------------------------------
-     */
-    public void showDatePickerDialog() {
-        datePickerFragment = new DatePickerFragment2();
-        datePickerFragment.show(getFragmentManager(), "datePicker");
-    }
-
-    public static void setDate(String string) {
-        date = string;
-    }
-
-    public static void setDateButtonText(String string) {
-        datePickerBtn.setText(string);
-    }
-
-    /**
-     * shows the user a message when they fail to create a valid account
-     */
-    public void showMessage(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
      * checks if the required data fields are entered, if so return true.
      * Otherwise, return false
      * @return
+     * --------------------------------------------------------------------------------------------
      */
     private boolean validData() {
         if(titleTxt.getText().toString().matches(".*[a-zA-Z]+.*") && !(date.equals("")) && !(amountTxt.getText().toString().equals(""))) {
@@ -166,7 +151,7 @@ public class EnterTransactionFragment extends Fragment {
 
     /**
      * Methods that connects to the database
-     * -----------------------------------------------------------------------------
+     * -----------------------------------------------------------------------------------------
      */
     private void addNewIncomeToDatabase() {
         Startup.db.addIncome(title, date, amount, category);
@@ -176,13 +161,39 @@ public class EnterTransactionFragment extends Fragment {
         Startup.db.addOutcome(title, date, amount, category);
     }
 
-    /**
-     * Inner classes that handle events from the user
-     * -----------------------------------------------------------------------------
-     */
 
     /**
-     * inner class to handle clicks
+     * Methods for handling date picking
+     * -----------------------------------------------------------------------------------------
+     */
+
+    @Override
+    public void returnDate(String date) {
+        setDate(date);
+        setDateButtonText(date);
+    }
+
+    public void showDatePickerDialog() {
+        //datePickerFragment = new DatePickerFragment2();
+        //datePickerFragment.show(getFragmentManager(), "datePicker");
+
+        DatePickerFragment datePicker = new DatePickerFragment();
+        datePicker.onDateSetListener(this);
+        datePicker.show(getActivity().getSupportFragmentManager(), "datePicker");
+    }
+
+    public void setDate(String string) {
+        date = string;
+    }
+
+    public void setDateButtonText(String string) {
+        datePickerBtn.setText(string);
+    }
+
+
+    /**
+     * Inner class that handle events from the user
+     * ---------------------------------------------------------------------------------------------
      */
     private class ClickListener implements View.OnClickListener {
         @Override
@@ -251,7 +262,7 @@ public class EnterTransactionFragment extends Fragment {
     /**
      * provides a date picker dialog
      */
-    public static class DatePickerFragment2 extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+/*    public static class DatePickerFragment2 extends DialogFragment implements DatePickerDialog.OnDateSetListener {
         public int year;
         public int month;
         public int day;
@@ -272,13 +283,13 @@ public class EnterTransactionFragment extends Fragment {
             return new DatePickerDialog(getActivity(), this, year, month, day);
         }
 
-        /**
+        *//**
          * Do something with the date chosen by the user
-         */
+         *//*
         public void onDateSet(DatePicker view, int year, int month, int day) {
             date = Integer.toString(day) + "/" + Integer.toString(month + 1) + "-" + Integer.toString(year); //month + 1 eftersom indexeringen börjar på noll
             setDateButtonText(date);
             setDate(date);
         }
-    }
+    }*/
 }
