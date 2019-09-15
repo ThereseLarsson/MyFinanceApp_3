@@ -193,8 +193,10 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         setDate(date);
         if(isIncome) {
             setHeadlineText("Income from " + date);
+            //TODO: visa income från och med date
         } else {
             setHeadlineText("Outcome from " + date);
+            //TODO: visa outcome från och med date
         }
     }
 
@@ -270,6 +272,57 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
                     }
                     break;
             }
+        }
+    }
+
+    /**
+     * Inner class for creating a object from the item stored in the SQLite database
+     * Provides easier processing of the data
+     * ---------------------------------------------------------------------------------------
+     */
+    private class DatabaseItem {
+        private String itemTitle;
+        private String itemDate;
+        private int itemAmount;
+        private String itemCategory;
+
+        public DatabaseItem(String itemTitle, String itemDate, int itemAmount, String itemCategory) {
+            this.itemTitle = itemTitle;
+            this.itemDate = itemDate;
+            this.itemAmount = itemAmount;
+            this.itemCategory = itemCategory;
+        }
+
+        public void setItemTitle(String itemTitle)  {
+            this.itemTitle = itemTitle;
+        }
+
+        public void setItemDate(String itemDate) {
+            this.itemDate = itemDate;
+        }
+
+        public void setItemAmount(int itemAmount) {
+            this.itemAmount = itemAmount;
+        }
+
+        public void setItemCategory(String itemCategory) {
+            this.itemCategory = itemCategory;
+        }
+
+        public String getItemTitle() {
+            return itemTitle;
+        }
+
+        public String getItemDate() {
+            return itemDate;
+        }
+
+        public int getItemAmount() {
+            return itemAmount;
+        }
+
+        public String getItemCategory() {
+            return itemCategory;
         }
     }
 }
