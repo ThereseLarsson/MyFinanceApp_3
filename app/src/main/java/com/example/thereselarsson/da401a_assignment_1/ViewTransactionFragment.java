@@ -250,9 +250,9 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
                 case R.id.viewTransaction_filterDateBtn:
                     if(isIncome) {
-                        //showDatePickerDialog();
+                        showDatePickerDialog();
                     } else {
-                        //showDatePickerDialog();
+                        showDatePickerDialog();
                     }
                     break;
 

@@ -51,7 +51,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
      */
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        date = Integer.toString(day) + "/" + Integer.toString(month) + "-" + Integer.toString(year);
+        date = Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year);
         //etf.setDate(date);
         if(listener != null) {
             listener.returnDate(date);
