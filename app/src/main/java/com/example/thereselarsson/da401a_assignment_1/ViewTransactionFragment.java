@@ -106,25 +106,8 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
     public ArrayList<Item> generateItemsList() {
         items = new ArrayList<Item>();
-
-        /*
-        row 0 - id
-        row 1 - title
-        row 2 - date
-        row 3 - amount
-        row 4- category
-         */
-        income_itemTitleList = Startup.db.getIncomeValuesFromRowNbr(1);
-        outcome_itemTitleList = Startup.db.getOutcomeValuesFromRowNbr(1); //is created here but not used as income is the default
-        income_itemCategoryList = Startup.db.getIncomeValuesFromRowNbr(4);
-        outcome_itemCategoryList = Startup.db.getOutcomeValuesFromRowNbr(4); //is created here but not used as income is the default
-
-        //not used here but need to be created
-        income_itemDateList = Startup.db.getIncomeValuesFromRowNbr(2);
-        outcome_itemDateList = Startup.db.getOutcomeValuesFromRowNbr(2); //is created here but not used as income is the default
-        income_itemAmountList = Startup.db.getIncomeValuesFromRowNbr(3);
-        outcome_itemAmountList = Startup.db.getOutcomeValuesFromRowNbr(3); //is created here but not used as income is the default
-
+        fetchAllIncomeFromDatabase(); //income used as default
+        fetchAllOutcomeFromDatabase();
         income_itemIconList = new int[] {R.drawable.icon_salary, R.drawable.icon_other};
         outcome_itemIconList = new int[] {R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_acc, R.drawable.icon_other, R.drawable.icon_salary}; //is created here but not used as income is the default
 
@@ -142,8 +125,34 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
     }
 
     /**
+     * methods that retrieves the data (item title, date, amount an category) from the database
+     * and places it in lists.
+     * Two methods from fetching data from the income-table and out-come table separately
+     *
+     * row 0 - id
+     * row 1 - title
+     * row 2 - date
+     * row 3 - amount
+     * row 4- category
+     * --------------------------------------------------------------------------------------------
+     */
+    public void fetchAllIncomeFromDatabase() {
+        income_itemTitleList = Startup.db.getIncomeValuesFromRowNbr(1);
+        income_itemDateList = Startup.db.getIncomeValuesFromRowNbr(2);
+        income_itemAmountList = Startup.db.getIncomeValuesFromRowNbr(3);
+        income_itemCategoryList = Startup.db.getIncomeValuesFromRowNbr(4);
+    }
+
+    public void fetchAllOutcomeFromDatabase() {
+        outcome_itemTitleList = Startup.db.getOutcomeValuesFromRowNbr(1);
+        outcome_itemDateList = Startup.db.getOutcomeValuesFromRowNbr(2);
+        outcome_itemAmountList = Startup.db.getOutcomeValuesFromRowNbr(3);
+        outcome_itemCategoryList = Startup.db.getOutcomeValuesFromRowNbr(4);
+    }
+
+    /**
      * methods for changing the content of the list view
-     * ---------------------------------------------------------------------------------------
+     * --------------------------------------------------------------------------------------------
      */
     public void setItemListContentToIncome() {
         items = new ArrayList<Item>();
@@ -194,6 +203,9 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         if(isIncome) {
             setHeadlineText("Income from " + date);
             //TODO: visa income från och med date
+            //sortera datum
+            //välj bort de som är innan vald datum
+            //uppdatera listvyn med setItemListContentToIncome();
         } else {
             setHeadlineText("Outcome from " + date);
             //TODO: visa outcome från och med date
@@ -212,20 +224,6 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
     public void setHeadlineText(String string) {
         headline.setText(string);
-    }
-
-    /**
-     * methods for resetting list view
-     * --------------------------------------------------------------------------------------
-     */
-    public void showAllIncome() {
-        //TODO: visa alla inkomster
-        setHeadlineText("All income");
-    }
-
-    public void showAllOutcome() {
-        //TODO: visa alla utgifter
-        setHeadlineText("All outcome");
     }
 
     /**
@@ -252,23 +250,21 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
                 case R.id.viewTransaction_filterDateBtn:
                     if(isIncome) {
-                        Log.d(null, "FILTERDATEBUTTON IS PRESSED");
-                        //TODO: filter from date --> show list of outcome items from table in database
-                        showDatePickerDialog();
+                        //showDatePickerDialog();
                     } else {
-                        Log.d(null, "FILTERDATEBUTTON IS PRESSED");
-                        //TODO: filter from date --> show list of outcome items from table in database
-                        showDatePickerDialog();
+                        //showDatePickerDialog();
                     }
                     break;
 
                 case R.id.viewTransaction_resetDateBtn:
                     if(isIncome) {
-                        Log.d(null, "RESETBUTTON IS PRESSED");
-                        showAllIncome();
+                        fetchAllIncomeFromDatabase();
+                        setItemListContentToIncome();
+                        setHeadlineText("All income");
                     } else {
-                        Log.d(null, "RESETBUTTON IS PRESSED");
-                        showAllOutcome();
+                        fetchAllOutcomeFromDatabase();
+                        setItemListContentToOutcome();
+                        setHeadlineText("All outcome");
                     }
                     break;
             }
