@@ -227,6 +227,21 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
     }
 
     /**
+     * sortes the dates so they are in order
+     */
+    public void sortDate() {
+
+    }
+
+    /**
+     * removes dates that occurs before a given start date
+     * @param startDate
+     */
+    public void sortDateFrom(String startDate) {
+
+    }
+
+    /**
      * inner class to handle clicks
      * --------------------------------------------------------------------------------------
      */
