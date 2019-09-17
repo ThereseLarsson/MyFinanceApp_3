@@ -15,7 +15,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 
 
 public class ViewTransactionFragment extends Fragment implements DatePickerFragment.Listener {
@@ -204,6 +210,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             setHeadlineText("Income from " + date);
             //TODO: visa income från och med date
             //sortera datum
+            sortDate(income_itemDateList);
             //välj bort de som är innan vald datum
             //uppdatera listvyn med setItemListContentToIncome();
         } else {
@@ -228,16 +235,35 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
     /**
      * sortes the dates so they are in order
+     * dates are given on the format DD/MM/YYYY
      */
-    public void sortDate() {
+    public void sortDate(String[] dateList) {
+        try {
+            //Create a SimpleDateFormat object for Date String converting
+            SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/yyyy");
 
+            //Create a Date list
+            List<Date> sdfDateList = new ArrayList<Date>();
+            for(int i = 0; i < dateList.length; i++) {
+                sdfDateList.add(sdf.parse(dateList[i]));
+            }
+            Collections.sort(sdfDateList);
+
+            //test: print the date list
+            for(Date dateobj : sdfDateList) {
+                Log.d(null, "DATUM: " + sdf.format(dateobj));
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * removes dates that occurs before a given start date
+     * @param list
      * @param startDate
      */
-    public void sortDateFrom(String startDate) {
+    public void sortDateFrom(String[] list, String startDate) {
 
     }
 
