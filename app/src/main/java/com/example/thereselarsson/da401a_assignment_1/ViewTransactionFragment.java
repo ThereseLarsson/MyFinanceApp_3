@@ -31,23 +31,21 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
     private ArrayList<Item> itemArrayList;
     private CustomListAdapter customListAdapter;
     private Item item;
-    private ArrayList<Item> items;
-    //private DialogFragment datePickerFragment;
+    private ArrayList<Item> incomeItems;
+    private ArrayList<Item> outcomeItems;
     private String date;
 
     //variables for storing data from database
+    private final int[] income_itemIconList = new int[] {R.drawable.icon_salary, R.drawable.icon_other}; //for storing the each items icon
+    private final int[] outcome_itemIconList = new int[] {R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_acc, R.drawable.icon_other, R.drawable.icon_salary};
     private String[] income_itemTitleList = {}; //for storing the each items title
     private String[] outcome_itemTitleList = {};
     private String[] income_itemDateList = {}; //for storing the each items date
     private String[] outcome_itemDateList = {};
-    private String[] income_itemAmountList = {}; //for storing the each items amount (price)
-    private String[] outcome_itemAmountList = {};
+    private int[] income_itemAmountList; //for storing the each items amount (price)
+    private int[] outcome_itemAmountList;
     private String[] income_itemCategoryList = {}; //for storing the each items category
     private String[] outcome_itemCategoryList = {};
-
-    //variables for handling icons
-    private int[] income_itemIconList = {}; //for storing the each items icon
-    private int[] outcome_itemIconList = {};
 
     //variables for UI
     private TextView headline;
@@ -110,24 +108,14 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         });
     }
 
+    //shows the items from income as default when the list is generated into the interface for the first time
     public ArrayList<Item> generateItemsList() {
-        items = new ArrayList<Item>();
-        fetchAllIncomeFromDatabase(); //income used as default
+        incomeItems = new ArrayList<Item>(); //income used as default
+        outcomeItems = new ArrayList<Item>();
+        fetchAllIncomeFromDatabase();
         fetchAllOutcomeFromDatabase();
-        income_itemIconList = new int[] {R.drawable.icon_salary, R.drawable.icon_other};
-        outcome_itemIconList = new int[] {R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_acc, R.drawable.icon_other, R.drawable.icon_salary}; //is created here but not used as income is the default
 
-        //shows the items from income as default when the list is generated into the interface for the first time
-        for(int i = 0; i < income_itemTitleList.length; i++) { //längden på listan är ekvivalent med antalet items
-            if(income_itemCategoryList[i].equals("Salary")) {
-                item = new Item(income_itemIconList[0], income_itemTitleList[i]);
-            } else {
-                item = new Item(income_itemIconList[1], income_itemTitleList[i]);
-            }
-            items.add(item);
-        }
-
-        return items;
+        return incomeItems;
     }
 
     /**
@@ -143,64 +131,93 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
      * --------------------------------------------------------------------------------------------
      */
     public void fetchAllIncomeFromDatabase() {
+        //retrieves the data from the database
         income_itemTitleList = Startup.db.getIncomeValuesFromRowNbr(1);
         income_itemDateList = Startup.db.getIncomeValuesFromRowNbr(2);
-        income_itemAmountList = Startup.db.getIncomeValuesFromRowNbr(3);
+
+        //amount-value needs to be converted from String to int
+        String[] temp = Startup.db.getIncomeValuesFromRowNbr(3);
+        income_itemAmountList = new int[temp.length];
+        for(int i = 0; i < temp.length; i++) {
+            income_itemAmountList[i] = Integer.parseInt(temp[i]);
+        }
         income_itemCategoryList = Startup.db.getIncomeValuesFromRowNbr(4);
+
+        createIncomeItemObjects();
     }
 
     public void fetchAllOutcomeFromDatabase() {
+        //retrieves the data from the database
         outcome_itemTitleList = Startup.db.getOutcomeValuesFromRowNbr(1);
         outcome_itemDateList = Startup.db.getOutcomeValuesFromRowNbr(2);
-        outcome_itemAmountList = Startup.db.getOutcomeValuesFromRowNbr(3);
+
+        //amount-value needs to be converted from String to int
+        String[] temp = Startup.db.getOutcomeValuesFromRowNbr(3);
+        outcome_itemAmountList = new int[temp.length];
+        for(int i = 0; i < temp.length; i++) {
+            outcome_itemAmountList[i] = Integer.parseInt(temp[i]);
+        }
         outcome_itemCategoryList = Startup.db.getOutcomeValuesFromRowNbr(4);
+
+        createOutcomeItemObjects();
+    }
+
+    /**
+     * methods that converts the lists (icon, title, date, amount and category) to a single list of Item-objects
+     * -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     */
+
+    //creates a list of Item-objects from the income data
+    public void createIncomeItemObjects() {
+        incomeItems = new ArrayList<Item>();
+
+        for(int i = 0; i < income_itemTitleList.length; i++) {
+            if(income_itemCategoryList[i].equals("Salary")) {
+                item = new Item(income_itemIconList[0], income_itemTitleList[i], income_itemDateList[i], income_itemAmountList[i], income_itemCategoryList[i]);
+            } else {
+                item = new Item(income_itemIconList[1], income_itemTitleList[i], income_itemDateList[i], income_itemAmountList[i], income_itemCategoryList[i]);
+            }
+            incomeItems.add(item);
+        }
+    }
+
+    //creates a list of Item-objects from the outcome data
+    public void createOutcomeItemObjects() {
+        outcomeItems = new ArrayList<Item>();
+
+        for(int i = 0; i < outcome_itemTitleList.length; i++) { //längden på listan är ekvivalent med antalet items
+            if(outcome_itemCategoryList[i].equals("Food")) {
+                item = new Item(outcome_itemIconList[0], outcome_itemTitleList[i], outcome_itemDateList[i], outcome_itemAmountList[i], outcome_itemCategoryList[i]);
+            } else if (outcome_itemCategoryList[i].equals("Leisure")) {
+                item = new Item(outcome_itemIconList[1], outcome_itemTitleList[i], outcome_itemDateList[i], outcome_itemAmountList[i], outcome_itemCategoryList[i]);
+            } else if (outcome_itemCategoryList[i].equals("Travel")) {
+                item = new Item(outcome_itemIconList[2], outcome_itemTitleList[i], outcome_itemDateList[i], outcome_itemAmountList[i], outcome_itemCategoryList[i]);
+            } else if (outcome_itemCategoryList[i].equals("Accommodation")) {
+                item = new Item(outcome_itemIconList[3], outcome_itemTitleList[i], outcome_itemDateList[i], outcome_itemAmountList[i], outcome_itemCategoryList[i]);
+            } else {
+                item = new Item(outcome_itemIconList[4], outcome_itemTitleList[i], outcome_itemDateList[i], outcome_itemAmountList[i], outcome_itemCategoryList[i]);
+            }
+            outcomeItems.add(item);
+        }
     }
 
     /**
      * methods for changing the content of the list view
-     * --------------------------------------------------------------------------------------------
+     * ---------------------------------------------------------------------------------------------------------------------------------
      */
     public void setItemListContentToIncome() {
-        items = new ArrayList<Item>();
-
-        for(int i = 0; i < income_itemTitleList.length; i++) { //längden på listan är ekvivalent med antalet items
-            if(income_itemCategoryList[i].equals("Salary")) {
-                item = new Item(income_itemIconList[0], income_itemTitleList[i]);
-            } else {
-                item = new Item(income_itemIconList[1], income_itemTitleList[i]);
-            }
-            items.add(item);
-        }
-
-        customListAdapter = new CustomListAdapter(MainActivity.context, items);
+        customListAdapter = new CustomListAdapter(MainActivity.context, incomeItems);
         listView.setAdapter(customListAdapter);
     }
 
     public void setItemListContentToOutcome() {
-        items = new ArrayList<Item>();
-
-        for(int i = 0; i < outcome_itemTitleList.length; i++) { //längden på listan är ekvivalent med antalet items
-            if(outcome_itemCategoryList[i].equals("Food")) {
-                item = new Item(outcome_itemIconList[0], outcome_itemTitleList[i]);
-            } else if (outcome_itemCategoryList[i].equals("Leisure")) {
-                item = new Item(outcome_itemIconList[1], outcome_itemTitleList[i]);
-            } else if (outcome_itemCategoryList[i].equals("Travel")) {
-                item = new Item(outcome_itemIconList[2], outcome_itemTitleList[i]);
-            } else if (outcome_itemCategoryList[i].equals("Accommodation")) {
-                item = new Item(outcome_itemIconList[3], outcome_itemTitleList[i]);
-            } else {
-                item = new Item(outcome_itemIconList[4], outcome_itemTitleList[i]);
-            }
-            items.add(item);
-        }
-
-        customListAdapter = new CustomListAdapter(MainActivity.context, items);
+        customListAdapter = new CustomListAdapter(MainActivity.context, outcomeItems);
         listView.setAdapter(customListAdapter);
     }
 
     /**
      * Methods for handling date picking
-     * --------------------------------------------------------------------------------------
+     * --------------------------------------------------------------------------------------------------------------------------------
      */
     @Override
     public void returnDate(String date) {

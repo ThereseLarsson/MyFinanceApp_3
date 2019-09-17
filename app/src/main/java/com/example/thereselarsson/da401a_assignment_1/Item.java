@@ -1,7 +1,5 @@
 package com.example.thereselarsson.da401a_assignment_1;
 
-import android.widget.ImageView;
-
 /**
  * Class for creating an object from the item stored in the SQLite database
  * Provides easier processing of the data
@@ -14,23 +12,27 @@ public class Item {
     private int amount;
     private String category;
 
-    public Item(String title, String date, int amount, String category, int icon) {
+    public Item(int icon, String title, String date, int amount, String category) {
+        this.icon = icon;
         this.title = title;
         this.date = date;
         this.amount = amount;
         this.category = category;
-        this.icon = icon;
     }
 
-    public Item(int icon, String title) {
+    /*public Item(int icon, String title) {
         this.icon = icon;
         this.title = title;
-    }
+    }*/
 
     /**
      * set-methods
      * ------------------------------------------------------------------------
      */
+    public void setIcon(int icon) {
+        this.icon = icon;
+    }
+
     public void setTitle(String title)  {
         this.title = title;
     }
@@ -47,14 +49,14 @@ public class Item {
         this.category = category;
     }
 
-    public void setIcon(int icon) {
-        this.icon = icon;
-    }
-
     /**
      * get-methods
      * ------------------------------------------------------------------------
      */
+    public int getIcon() {
+        return icon;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -69,9 +71,5 @@ public class Item {
 
     public String getCategory() {
         return category;
-    }
-
-    public int getIcon() {
-        return icon;
     }
 }
