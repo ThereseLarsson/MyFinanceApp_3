@@ -146,7 +146,6 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
                 return true;
             }
         }
-
     }
 
     /**
