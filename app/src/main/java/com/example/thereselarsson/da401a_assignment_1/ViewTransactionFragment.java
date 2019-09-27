@@ -118,6 +118,19 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         fetchAllIncomeFromDatabase();
         fetchAllOutcomeFromDatabase();
 
+        Log.d(null, "INNAN SORTERING");
+        for(int i = 0; i < incomeItems.size(); i++) {
+            Log.d(null, "INCOME-ITEM: " + incomeItems.get(i).getDate());
+        }
+
+        sortItemLists(); //sortera item-listorna (income/outcome) så de sorteras efter datum
+
+        Log.d(null, "--------------------------------------------------------");
+        Log.d(null, "EFTER SORTERING");
+        for(int i = 0; i < incomeItems.size(); i++) {
+            Log.d(null, "INCOME-ITEM: " + incomeItems.get(i).getDate());
+        }
+
         return incomeItems;
     }
 
@@ -162,6 +175,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         }
         outcome_itemCategoryList = Startup.db.getOutcomeValuesFromRowNbr(4);
 
+        //creates a Item-ArrayList of the outcome-values above
         createOutcomeItemObjects();
     }
 
@@ -229,14 +243,15 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         this.date = date;
         setDate(date);
         if(isIncome) {
-            setHeadlineText("Income from " + date);
             //TODO: visa income från och med date
-            sortItemList(); //sortera item-listan så de sorteras efter datum
-            //filtrera item-listan: välj bort de items som är innan valt datum
+            setHeadlineText("Income from " + date);
+            filteredIncomeItems = filterItemsAfterDate(incomeItems, date); //filtrera item-listan: välj bort de items som är innan valt datum
             //uppdatera listvyn med setItemListContentToIncome();
         } else {
-            setHeadlineText("Outcome from " + date);
             //TODO: visa outcome från och med date
+            setHeadlineText("Outcome from " + date);
+            filteredOutcomeItems = filterItemsAfterDate(outcomeItems, date); //filtrera item-listan: välj bort de items som är innan valt datum
+            //uppdatera listvyn med setItemListContentToIncome();
         }
     }
 
@@ -258,35 +273,48 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
      * sortes the dates so they are in order
      * dates are given on the format DD/MM/YYYY
      */
-    public void sortItemList() {
+    public void sortItemLists() {
+        //sorterar income-listan
         Collections.sort(incomeItems, new Comparator<Item>() {
             @Override
-            public int compare(Item i1, Item i2) {
-                return Integer.valueOf(i2.getDate().compareTo(i1.getDate()));
+            public int compare(Item ii1, Item ii2) {
+                return Integer.valueOf(ii2.getDate().compareTo(ii1.getDate()));
             }
         });
 
-        //test: print the date list
-        for(int i = 0; i < incomeItems.size(); i++) {
-            Log.d(null, "ITEM: " + incomeItems.get(i).getDate());
+        //sorterar outcome-listan
+        Collections.sort(outcomeItems, new Comparator<Item>() {
+            @Override
+            public int compare(Item oi1, Item oi2) {
+                return Integer.valueOf(oi2.getDate().compareTo(oi1.getDate()));
+            }
+        });
+
+        //test: print the income-list
+        /*for(int i = 0; i < incomeItems.size(); i++) {
+            Log.d(null, "INCOME-ITEM: " + incomeItems.get(i).getDate());
         }
+
+        //test: print the outcome-list
+        for(int i = 0; i < outcomeItems.size(); i++) {
+            Log.d(null, "OUTCOME-ITEM: " + outcomeItems.get(i).getDate());
+        }*/
     }
 
     /**
      * removes dates that occurs before a given start date
-     * @param itemList, either the income or outcome list of items to be filtered
+     * @param itemList
      * @param startDate
-     *
-     * avsedd att användas på två sätt:
-     * filteredIncomeItems = filterAfterDate(incomeItems, "16/08/2019");
-     * filteredOutcomeItems = filterAfterDate(outcomeItems, "16/08/2019");
      */
     public ArrayList<Item> filterItemsAfterDate(ArrayList<Item> itemList, String startDate) {
-        ArrayList<Item> newItemList = new ArrayList<Item>();
-        //iterera genom / hitta index direkt för startDate, i (redan sorterad) income/outcome lista efter startDate, behåll items som kommer efter startDate
-        //newItemList.add(...) relevanta items i newItemList
+        ArrayList<Item> newList = new ArrayList<Item>();
+        int lastIndex = -1; //hitta det index som startdatum ligger på
 
-        return newItemList;
+        //iterera genom / hitta index direkt för startDate, i (redan sorterad) income/outcome lista efter startDate, behåll items som kommer efter startDate
+        for(int i = 0; i < lastIndex; i++) {
+            newList.add(itemList.get(i));
+        }
+        return newList;
     }
 
     /**
