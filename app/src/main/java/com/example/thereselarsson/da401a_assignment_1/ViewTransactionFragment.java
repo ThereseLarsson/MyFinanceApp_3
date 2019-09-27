@@ -214,15 +214,15 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
      * methods for changing the content of the list view
      * ---------------------------------------------------------------------------------------------------------------------------------
      */
-    public void setItemListContentToIncome() {
-        customListAdapter = new CustomListAdapter(MainActivity.context, incomeItems);
+    public void setItemListContent(ArrayList<Item> itemList) {
+        customListAdapter = new CustomListAdapter(MainActivity.context, itemList);
         listView.setAdapter(customListAdapter);
     }
 
-    public void setItemListContentToOutcome() {
+    /*public void setItemListContentToOutcome() {
         customListAdapter = new CustomListAdapter(MainActivity.context, outcomeItems);
         listView.setAdapter(customListAdapter);
-    }
+    }*/
 
     /**
      * Methods for handling date picking
@@ -236,12 +236,12 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             //TODO: visa income från och med date
             setHeadlineText("Income from " + date);
             filteredIncomeItems = filterItemsAfterDate(incomeItems, date); //filtrera item-listan: välj bort de items som är innan valt datum
-            //uppdatera listvyn med setItemListContentToIncome();
+            setItemListContent(filteredIncomeItems); //uppdatera listvyn med setItemListContentToIncome();
         } else {
             //TODO: visa outcome från och med date
             setHeadlineText("Outcome from " + date);
             filteredOutcomeItems = filterItemsAfterDate(outcomeItems, date); //filtrera item-listan: välj bort de items som är innan valt datum
-            //uppdatera listvyn med setItemListContentToIncome();
+            setItemListContent(filteredOutcomeItems); //uppdatera listvyn med setItemListContentToOutcome();
         }
     }
 
@@ -275,17 +275,24 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
     /**
      * removes dates that occurs before a given start date
      * @param itemList
-     * @param startDate
+     * @param startDate, t.ex. 18/08/2019
      */
     public ArrayList<Item> filterItemsAfterDate(ArrayList<Item> itemList, String startDate) {
-        ArrayList<Item> newList = new ArrayList<Item>();
-        int lastIndex = -1; //hitta det index som startdatum ligger på
+        ArrayList<Item> filteredItemList = new ArrayList<Item>();
+        boolean lastRelevantDateFound = false;
+        int index = 0;
 
         //iterera genom / hitta index direkt för startDate, i (redan sorterad) income/outcome lista efter startDate, behåll items som kommer efter startDate
-        for(int i = 0; i < lastIndex; i++) {
-            newList.add(itemList.get(i));
+        while(lastRelevantDateFound == false) {
+            if(0 <= itemList.get(index).getDate().compareTo(startDate)) { //om nuvarande datum är "större" än eller lika med startDate
+                filteredItemList.add(itemList.get(index));
+                index++;
+            } else {
+                lastRelevantDateFound = true;
+            }
         }
-        return newList;
+
+        return filteredItemList;
     }
 
     /**
@@ -300,12 +307,12 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
                     if(isIncome) {
                         headline.setText("All outcome");
                         toggleBtn.setText("Toggle to show income instead");
-                        setItemListContentToOutcome();
+                        setItemListContent(outcomeItems);
                         isIncome = false;
                     } else {
                         headline.setText("All income");
                         toggleBtn.setText("Toggle to show outcome instead");
-                        setItemListContentToIncome();
+                        setItemListContent(incomeItems);
                         isIncome = true;
                     }
                     break;
@@ -321,11 +328,11 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
                 case R.id.viewTransaction_resetDateBtn:
                     if(isIncome) {
                         fetchAllIncomeFromDatabase();
-                        setItemListContentToIncome();
+                        setItemListContent(incomeItems);
                         setHeadlineText("All income");
                     } else {
                         fetchAllOutcomeFromDatabase();
-                        setItemListContentToOutcome();
+                        setItemListContent(outcomeItems);
                         setHeadlineText("All outcome");
                     }
                     break;
