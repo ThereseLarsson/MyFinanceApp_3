@@ -163,10 +163,8 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         }
         outcome_itemCategoryList = Startup.db.getOutcomeValuesFromRowNbr(4);
 
-        //creates a Item-ArrayList of the outcome-values above
-        createOutcomeItemObjects();
-        //sortes the lists
-        sortItemList(outcomeItems);
+        createOutcomeItemObjects(); //creates a Item-ArrayList of the outcome-values above
+        sortItemList(outcomeItems); //sortes the list after date
     }
 
     /**
