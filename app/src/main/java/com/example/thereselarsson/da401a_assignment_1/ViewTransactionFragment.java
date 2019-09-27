@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -230,9 +231,8 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         if(isIncome) {
             setHeadlineText("Income from " + date);
             //TODO: visa income från och med date
-            //sortera datum
-            sortDate(income_itemDateList);
-            //välj bort de som är innan vald datum
+            sortItemList(); //sortera item-listan så de sorteras efter datum
+            //filtrera item-listan: välj bort de items som är innan valt datum
             //uppdatera listvyn med setItemListContentToIncome();
         } else {
             setHeadlineText("Outcome from " + date);
@@ -258,24 +258,17 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
      * sortes the dates so they are in order
      * dates are given on the format DD/MM/YYYY
      */
-    public void sortDate(String[] dateList) {
-        try {
-            //Create a SimpleDateFormat object for Date String converting
-            SimpleDateFormat sdf = new SimpleDateFormat("DD/MM/yyyy");
-
-            //Create a Date list
-            List<Date> sdfDateList = new ArrayList<Date>();
-            for(int i = 0; i < dateList.length; i++) {
-                sdfDateList.add(sdf.parse(dateList[i]));
+    public void sortItemList() {
+        Collections.sort(incomeItems, new Comparator<Item>() {
+            @Override
+            public int compare(Item i1, Item i2) {
+                return Integer.valueOf(i2.getDate().compareTo(i1.getDate()));
             }
-            Collections.sort(sdfDateList);
+        });
 
-            //test: print the date list
-            for(Date dateobj : sdfDateList) {
-                Log.d(null, "DATUM: " + sdf.format(dateobj));
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
+        //test: print the date list
+        for(int i = 0; i < incomeItems.size(); i++) {
+            Log.d(null, "ITEM: " + incomeItems.get(i).getDate());
         }
     }
 
