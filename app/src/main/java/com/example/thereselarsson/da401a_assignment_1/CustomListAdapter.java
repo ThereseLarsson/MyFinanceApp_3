@@ -53,7 +53,7 @@ public class CustomListAdapter extends BaseAdapter {
 
         //sets the text for item name and item description from the current item object
         itemIcon.setImageResource(currentItem.getIcon());
-        itemTitle.setText(currentItem.getTitle());
+        itemTitle.setText(currentItem.getTitle() + "\n" + currentItem.getDate()); //displays both the title and the date of the current item
 
         // returns the view for the current row
         return convertView;
