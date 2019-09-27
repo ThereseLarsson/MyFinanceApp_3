@@ -270,14 +270,6 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
                 return Integer.valueOf(i2.getDate().compareTo(i1.getDate()));
             }
         });
-
-        /*//sorterar outcome-listan
-        Collections.sort(outcomeItems, new Comparator<Item>() {
-            @Override
-            public int compare(Item oi1, Item oi2) {
-                return Integer.valueOf(oi2.getDate().compareTo(oi1.getDate()));
-            }
-        });*/
     }
 
     /**
