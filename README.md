@@ -8,19 +8,14 @@ Gick: Termin 5 Systemutvecklare, ht 2018.
 ## Run the application
 - Run MainActivity.java
 
-### Left TODO (last updated 9/16-2019, kl. 13:04)
+### Left TODO (last updated 27/09/2019, kl. 22:10)
 
-- Add functionality to filter income/outcome after date (1)
-  - Relevant classes:
-    - ViewTransactionFragment
-    - Database
-    
-- Make it possible to view a specific item in a detailed view (2)
+- Make it possible to view a specific item in a detailed view (1)
   - Relevant classes
     - ViewTransactionFragment
     - DetailActivity
     
-- Fix so the app can handle screen rotation (4)
+- Fix so the app can handle screen rotation (3)
   - Relevant classes:
     - CreateAccount
     - DetailActivity
@@ -29,7 +24,7 @@ Gick: Termin 5 Systemutvecklare, ht 2018.
     - SummaryFragment
     - ViewTransactionFragment 
 
-- Improve UI (make it look sleek!) (3)
+- Improve UI (make it look sleek!) (2)
   - background image
   - buttons
   - textcolor
