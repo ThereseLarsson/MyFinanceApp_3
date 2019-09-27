@@ -118,19 +118,6 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         fetchAllIncomeFromDatabase();
         fetchAllOutcomeFromDatabase();
 
-        Log.d(null, "INNAN SORTERING");
-        for(int i = 0; i < incomeItems.size(); i++) {
-            Log.d(null, "INCOME-ITEM: " + incomeItems.get(i).getDate());
-        }
-
-        sortItemLists(); //sortera item-listorna (income/outcome) så de sorteras efter datum
-
-        Log.d(null, "--------------------------------------------------------");
-        Log.d(null, "EFTER SORTERING");
-        for(int i = 0; i < incomeItems.size(); i++) {
-            Log.d(null, "INCOME-ITEM: " + incomeItems.get(i).getDate());
-        }
-
         return incomeItems;
     }
 
@@ -160,6 +147,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         income_itemCategoryList = Startup.db.getIncomeValuesFromRowNbr(4);
 
         createIncomeItemObjects();
+        sortItemList(incomeItems);
     }
 
     public void fetchAllOutcomeFromDatabase() {
@@ -177,6 +165,8 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
         //creates a Item-ArrayList of the outcome-values above
         createOutcomeItemObjects();
+        //sortes the lists
+        sortItemList(outcomeItems);
     }
 
     /**
@@ -273,32 +263,21 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
      * sortes the dates so they are in order
      * dates are given on the format DD/MM/YYYY
      */
-    public void sortItemLists() {
-        //sorterar income-listan
-        Collections.sort(incomeItems, new Comparator<Item>() {
+    public void sortItemList(ArrayList<Item> itemList) {
+        Collections.sort(itemList, new Comparator<Item>() {
             @Override
-            public int compare(Item ii1, Item ii2) {
-                return Integer.valueOf(ii2.getDate().compareTo(ii1.getDate()));
+            public int compare(Item i1, Item i2) {
+                return Integer.valueOf(i2.getDate().compareTo(i1.getDate()));
             }
         });
 
-        //sorterar outcome-listan
+        /*//sorterar outcome-listan
         Collections.sort(outcomeItems, new Comparator<Item>() {
             @Override
             public int compare(Item oi1, Item oi2) {
                 return Integer.valueOf(oi2.getDate().compareTo(oi1.getDate()));
             }
-        });
-
-        //test: print the income-list
-        /*for(int i = 0; i < incomeItems.size(); i++) {
-            Log.d(null, "INCOME-ITEM: " + incomeItems.get(i).getDate());
-        }
-
-        //test: print the outcome-list
-        for(int i = 0; i < outcomeItems.size(); i++) {
-            Log.d(null, "OUTCOME-ITEM: " + outcomeItems.get(i).getDate());
-        }*/
+        });*/
     }
 
     /**
