@@ -104,6 +104,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         listView = rootView.findViewById(R.id.viewTransaction_list);
         listView.setAdapter(customListAdapter);
 
+        //TODO: flytta ut så metoden kan anpassa sig utefter om listview visar income eller outcome. Ty här ör listView alltid likamed income-listan
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
