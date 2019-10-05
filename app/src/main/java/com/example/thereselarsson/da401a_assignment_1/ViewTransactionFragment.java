@@ -111,11 +111,16 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
                 //TODO: Start DetailFragment + skicka med värden från clicked item
                 Item clickedItem = itemArrayList.get(position);
+
+                Bundle extras = new Bundle();
+                //extras.put("ClickedItemIcon", clickedItem.getIcon());
+                extras.putString("ClickedItemTitle", clickedItem.getTitle());
+                extras.putString("ClickedItemDate", clickedItem.getDate());
+                extras.putInt("ClickedItemAmount", clickedItem.getAmount());
+                extras.putString("ClickedItemCategory", clickedItem.getCategory());
+
                 Intent intent = new Intent(getActivity().getApplicationContext(), DetailActivity.class);
-
-                //skicka varje Item-attribut var för sig??
-
-                //intent.putExtra("g", clickedItem); //skicka med Item
+                intent.putExtras(extras); //skicka med Items attribut
                 startActivity(intent);
             }
         });

@@ -41,8 +41,8 @@ public class DetailActivity extends AppCompatActivity {
 
     private void setItemToCurrent() {
         if(currentItem != null) {
-            if(iconView != null && titleTxtView != null && dateTxtView != null && amountTxtView != null && categoryTxtView != null) {
-                iconView.setImageResource(currentItem.getIcon());
+            if(titleTxtView != null && dateTxtView != null && amountTxtView != null && categoryTxtView != null) {
+                //iconView.setImageResource(currentItem.getIcon());
                 titleTxtView.setText(currentItem.getTitle());
                 dateTxtView.setText(currentItem.getDate());
                 amountTxtView.setText(currentItem.getAmount());
