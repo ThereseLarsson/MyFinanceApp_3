@@ -99,7 +99,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
      * ---------------------------------------------------------------------------------------
      */
     public void initiateCustomListAdapter() {
-        itemArrayList = generateItemsList();
+        itemArrayList = generateItemsList(); //returns the income-list (to be used as default when the listview is loaded for the first time)
         customListAdapter = new CustomListAdapter(MainActivity.context, itemArrayList);
         listView = rootView.findViewById(R.id.viewTransaction_list);
         listView.setAdapter(customListAdapter);
