@@ -46,20 +46,20 @@ public class DetailActivity extends AppCompatActivity {
 
         //extract the stored data from the bundle
         title = extras.getString("ClickedItemTitle");
-        //date = extras.getString("ClickedItemDate");
-        //amount = extras.getInt("ClickedItemAmount");
-        //category = extras.getString("ClickedItemCategory");
+        date = extras.getString("ClickedItemDate");
+        amount = extras.getInt("ClickedItemAmount");
+        category = extras.getString("ClickedItemCategory");
     }
 
     private void setData() {
         titleTxtView.setText(title);
-        //dateTxtView.setText(date);
-        //amountTxtView.setText(amount);
-        //categoryTxtView.setText(category);
+        dateTxtView.setText(date);
+        amountTxtView.setText(Integer.toString(amount));
+        categoryTxtView.setText(category);
 
         //sets the icon
         //income
-        /*if(categoryTxtView.getText().equals("Salary")) {
+        if(categoryTxtView.getText().equals("Salary")) {
             iconView.setImageResource(R.drawable.icon_salary);
         } else if(categoryTxtView.getText().equals("Other")) {
             iconView.setImageResource(R.drawable.icon_other);
@@ -73,6 +73,6 @@ public class DetailActivity extends AppCompatActivity {
             iconView.setImageResource(R.drawable.icon_travel);
         } else if(categoryTxtView.getText().equals("Accommodation")) {
             iconView.setImageResource(R.drawable.icon_acc);
-        }*/
+        }
     }
 }

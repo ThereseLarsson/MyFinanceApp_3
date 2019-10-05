@@ -58,7 +58,7 @@
     <!-- Detail view -->
     <string name="detailView_titleTxt">Title: </string>
     <string name="detailView_dateTxt">Added: </string>
-    <string name="detailView_amountTxt">Balance: </string>
+    <string name="detailView_amountTxt">Amount: </string>
     <string name="detailView_categoryTxt">Category: </string>
 
     <!-- TODO: Remove or change this placeholder text -->
