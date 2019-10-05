@@ -55,10 +55,13 @@
     <string name="viewTransaction_filterDateBtnText">Filter after date</string>
     <string name="viewTransaction_resetDateBtnText">Reset date filter</string>
 
-    <!-- DetailActivity -->
-    <string name="detailActivity_titleTxt">Title: </string>
-    <string name="detailActivity_dateTxt">Added: </string>
-    <string name="detailActivity_amountTxt">Balance: </string>
-    <string name="detailActivity_categoryTxt">Category: </string>
+    <!-- Detail view -->
+    <string name="detailView_titleTxt">Title: </string>
+    <string name="detailView_dateTxt">Added: </string>
+    <string name="detailView_amountTxt">Balance: </string>
+    <string name="detailView_categoryTxt">Category: </string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

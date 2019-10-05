@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- TODO (ViewTransactionFragment, Database) Get list items for listview from database -->
-    <!-- TODO (ViewTransactionFragment, Database) add functionality to filter income/outcome after date -->
-    <!-- TODO (ViewTransactionFragment, DetailActivity) Make it possible to view a specific item in a detailed view -->
-    <!-- TODO (CreateAccount, DetailActivity, EnterTransactionActivity, GreetingFragment, SummaryFragment, ViewTransactionFragment) Fix so the app can handle screen rotation -->
+    <!-- TODO (ViewTransactionFragment, DetailFragment) Make it possible to view a specific item in a detailed view -->
+    <!-- TODO (CreateAccount, DetailFragment, EnterTransactionActivity, GreetingFragment, SummaryFragment, ViewTransactionFragment) Fix so the app can handle screen rotation -->
 </resources>

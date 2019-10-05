@@ -1,5 +1,7 @@
 package com.example.thereselarsson.da401a_assignment_1;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -104,9 +106,17 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                //starta DetailActivity + skicka med värden
-                Log.d(null, "CLICKED row number: " + arg2);
+            public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
+                Log.d(null, "CLICKED row number: " + position);
+
+                //TODO: Start DetailFragment + skicka med värden från clicked item
+                Item clickedItem = itemArrayList.get(position);
+                Intent intent = new Intent(getActivity().getApplicationContext(), DetailActivity.class);
+
+                //skicka varje Item-attribut var för sig??
+
+                //intent.putExtra("g", clickedItem); //skicka med Item
+                startActivity(intent);
             }
         });
     }
