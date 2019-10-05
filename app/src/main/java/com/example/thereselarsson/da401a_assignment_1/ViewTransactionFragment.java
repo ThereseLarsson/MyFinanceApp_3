@@ -109,11 +109,10 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
                 Log.d(null, "CLICKED row number: " + position);
 
-                //TODO: Start DetailFragment + skicka med värden från clicked item
+                //TODO: Plockar alltid från income-listan, varför???
                 Item clickedItem = itemArrayList.get(position);
 
                 Bundle extras = new Bundle();
-                //extras.put???("ClickedItemIcon", clickedItem.getIcon());
                 extras.putString("ClickedItemTitle", clickedItem.getTitle());
                 extras.putString("ClickedItemDate", clickedItem.getDate());
                 extras.putInt("ClickedItemAmount", clickedItem.getAmount());
