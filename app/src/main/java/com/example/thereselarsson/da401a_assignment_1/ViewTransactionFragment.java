@@ -113,7 +113,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
                 Item clickedItem = itemArrayList.get(position);
 
                 Bundle extras = new Bundle();
-                //extras.put("ClickedItemIcon", clickedItem.getIcon());
+                //extras.put???("ClickedItemIcon", clickedItem.getIcon());
                 extras.putString("ClickedItemTitle", clickedItem.getTitle());
                 extras.putString("ClickedItemDate", clickedItem.getDate());
                 extras.putInt("ClickedItemAmount", clickedItem.getAmount());

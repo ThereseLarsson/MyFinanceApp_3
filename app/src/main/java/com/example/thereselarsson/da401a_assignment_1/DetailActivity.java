@@ -47,6 +47,24 @@ public class DetailActivity extends AppCompatActivity {
                 dateTxtView.setText(currentItem.getDate());
                 amountTxtView.setText(currentItem.getAmount());
                 categoryTxtView.setText(currentItem.getCategory());
+
+                //sets the icon
+                //income
+                if(categoryTxtView.getText().equals("Salary")) {
+                    iconView.setImageResource(R.drawable.icon_salary);
+                } else if(categoryTxtView.getText().equals("Other")) {
+                    iconView.setImageResource(R.drawable.icon_other);
+
+                    //outcome
+                } else if(categoryTxtView.getText().equals("Food")) {
+                    iconView.setImageResource(R.drawable.icon_food);
+                } else if(categoryTxtView.getText().equals("Leisure")) {
+                    iconView.setImageResource(R.drawable.icon_sparetime);
+                } else if(categoryTxtView.getText().equals("Travel")) {
+                    iconView.setImageResource(R.drawable.icon_travel);
+                } else if(categoryTxtView.getText().equals("Accommodation")) {
+                    iconView.setImageResource(R.drawable.icon_acc);
+                }
             }
         }
     }
