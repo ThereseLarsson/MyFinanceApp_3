@@ -32,6 +32,9 @@ public class DetailActivity extends AppCompatActivity {
         setData();
     }
 
+    /**
+     * initiates the necessary components
+     */
     public void initiateComponents() {
         iconView = findViewById(R.id.detailView_icon);
         titleTxtView = findViewById(R.id.detailView_title);
@@ -40,6 +43,9 @@ public class DetailActivity extends AppCompatActivity {
         categoryTxtView = findViewById(R.id.detailView_category);
     }
 
+    /**
+     * gets the data sent from the intent (from the ViewTransactionFragment)
+     */
     public void getData() {
         Intent intent = getIntent(); //get the intent in the target activity
         Bundle extras = intent.getExtras(); // gets the attached bundle from the intent
@@ -51,6 +57,9 @@ public class DetailActivity extends AppCompatActivity {
         category = extras.getString("ClickedItemCategory");
     }
 
+    /**
+     * uses the data retrieved from the intent to update the view of the DetailActivity
+     */
     private void setData() {
         titleTxtView.setText(title);
         dateTxtView.setText(date);
