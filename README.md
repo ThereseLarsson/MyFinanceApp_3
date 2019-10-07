@@ -15,7 +15,7 @@ Gick: Termin 5 Systemutvecklare, ht 2018.
     - ViewTransactionFragment
     - DetailActivity
     
-- Fix so the app can handle screen rotation (3)
+- Fix so the app can handle screen rotation (2)
   - Relevant classes:
     - CreateAccount
     - DetailActivity
@@ -23,9 +23,4 @@ Gick: Termin 5 Systemutvecklare, ht 2018.
     - GreetingFragment
     - SummaryFragment
     - ViewTransactionFragment 
-
-- Improve UI (make it look sleek!) (2)
-  - background image
-  - buttons
-  - textcolor
 
