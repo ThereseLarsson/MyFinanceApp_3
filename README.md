@@ -1,5 +1,10 @@
 # da401a_assignment_1
-Assignment 1
+## About
+Assignment 1, which provides a financial app where the user can:
+- add income / outcome consisting of title, date, amount and category from a drop down menu.
+- see a summary over the users total income / outcome amount and total balance.
+- see all income / outcome items in a list
+  - click an individual item to display more detailed information in a new window. The information includes: title, date added, amount, category and an icon that corresponds to the items categpry.
 
 Course: Application Development for Android (DA401A) 
 
