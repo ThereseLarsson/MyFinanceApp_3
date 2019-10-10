@@ -1,9 +1,9 @@
 # da401a_assignment_1
-Inlämningsuppgift 1
+Assignment 1
 
-Kurs: Application Development for Android (DA401A) 
+Course: Application Development for Android (DA401A) 
 
-Gick: Termin 5 Systemutvecklare, ht 2018.
+Went the course: T5 Systemutvecklare at Malmö University, ht 2018.
 
 ## Run the application
 - Run MainActivity.java
