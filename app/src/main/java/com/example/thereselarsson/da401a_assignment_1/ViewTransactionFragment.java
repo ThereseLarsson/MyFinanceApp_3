@@ -104,13 +104,13 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         listView = rootView.findViewById(R.id.viewTransaction_list);
         listView.setAdapter(customListAdapter);
 
-        //TODO: flytta ut så metoden kan anpassa sig utefter om listview visar income eller outcome. Ty här ör listView alltid likamed income-listan
+        //TODO: maybe move the method out from initiateCustomListAdapter so the itemlistener can adapt after if the listview is displaying income or outcome?
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
                 Log.d(null, "CLICKED row number: " + position);
 
-                //TODO: Plockar alltid från income-listan, varför???
+                //TODO: Always pick from the income-list, why???
                 Item clickedItem = itemArrayList.get(position);
 
                 Bundle extras = new Bundle();
