@@ -18,7 +18,7 @@ Went the course: ht 2018.
 
 ### Left TODO (last updated 07/10/2019, kl. 18:20)
 
-- Make it possible to view a specific item in a detailed view (1)
+- Make it possible to view a specific item in a detailed view (1) BUG: only shows income items in detailed view
   - Relevant classes
     - ViewTransactionFragment
     - DetailActivity
