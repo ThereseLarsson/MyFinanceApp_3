@@ -30,5 +30,6 @@ Went the course: ht 2018.
     - EnterTransactionActivity
     - GreetingFragment
     - SummaryFragment
-    - ViewTransactionFragment 
+    - ViewTransactionFragment
+    - ... Maybe more?
 
