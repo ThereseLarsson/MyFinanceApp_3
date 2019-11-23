@@ -16,7 +16,7 @@ Went the course: ht 2018.
 ## Run the application
 - Run MainActivity.java
 
-### Left TODO (last updated 07/10/2019, kl. 18:20)
+### Left TODO (last updated 23/11/2019, kl. 19:40)
 
 - Make it possible to view a specific item in a detailed view (1) BUG: only shows income items in detailed view
   - Relevant classes
