@@ -16,9 +16,10 @@ Went the course: ht 2018.
 ## Run the application
 - Run MainActivity.java
 
-### Left TODO (last updated 07/10/2019, kl. 18:20)
+### Left TODO (last updated 23/11/2019, kl. 19:43)
 
-- Make it possible to view a specific item in a detailed view (1) BUG: only shows income items in detailed view
+- Make it possible to view a specific item in a detailed view (1) 
+  - Almost done except for one BUG: DetailActivity only shows income items regardless of if the listview in the ViewTransactionFragment is displaying income- or outcome items
   - Relevant classes
     - ViewTransactionFragment
     - DetailActivity
@@ -30,5 +31,6 @@ Went the course: ht 2018.
     - EnterTransactionActivity
     - GreetingFragment
     - SummaryFragment
-    - ViewTransactionFragment 
+    - ViewTransactionFragment
+    - ... Maybe more?
 
