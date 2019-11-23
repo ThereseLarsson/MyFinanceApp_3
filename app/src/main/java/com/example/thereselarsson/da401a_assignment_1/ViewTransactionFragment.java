@@ -113,7 +113,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
                 Log.d(null, "CLICKED row number: " + position);
 
-                //TODO: Always pick from the income-list, why???
+                //TODO: Always picks from the income-list, why??? BUT, it does pick from the right row
                 Item clickedItem = itemArrayList.get(position);
 
                 Bundle extras = new Bundle();
