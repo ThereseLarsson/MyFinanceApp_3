@@ -22,7 +22,9 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Date;
 
-
+/**
+ * Provides the function to add a transaction (income or outcome)
+ */
 public class EnterTransactionFragment extends Fragment implements DatePickerFragment.Listener {
     private View rootView;
     private DialogFragment datePickerFragment;
@@ -62,6 +64,9 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
         return rootView;
     }
 
+    /**
+     * initiates the necessary components
+     */
     public void initiateComponents() {
         headline = rootView.findViewById(R.id.enterTransaction_headline);
         titleTxt = rootView.findViewById(R.id.enterTransaction_title);
@@ -131,6 +136,11 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
         }
     }
 
+    //TODO: remove this method? The title might not need to be unique
+    /**
+     * checks if the entered title (of the item) of the transaction is unique
+     * if not, return false
+     */
     private boolean uniqueTitle() {
         title = titleTxt.getText().toString();
         if(isIncome) {

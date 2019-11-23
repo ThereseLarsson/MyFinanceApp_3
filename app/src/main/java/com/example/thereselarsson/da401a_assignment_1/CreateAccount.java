@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * registers a new user
+ */
 public class CreateAccount extends AppCompatActivity {
     private EditText firstName;
     private EditText lastName;
@@ -51,8 +54,7 @@ public class CreateAccount extends AppCompatActivity {
 
     /**
      * checks if the firstname and lastname are both filled, if so return true.
-     * Otherwise, return false
-     * @return
+     * otherwise, return false
      */
     private boolean validNames() {
         if(firstName.getText().toString().matches(".*[a-zA-Z]+.*") &&

@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * shows a detailed view of an item (picked from the displayed listview)
+ * shows a detailed view of an item (picked from the displayed listview located in ViewTransactionFragment)
  */
 public class DetailActivity extends AppCompatActivity {
     private TextView titleTxtView;

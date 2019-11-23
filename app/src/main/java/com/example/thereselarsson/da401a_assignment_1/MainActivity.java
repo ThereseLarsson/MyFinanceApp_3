@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-//Main Menu in the app
+//Main Menu in the app with a navigation drawer
 public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
     private TextView userName;
     private String name;
@@ -33,7 +33,9 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         name = Startup.db.getPersonName();
         context = getApplicationContext();
 
-        //navigation drawer
+        /**
+         * code for the navigation drawer
+         */
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -54,10 +56,16 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //display the GreetingFragment by default
         GreetingFragment greetingFragment = new GreetingFragment();
         setFragment(greetingFragment, false);
     }
 
+    /**
+     * (dynamically) changes the fragment located in the MainActivity
+     * @param fragment, the fragment to display
+     * @param backstack
+     */
     private void setFragment(Fragment fragment, boolean backstack) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -70,6 +78,10 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         fragmentManager.executePendingTransactions(); //try to force the commit to run immediately
     }
 
+    /**
+     * close the navigation drawer if the back-button on the smartphone is pressed
+     * if the back-button is pressed when the navigation drawer is closed, do nothing
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -87,11 +99,6 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         return true;
     }
 
-    /**
-     * opens the drawer when the user taps on the nav drawer button
-     * @param item
-     * @return
-     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -106,6 +113,9 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * method for handling when an item is selected from the drawer navigation
+     */
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -123,6 +133,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
             viewTransactionFragment = new ViewTransactionFragment();
             setFragment(viewTransactionFragment, false);
         }
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

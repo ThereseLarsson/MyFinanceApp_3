@@ -7,8 +7,8 @@ import android.os.Bundle;
 
 /**
  * the first thing that loads upon app launch.
- * if a account is already created --> go to main menu / MainActivity
- * otherwise, --> go to Create new account activity
+ * if an account is already created --> go to main menu / MainActivity
+ * otherwise, --> go to Create (new) account activity
  */
 public class Startup extends AppCompatActivity {
     Intent intent;
@@ -39,8 +39,6 @@ public class Startup extends AppCompatActivity {
 
     /**
      * initiates and returns the database
-     * @param context
-     * @return
      */
     public static Database initiateDatabase(Context context){
         if(db == null) {

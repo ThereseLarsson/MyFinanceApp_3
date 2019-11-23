@@ -28,6 +28,9 @@ public class GreetingFragment extends Fragment {
         return rootView;
     }
 
+    /**
+     * initiated the necessary components
+     */
     public void initiateComponents() {
         name = Startup.db.getPersonName();
         greetingName = rootView.findViewById(R.id.greeting_name);

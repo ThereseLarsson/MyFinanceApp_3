@@ -104,6 +104,9 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         listView = rootView.findViewById(R.id.viewTransaction_list);
         listView.setAdapter(customListAdapter);
 
+        /**
+         * listener for the listview
+         */
         //TODO: maybe move the method out from initiateCustomListAdapter so the itemlistener can adapt after if the listview is displaying income or outcome?
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -258,16 +261,25 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         }
     }
 
+    /**
+     * displays a date picker dialog
+     */
     public void showDatePickerDialog() {
         DatePickerFragment datePicker = new DatePickerFragment();
         datePicker.onDateSetListener(this);
         datePicker.show(getActivity().getSupportFragmentManager(), "datePicker");
     }
 
+    /**
+     * sets the date
+     */
     public void setDate(String string) {
         date = string;
     }
 
+    /**
+     * sets the text of the headline in ViewTransactionFragment
+     */
     public void setHeadlineText(String string) {
         headline.setText(string);
     }
@@ -287,7 +299,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
     /**
      * removes dates that occurs before a given start date
-     * @param itemList
+     * @param itemList, list of items
      * @param startDate, t.ex. 18/08/2019
      */
     public ArrayList<Item> filterItemsAfterDate(ArrayList<Item> itemList, String startDate) {

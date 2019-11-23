@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
+/**
+ * Fragment used for testing purposes, not used in finished app
+ */
 public class TestFragment extends Fragment {
     private View rootView;
 

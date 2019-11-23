@@ -6,10 +6,10 @@ package com.example.thereselarsson.da401a_assignment_1;
  */
 
 public class Item {
-    private int icon;
+    private int icon; //the icon for the data (based on category)
     private String title;
     private String date;
-    private int amount;
+    private int amount; //in the currency kr
     private String category;
 
     public Item(int icon, String title, String date, int amount, String category) {

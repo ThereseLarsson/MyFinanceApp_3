@@ -22,14 +22,20 @@ public class CustomListAdapter extends BaseAdapter {
         this.items = items;
     }
 
+    /**
+     * returns total of items in the list
+     */
     @Override
     public int getCount() {
-        return items.size(); //returns total of items in the list
+        return items.size();
     }
 
+    /**
+     * returns list item at the specified position
+     */
     @Override
     public Object getItem(int position) {
-        return items.get(position); //returns list item at the specified position
+        return items.get(position);
     }
 
     @Override

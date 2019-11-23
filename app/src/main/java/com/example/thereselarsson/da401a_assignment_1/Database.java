@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- * class for storing the entered user data
+ * class for storing data entered by the user
  */
 public class Database extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "a1Database";
@@ -105,7 +105,6 @@ public class Database extends SQLiteOpenHelper {
 
     /**
      * checks if a user existss
-     * @return
      */
     public boolean userExists() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -126,7 +125,6 @@ public class Database extends SQLiteOpenHelper {
     /**
      * gets the users first name and last name and
      * returns these as one string
-     * @return
      */
     public String getPersonName() {
         String firstName = "";
@@ -208,7 +206,6 @@ public class Database extends SQLiteOpenHelper {
      * row 2 - date
      * row 3 - amount
      * row 4- category
-     * @return
      */
     public String[] getIncomeValuesFromRowNbr(int indexInTable) {
         String rowValue = "";
@@ -293,7 +290,6 @@ public class Database extends SQLiteOpenHelper {
      * row 2 - date
      * row 3 - amount
      * row 4- category
-     * @return
      */
     public String[] getOutcomeValuesFromRowNbr(int indexInTable) {
         String rowValue = "";
