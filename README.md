@@ -29,8 +29,10 @@ Went the course: ht 2018.
     - CreateAccount
     - DetailActivity
     - EnterTransactionActivity
-    - GreetingFragment
-    - SummaryFragment
+    - ~~GreetingFragment~~
+    - ~~SummaryFragment~~
     - ViewTransactionFragment
+    - Startup(Activity)
+    - Create Account(Activity)
     - ... Maybe more?
 
