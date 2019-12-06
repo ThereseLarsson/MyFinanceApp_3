@@ -27,21 +27,23 @@ import java.util.Date;
  */
 public class EnterTransactionFragment extends Fragment implements DatePickerFragment.Listener {
     private View rootView;
-    private DialogFragment datePickerFragment;
+    //private DialogFragment datePickerFragment;
 
-    //variables to change when income/outcome is toggles
+    //UI-components and variables to change when income/outcome is toggled
     private TextView headline;
     private Switch toggleBtn;
     private boolean isIncome; //if false --> = outcome
 
-    //variables to get input from user
+    //UI-components to get input from user
     private EditText titleTxt;
-    private String title;
     private Button datePickerBtn;
-    private String date;
     private EditText amountTxt;
-    private double amount;
     private Spinner spinner;
+
+    //variables to save input from corresponding UI-components
+    private String title;
+    private String date;
+    private double amount;
     private String category;
 
     //interaction
@@ -56,12 +58,67 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_enter_transaction, container, false);
+        return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("title", titleTxt.getText().toString());
+        outState.putString("date", datePickerBtn.getText().toString());
+        outState.putString("amount", amountTxt.getText().toString());
+        outState.putString("category", category);
+
+        outState.putString("headline", headline.getText().toString());
+        outState.putBoolean("isIncome", isIncome);
+        outState.putString("toggleBtn", toggleBtn.getText().toString());
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
         initiateComponents();
         registerListeners();
-        setIncomeCategories();
-        isIncome = true;
-        date = "";
-        return rootView;
+
+        if(savedInstanceState == null) { //första gången som detta fragment laddas
+            isIncome = true;
+            date = "";
+
+        } else { //probably orientation change
+            titleTxt.setText(savedInstanceState.getString("title"));
+            datePickerBtn.setText(savedInstanceState.getString("date"));
+            date = savedInstanceState.getString("date");
+            amountTxt.setText(savedInstanceState.getString("amount"));
+            category = savedInstanceState.getString("category");
+
+            headline.setText(savedInstanceState.getString("headline"));
+            isIncome = savedInstanceState.getBoolean("isIncome");
+            toggleBtn.setText(savedInstanceState.getString("toggleBtn"));
+        }
+
+        if(isIncome) {
+            setIncomeCategories();
+        } else {
+            setOutcomeCategories();
+        }
+
+        toggleBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(isIncome) {
+                    headline.setText("Enter new outcome");
+                    toggleBtn.setText("Toggle to enter new income instead");
+                    setOutcomeCategories();
+                    isIncome = false;
+                } else {
+                    headline.setText("Enter new income");
+                    toggleBtn.setText("Toggle to enter new outcome instead");
+                    setIncomeCategories();
+                    isIncome = true;
+                }
+            }
+        });
     }
 
     /**
@@ -192,13 +249,31 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
     }
 
     public void setDate(String string) {
-        date = string;
+        this.date = string;
+        Log.d(null, "DATE ÄR: " + date);
     }
 
     public void setDateButtonText(String string) {
         datePickerBtn.setText(string);
     }
 
+    /**
+     * gets the selected category from the spinner
+     */
+    private class SpinnerActivity implements AdapterView.OnItemSelectedListener {
+        // An item was selected
+        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+            category = parent.getItemAtPosition(pos).toString();
+        }
+
+        public void onNothingSelected(AdapterView<?> parent) {
+            if(isIncome) {
+                category = "Salary"; //automatically select first income item
+            } else {
+                category = "Food"; ////automatically select first outcome item
+            }
+        }
+    }
 
     /**
      * Inner class that handle events from the user
@@ -233,7 +308,7 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
                     }
                     break;
 
-                case R.id.enterTransaction_toggleBtn:
+                /**case R.id.enterTransaction_toggleBtn:
                     if(isIncome) {
                         headline.setText("Enter new outcome");
                         toggleBtn.setText("Toggle to enter new income instead");
@@ -245,60 +320,8 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
                         setIncomeCategories();
                         isIncome = true;
                     }
-                    break;
+                    break; */
             }
         }
     }
-
-    /**
-     * gets the selected category from the spinner
-     */
-    private class SpinnerActivity implements AdapterView.OnItemSelectedListener {
-        // An item was selected
-        public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-            category = parent.getItemAtPosition(pos).toString();
-        }
-
-        public void onNothingSelected(AdapterView<?> parent) {
-            if(isIncome) {
-                category = "Salary"; //automatically select first income item
-            } else {
-                category = "Food"; ////automatically select first outcome item
-            }
-        }
-    }
-
-    /**
-     * provides a date picker dialog
-     */
-/*    public static class DatePickerFragment2 extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-        public int year;
-        public int month;
-        public int day;
-
-        public DatePickerFragment2() {
-            // Required empty public constructor
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
-            final Calendar c = Calendar.getInstance();
-            year = c.get(Calendar.YEAR);
-            month = c.get(Calendar.MONTH);
-            day = c.get(Calendar.DAY_OF_MONTH);
-
-            // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, year, month, day);
-        }
-
-        *//**
-         * Do something with the date chosen by the user
-         *//*
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            date = Integer.toString(day) + "/" + Integer.toString(month + 1) + "-" + Integer.toString(year); //month + 1 eftersom indexeringen börjar på noll
-            setDateButtonText(date);
-            setDate(date);
-        }
-    }*/
 }
