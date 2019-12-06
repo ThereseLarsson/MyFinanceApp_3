@@ -142,5 +142,21 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         return true;
     }
 
+    /**
+     * methods for handling screen rotation
+     * @param outState
+     * --------------------------------------------------------------------------
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //fetch and save data that needs to be saved just before rotating screen
+        outState.putString("Key", "Value");
+    }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        String string = savedInstanceState.getString("Key");
+    }
 }
