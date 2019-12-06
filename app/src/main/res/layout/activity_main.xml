@@ -13,28 +13,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+    <FrameLayout
+        android:id="@+id/main_fragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="?attr/actionBarSize">
 
-        <fragment
+        <!-- <fragment
             android:id="@+id/main_fragmentContainer"
+            android:name="com.example.thereselarsson.da401a_assignment_1.TestFragment"
             android:layout_width="435dp"
             android:layout_height="560dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="55dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:name="com.example.thereselarsson.da401a_assignment_1.TestFragment"
-            />
+            android:layout_marginTop="55dp" /> -->
 
-    </android.support.constraint.ConstraintLayout>
+    </FrameLayout>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
