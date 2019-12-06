@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private EnterTransactionFragment enterTransactionFragment;
     private ViewTransactionFragment viewTransactionFragment;
     public static Context context;
+    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +57,11 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //display the GreetingFragment by default
-        GreetingFragment greetingFragment = new GreetingFragment();
-        setFragment(greetingFragment, false);
+        if(savedInstanceState == null) {
+            //display the GreetingFragment by default
+            GreetingFragment greetingFragment = new GreetingFragment();
+            setFragment(greetingFragment, false);
+        }
     }
 
     /**
@@ -138,4 +141,6 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
