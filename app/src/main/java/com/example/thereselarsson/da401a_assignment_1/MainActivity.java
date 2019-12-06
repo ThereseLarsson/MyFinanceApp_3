@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private EnterTransactionFragment enterTransactionFragment;
     private ViewTransactionFragment viewTransactionFragment;
     public static Context context;
-    private Fragment currentFragment;
+    //private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,23 +140,5 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    /**
-     * methods for handling screen rotation
-     * @param outState
-     * --------------------------------------------------------------------------
-     */
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        //fetch and save data that needs to be saved just before rotating screen
-        outState.putString("Key", "Value");
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        String string = savedInstanceState.getString("Key");
     }
 }
