@@ -16,7 +16,7 @@ Went the course: ht 2018.
 ## Run the application
 - Run MainActivity.java
 
-### Left TODO (last updated 23/11/2019, kl. 19:43)
+### Left TODO (last updated 06/12/2019, kl. 13:45)
 
 - Make it possible to view a specific item in a detailed view (1) 
   - Almost done except for one BUG: DetailActivity only shows income items regardless of if the listview in the ViewTransactionFragment is displaying income- or outcome items
@@ -29,8 +29,9 @@ Went the course: ht 2018.
     - CreateAccount
     - DetailActivity
     - EnterTransactionActivity
-    - GreetingFragment
-    - SummaryFragment
+    - ~~GreetingFragment~~
+    - ~~SummaryFragment~~
     - ViewTransactionFragment
+    - Startup(Activity)
     - ... Maybe more?
 
