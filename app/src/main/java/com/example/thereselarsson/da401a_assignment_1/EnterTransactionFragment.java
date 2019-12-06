@@ -64,6 +64,7 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        //save relevant values just before the screen rotation
         outState.putString("title", titleTxt.getText().toString());
         outState.putString("date", datePickerBtn.getText().toString());
         outState.putString("amount", amountTxt.getText().toString());
@@ -85,10 +86,11 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
             isIncome = true;
             date = "";
 
+            //allows to restore (saved) values after the screen rotation is done
         } else { //probably orientation change
             titleTxt.setText(savedInstanceState.getString("title"));
             datePickerBtn.setText(savedInstanceState.getString("date"));
-            date = savedInstanceState.getString("date");
+            date = savedInstanceState.getString("date"); //denna lilla specialaren behövs då date hämtas från datePickern (vilket inte anropas då skärmen roteras)
             amountTxt.setText(savedInstanceState.getString("amount"));
             category = savedInstanceState.getString("category");
 
