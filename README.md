@@ -33,6 +33,6 @@ Went the course: ht 2018.
     - ~~SummaryFragment~~
     - ViewTransactionFragment
     - Startup(Activity)
-    - Create Account(Activity)
+    - CreateAccount(Activity)
     - ... Maybe more?
 
