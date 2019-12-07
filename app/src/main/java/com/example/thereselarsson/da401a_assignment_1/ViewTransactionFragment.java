@@ -29,34 +29,39 @@ import java.util.List;
 
 public class ViewTransactionFragment extends Fragment implements DatePickerFragment.Listener {
     private View rootView;
-    private ListView listView;
     private boolean isIncome; //if false --> = outcome
+    private boolean isFiltered;
     private ArrayList<Item> itemArrayList;
     private CustomListAdapter customListAdapter;
     //private Item item;
-    private ArrayList<Item> incomeItems;
-    private ArrayList<Item> outcomeItems;
-    private ArrayList<Item> filteredIncomeItems; //used to store item-objects filtered after a specific date
-    private ArrayList<Item> filteredOutcomeItems;
     private String date;
 
-    //variables for storing data from database
-    private final int[] income_itemIconList = new int[] {R.drawable.icon_salary, R.drawable.icon_other}; //for storing the each items icon
-    private final int[] outcome_itemIconList = new int[] {R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_acc, R.drawable.icon_other, R.drawable.icon_salary};
-    private String[] income_itemTitleList = {}; //for storing the each items title
-    private String[] outcome_itemTitleList = {};
-    private String[] income_itemDateList = {}; //for storing the each items date
-    private String[] outcome_itemDateList = {};
-    private int[] income_itemAmountList; //for storing the each items amount (price)
-    private int[] outcome_itemAmountList;
-    private String[] income_itemCategoryList = {}; //for storing the each items category
-    private String[] outcome_itemCategoryList = {};
-
-    //variables for UI
+    //UI-components
     private TextView headline;
     private Switch toggleBtn;
     private Button filterDateBtn;
     private Button resetDateBtn;
+    private ListView listView;
+
+    //variables for storing data from database
+    // - INCOME
+    private final int[] income_itemIconList = new int[] {R.drawable.icon_salary, R.drawable.icon_other}; //for storing the each items icon
+    private String[] income_itemTitleList = {}; //for storing the each items title
+    private String[] income_itemDateList = {}; //for storing the each items date
+    private int[] income_itemAmountList; //for storing the each items amount (price)
+    private String[] income_itemCategoryList = {}; //for storing the each items category
+    // - OUTCOME
+    private final int[] outcome_itemIconList = new int[] {R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_acc, R.drawable.icon_other, R.drawable.icon_salary};
+    private String[] outcome_itemTitleList = {};
+    private String[] outcome_itemDateList = {};
+    private int[] outcome_itemAmountList;
+    private String[] outcome_itemCategoryList = {};
+
+    //variables for generating item-objects from the data (icon, title, date, amount and category) fetched from the database
+    private ArrayList<Item> incomeItems;
+    private ArrayList<Item> outcomeItems;
+    private ArrayList<Item> filteredIncomeItems; //used to store item-objects filtered after a specific date
+    private ArrayList<Item> filteredOutcomeItems;
 
 
     public ViewTransactionFragment() {
@@ -67,14 +72,74 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_view_transaction, container, false);
-        initiateComponents();
-        registerListeners();
-        isIncome = true;
+        //initiateComponents();
+        //registerListeners();
+        //isIncome = true;
 
         //set up the custom list adapter view
-        initiateCustomListAdapter();
+        //initiateCustomListAdapter();
 
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //save relevant values just before the screen rotation
+        //UI-components
+        outState.putString("headline", headline.getText().toString());
+        outState.putString("toggleBtnText", toggleBtn.getText().toString());
+
+        //save local variables that holds data
+        outState.putString("date", date);
+        outState.putBoolean("isIncome", isIncome);
+        //TODO: save filteredIncomeItems
+        //TODO: save filteredOutcomeItems
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        initiateComponents();
+        registerListeners();
+
+        //första gången som detta fragment laddas
+        if(savedInstanceState == null) {
+            isIncome = true;
+
+        //allows to restore (saved) values after the screen rotation is done
+        } else {
+            //restoring UI-components
+            headline.setText(savedInstanceState.getString("headline"));
+            toggleBtn.setText(savedInstanceState.getString("toggleBtnText"));
+
+            //restoring local variables that holds data
+            date = savedInstanceState.getString("filterBtnText"); //denna lilla specialaren behövs då date hämtas från datePickern (vilket inte anropas då skärmen roteras)
+            isIncome = savedInstanceState.getBoolean("isIncome");
+            //TODO: restore filteredIncomeItems
+            //TODO: restore filteredOutcomeItems
+        }
+
+        initiateCustomListAdapter(isIncome); //set up the custom list adapter view
+
+
+        toggleBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                if(isIncome) {
+                    headline.setText("All outcome");
+                    toggleBtn.setText("Toggle to show income instead");
+                    setItemListContent(outcomeItems);
+                    isIncome = false;
+                } else {
+                    headline.setText("All income");
+                    toggleBtn.setText("Toggle to show outcome instead");
+                    setItemListContent(incomeItems);
+                    isIncome = true;
+                }
+            }
+        });
     }
 
     public void initiateComponents() {
@@ -98,8 +163,8 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
      * methods for creating custom list adapter
      * ---------------------------------------------------------------------------------------
      */
-    public void initiateCustomListAdapter() {
-        itemArrayList = generateItemsList(); //returns the income-list (to be used as default when the listview is loaded for the first time)
+    public void initiateCustomListAdapter(boolean isIncome) {
+        itemArrayList = generateItemsList(isIncome); //returns the income-list (to be used as default when the listview is loaded for the first time)
         customListAdapter = new CustomListAdapter(MainActivity.context, itemArrayList);
         listView = rootView.findViewById(R.id.viewTransaction_list);
         listView.setAdapter(customListAdapter);
@@ -130,13 +195,17 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
     }
 
     //shows the items from income as default when the list is generated into the interface for the first time
-    public ArrayList<Item> generateItemsList() {
+    public ArrayList<Item> generateItemsList(boolean isIncome) {
         incomeItems = new ArrayList<Item>(); //income used as default
         outcomeItems = new ArrayList<Item>();
         fetchAllIncomeFromDatabase();
         fetchAllOutcomeFromDatabase();
 
-        return incomeItems;
+        if(isIncome) {
+            return incomeItems;
+        } else {
+            return outcomeItems;
+        }
     }
 
     /**
@@ -149,7 +218,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
      * row 2 - date
      * row 3 - amount
      * row 4- category
-     * --------------------------------------------------------------------------------------------
+     * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
     public void fetchAllIncomeFromDatabase() {
         //retrieves the data from the database
@@ -228,7 +297,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
     /**
      * methods for changing the content of the list view
-     * ---------------------------------------------------------------------------------------------------------------------------------
+     * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
     public void setItemListContent(ArrayList<Item> itemList) {
         customListAdapter = new CustomListAdapter(MainActivity.context, itemList);
@@ -242,7 +311,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
     /**
      * Methods for handling date picking
-     * --------------------------------------------------------------------------------------------------------------------------------
+     * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
     @Override
     public void returnDate(String date) {
@@ -274,7 +343,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
      * sets the date
      */
     public void setDate(String string) {
-        date = string;
+        this.date = string;
     }
 
     /**
@@ -322,13 +391,13 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
     /**
      * inner class to handle clicks
-     * --------------------------------------------------------------------------------------
+     * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
     private class ClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                case R.id.viewTransaction_toggleBtn:
+                /* case R.id.viewTransaction_toggleBtn:
                     if(isIncome) {
                         headline.setText("All outcome");
                         toggleBtn.setText("Toggle to show income instead");
@@ -340,7 +409,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
                         setItemListContent(incomeItems);
                         isIncome = true;
                     }
-                    break;
+                    break; */
 
                 case R.id.viewTransaction_filterDateBtn:
                     if(isIncome) {
