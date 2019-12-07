@@ -19,7 +19,7 @@ Went the course: ht 2018.
 ### Left TODO (last updated 06/12/2019, kl. 21:37)
 
 - Make it possible to view a specific item in a detailed view (1) 
-  - Almost done except for one BUG: DetailActivity only shows income items regardless of if the listview in the ViewTransactionFragment is displaying income- or outcome items
+  - Almost done except for one BUG: not correct item is displayed in DetailActivity, always income-item is displayed when phone is in landscape mode and vice versa.
   - Relevant classes
     - ViewTransactionFragment
     - DetailActivity
