@@ -23,15 +23,4 @@ Went the course: ht 2018.
   - Relevant classes
     - ViewTransactionFragment
     - DetailActivity
-    
-- Fix so the app can handle screen rotation (2)
-  - Relevant classes:
-    - ~~CreateAccount~~
-    - ~~DetailActivity~~
-    - ~~EnterTransactionFragment~~
-    - ~~GreetingFragment~~
-    - ~~SummaryFragment~~
-    - ViewTransactionFragment
-    - ~~Startup(Activity)~~
-    - ~~Navigation header~~
 
