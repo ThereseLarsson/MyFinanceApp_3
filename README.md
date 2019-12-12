@@ -16,9 +16,9 @@ Went the course: ht 2018.
 ## Run the application
 - Run MainActivity.java
 
-### Left TODO (last updated 07/12/2019, kl. 12:48)
+### Left TODO (last updated 12/12/2019, kl. 17:23)
 
-- Make it possible to view a specific item in a detailed view (1) 
+- Make it possible to view a specific item in a detailed view 
   - Almost done except for one BUG: not correct item is displayed in DetailActivity, always income-item is displayed when phone is in landscape mode and vice versa.
   - Relevant classes
     - ViewTransactionFragment
