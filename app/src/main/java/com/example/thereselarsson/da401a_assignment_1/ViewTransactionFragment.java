@@ -48,13 +48,13 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
     private final int[] income_itemIconList = new int[] {R.drawable.icon_salary, R.drawable.icon_other}; //for storing the each items icon
     private String[] income_itemTitleList = {}; //for storing the each items title
     private String[] income_itemDateList = {}; //for storing the each items date
-    private int[] income_itemAmountList; //for storing the each items amount (price)
+    private double[] income_itemAmountList; //for storing the each items amount (price)
     private String[] income_itemCategoryList = {}; //for storing the each items category
     // - OUTCOME
     private final int[] outcome_itemIconList = new int[] {R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_acc, R.drawable.icon_other, R.drawable.icon_salary};
     private String[] outcome_itemTitleList = {};
     private String[] outcome_itemDateList = {};
-    private int[] outcome_itemAmountList;
+    private double[] outcome_itemAmountList;
     private String[] outcome_itemCategoryList = {};
 
     //variables for generating item-objects from the data (icon, title, date, amount and category) fetched from the database
@@ -188,7 +188,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
                 Bundle extras = new Bundle();
                 extras.putString("ClickedItemTitle", clickedItem.getTitle());
                 extras.putString("ClickedItemDate", clickedItem.getDate());
-                extras.putInt("ClickedItemAmount", clickedItem.getAmount());
+                extras.putDouble("ClickedItemAmount", clickedItem.getAmount());
                 extras.putString("ClickedItemCategory", clickedItem.getCategory());
 
                 Intent intent = new Intent(getActivity().getApplicationContext(), DetailActivity.class);
@@ -237,9 +237,9 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
         //amount-value needs to be converted from String to int
         String[] temp = Startup.db.getIncomeValuesFromRowNbr(3);
-        income_itemAmountList = new int[temp.length];
+        income_itemAmountList = new double[temp.length];
         for(int i = 0; i < temp.length; i++) {
-            income_itemAmountList[i] = Integer.parseInt(temp[i]);
+            income_itemAmountList[i] = Double.parseDouble(temp[i]);
         }
         income_itemCategoryList = Startup.db.getIncomeValuesFromRowNbr(4);
 
@@ -254,9 +254,9 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
         //amount-value needs to be converted from String to int
         String[] temp = Startup.db.getOutcomeValuesFromRowNbr(3);
-        outcome_itemAmountList = new int[temp.length];
+        outcome_itemAmountList = new double[temp.length];
         for(int i = 0; i < temp.length; i++) {
-            outcome_itemAmountList[i] = Integer.parseInt(temp[i]);
+            outcome_itemAmountList[i] = Double.parseDouble(temp[i]);
         }
         outcome_itemCategoryList = Startup.db.getOutcomeValuesFromRowNbr(4);
 

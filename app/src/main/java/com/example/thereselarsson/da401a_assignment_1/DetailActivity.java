@@ -20,7 +20,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private String title;
     private String date;
-    private int amount;
+    private double amount;
     private String category;
 
     @Override
@@ -53,7 +53,7 @@ public class DetailActivity extends AppCompatActivity {
         //extract the stored data from the bundle
         title = extras.getString("ClickedItemTitle");
         date = extras.getString("ClickedItemDate");
-        amount = extras.getInt("ClickedItemAmount");
+        amount = extras.getDouble("ClickedItemAmount");
         category = extras.getString("ClickedItemCategory");
     }
 
@@ -63,7 +63,7 @@ public class DetailActivity extends AppCompatActivity {
     private void setData() {
         titleTxtView.setText(title);
         dateTxtView.setText(date);
-        amountTxtView.setText(Integer.toString(amount));
+        amountTxtView.setText(Double.toString(amount));
         categoryTxtView.setText(category);
 
         //sets the icon

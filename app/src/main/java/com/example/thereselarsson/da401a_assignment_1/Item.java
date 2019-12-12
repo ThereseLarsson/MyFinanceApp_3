@@ -12,10 +12,10 @@ public class Item implements Parcelable {
     private int icon; //the icon for the data (based on category)
     private String title;
     private String date;
-    private int amount; //in the currency kr
+    private double amount; //in the currency kr
     private String category;
 
-    public Item(int icon, String title, String date, int amount, String category) {
+    public Item(int icon, String title, String date, double amount, String category) {
         this.icon = icon;
         this.title = title;
         this.date = date;
@@ -44,7 +44,7 @@ public class Item implements Parcelable {
         this.date = date;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -68,7 +68,7 @@ public class Item implements Parcelable {
         return date;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
@@ -84,7 +84,7 @@ public class Item implements Parcelable {
         this.icon = in.readInt();
         this.title = in.readString();
         this.date = in.readString();
-        this.amount = in.readInt();
+        this.amount = in.readDouble();
         this.category = in.readString();
     }
 
@@ -97,7 +97,7 @@ public class Item implements Parcelable {
         dest.writeInt(icon);
         dest.writeString(title);
         dest.writeString(date);
-        dest.writeInt(amount);
+        dest.writeDouble(amount);
         dest.writeString(category);
     }
 
