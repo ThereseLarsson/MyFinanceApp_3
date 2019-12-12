@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
     private EnterTransactionFragment enterTransactionFragment;
     private ViewTransactionFragment viewTransactionFragment;
     public static Context context;
-    //private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

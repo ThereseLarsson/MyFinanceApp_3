@@ -1,8 +1,5 @@
 package com.example.thereselarsson.da401a_assignment_1;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -12,15 +9,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Provides the function to add a transaction (income or outcome)
@@ -242,9 +236,6 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
     }
 
     public void showDatePickerDialog() {
-        //datePickerFragment = new DatePickerFragment2();
-        //datePickerFragment.show(getFragmentManager(), "datePicker");
-
         DatePickerFragment datePicker = new DatePickerFragment();
         datePicker.onDateSetListener(this);
         datePicker.show(getActivity().getSupportFragmentManager(), "datePicker");
@@ -252,7 +243,6 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
 
     public void setDate(String string) {
         this.date = string;
-        Log.d(null, "DATE ÄR: " + date);
     }
 
     public void setDateButtonText(String string) {

@@ -1,9 +1,7 @@
 package com.example.thereselarsson.da401a_assignment_1;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,20 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
 
 
 public class ViewTransactionFragment extends Fragment implements DatePickerFragment.Listener {
@@ -33,7 +24,6 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
     private boolean isFiltered;
     private ArrayList<Item> itemArrayList;
     private CustomListAdapter customListAdapter;
-    //private Item item;
     private String date;
 
     //UI-components

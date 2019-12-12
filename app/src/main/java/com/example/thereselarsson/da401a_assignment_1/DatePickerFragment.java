@@ -1,12 +1,9 @@
 package com.example.thereselarsson.da401a_assignment_1;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
-import android.widget.Button;
 import android.widget.DatePicker;
 
 import java.util.Calendar;
@@ -20,8 +17,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
     public static int month;
     public static int day;
     public String date;
-    //private EnterTransactionFragment etf;
-    //private Button btn;
     private Listener listener;
 
     public interface Listener {
@@ -39,8 +34,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         year = c.get(Calendar.YEAR);
         month = c.get(Calendar.MONTH);
         day = c.get(Calendar.DAY_OF_MONTH);
-        //etf = new EnterTransactionFragment();
-        //listener = (Listener)getActivity();
 
         // Create a new instance of DatePickerDialog and return it
         return new DatePickerDialog(getActivity(), this, year, month, day);
@@ -70,8 +63,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
         date = strDay + "/" + strMonth + "/" + strYear;
 
-        //date = Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year);
-        //etf.setDate(date);
         if(listener != null) {
             listener.returnDate(date);
         }
