@@ -77,7 +77,7 @@ public class Item implements Parcelable {
     }
 
     /**
-     * methods for making the Item-object parcelable
+     * methods for making the Item-object parcelable (used in ViewTransactionFragment)
      */
 
     public Item(Parcel in) {

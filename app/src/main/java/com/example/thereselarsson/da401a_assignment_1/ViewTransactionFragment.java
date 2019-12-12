@@ -94,8 +94,8 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         outState.putString("date", date);
         outState.putBoolean("isIncome", isIncome);
         outState.putBoolean("isFiltered", isFiltered);
-        outState.putParcelableArrayList("filteredIncomeItems", filteredIncomeItems); //TODO: save filteredIncomeItems
-        outState.putParcelableArrayList("filteredOutcomeItems", filteredOutcomeItems);//TODO: save filteredOutcomeItems
+        outState.putParcelableArrayList("filteredIncomeItems", filteredIncomeItems);
+        outState.putParcelableArrayList("filteredOutcomeItems", filteredOutcomeItems);
     }
 
     @Override
@@ -121,8 +121,8 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             isIncome = savedInstanceState.getBoolean("isIncome");
             isFiltered = savedInstanceState.getBoolean("isFiltered");
             Log.d(null, "IS_FILTERED: " + isFiltered);
-            filteredIncomeItems = savedInstanceState.getParcelableArrayList("filteredIncomeItems"); //TODO: restore filteredIncomeItems
-            filteredOutcomeItems = savedInstanceState.getParcelableArrayList("filteredOutcomeItems"); //TODO: restore filteredOutcomeItems
+            filteredIncomeItems = savedInstanceState.getParcelableArrayList("filteredIncomeItems");
+            filteredOutcomeItems = savedInstanceState.getParcelableArrayList("filteredOutcomeItems");
         }
 
         initiateCustomListAdapter(isIncome); //set up the custom list adapter view
@@ -182,7 +182,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
                 Log.d(null, "CLICKED row number: " + position);
 
-                //TODO: Always picks from the income-list, why??? BUT, it does pick from the right row
+                //TODO: picks wrong item (i avseende till income/outcome), why??? BUT, it does pick from the right row
                 Item clickedItem = itemArrayList.get(position);
 
                 Bundle extras = new Bundle();
@@ -328,12 +328,10 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         this.date = date;
         setDate(date);
         if(isIncome) {
-            //TODO: visa income från och med date
             setHeadlineText("Income from " + date);
             filteredIncomeItems = filterItemsAfterDate(incomeItems, date); //filtrera item-listan: välj bort de items som är innan valt datum
             setItemListContent(filteredIncomeItems); //uppdaterar listvyn med setItemListContentToIncome();
         } else {
-            //TODO: visa outcome från och med date
             setHeadlineText("Outcome from " + date);
             filteredOutcomeItems = filterItemsAfterDate(outcomeItems, date); //filtrera item-listan: välj bort de items som är innan valt datum
             setItemListContent(filteredOutcomeItems); //uppdaterar listvyn med setItemListContentToOutcome();
