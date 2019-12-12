@@ -93,8 +93,9 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         //save local variables that holds data
         outState.putString("date", date);
         outState.putBoolean("isIncome", isIncome);
-        //TODO: save filteredIncomeItems
-        //TODO: save filteredOutcomeItems
+        outState.putBoolean("isFiltered", isFiltered);
+        outState.putParcelableArrayList("filteredIncomeItems", filteredIncomeItems); //TODO: save filteredIncomeItems
+        outState.putParcelableArrayList("filteredOutcomeItems", filteredOutcomeItems);//TODO: save filteredOutcomeItems
     }
 
     @Override
@@ -107,6 +108,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         //första gången som detta fragment laddas
         if(savedInstanceState == null) {
             isIncome = true;
+            isFiltered = false;
 
         //allows to restore (saved) values after the screen rotation is done
         } else {
@@ -117,8 +119,10 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             //restoring local variables that holds data
             date = savedInstanceState.getString("filterBtnText"); //denna lilla specialaren behövs då date hämtas från datePickern (vilket inte anropas då skärmen roteras)
             isIncome = savedInstanceState.getBoolean("isIncome");
-            //TODO: restore filteredIncomeItems
-            //TODO: restore filteredOutcomeItems
+            isFiltered = savedInstanceState.getBoolean("isFiltered");
+            Log.d(null, "IS_FILTERED: " + isFiltered);
+            filteredIncomeItems = savedInstanceState.getParcelableArrayList("filteredIncomeItems"); //TODO: restore filteredIncomeItems
+            filteredOutcomeItems = savedInstanceState.getParcelableArrayList("filteredOutcomeItems"); //TODO: restore filteredOutcomeItems
         }
 
         initiateCustomListAdapter(isIncome); //set up the custom list adapter view
@@ -200,6 +204,12 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         outcomeItems = new ArrayList<Item>();
         fetchAllIncomeFromDatabase();
         fetchAllOutcomeFromDatabase();
+
+        if(isFiltered && isIncome) {
+            return filteredIncomeItems;
+        } else  if(isFiltered && !isIncome) {
+            return filteredOutcomeItems;
+        }
 
         if(isIncome) {
             return incomeItems;
@@ -321,13 +331,14 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             //TODO: visa income från och med date
             setHeadlineText("Income from " + date);
             filteredIncomeItems = filterItemsAfterDate(incomeItems, date); //filtrera item-listan: välj bort de items som är innan valt datum
-            setItemListContent(filteredIncomeItems); //uppdatera listvyn med setItemListContentToIncome();
+            setItemListContent(filteredIncomeItems); //uppdaterar listvyn med setItemListContentToIncome();
         } else {
             //TODO: visa outcome från och med date
             setHeadlineText("Outcome from " + date);
             filteredOutcomeItems = filterItemsAfterDate(outcomeItems, date); //filtrera item-listan: välj bort de items som är innan valt datum
-            setItemListContent(filteredOutcomeItems); //uppdatera listvyn med setItemListContentToOutcome();
+            setItemListContent(filteredOutcomeItems); //uppdaterar listvyn med setItemListContentToOutcome();
         }
+        isFiltered = true;
     }
 
     /**
@@ -429,6 +440,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
                         setItemListContent(outcomeItems);
                         setHeadlineText("All outcome");
                     }
+                    isFiltered = false;
                     break;
             }
         }

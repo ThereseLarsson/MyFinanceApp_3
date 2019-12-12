@@ -1,11 +1,14 @@
 package com.example.thereselarsson.da401a_assignment_1;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Class for creating an object from the item stored in the SQLite database
  * Provides easier processing of the data
  */
 
-public class Item {
+public class Item implements Parcelable {
     private int icon; //the icon for the data (based on category)
     private String title;
     private String date;
@@ -72,4 +75,40 @@ public class Item {
     public String getCategory() {
         return category;
     }
+
+    /**
+     * methods for making the Item-object parcelable
+     */
+
+    public Item(Parcel in) {
+        this.icon = in.readInt();
+        this.title = in.readString();
+        this.date = in.readString();
+        this.amount = in.readInt();
+        this.category = in.readString();
+    }
+
+    public int describeContents(){
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(icon);
+        dest.writeString(title);
+        dest.writeString(date);
+        dest.writeInt(amount);
+        dest.writeString(category);
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Item createFromParcel(Parcel in) {
+            return new Item(in);
+        }
+
+        public Item[] newArray(int size) {
+            return new Item[size];
+        }
+    };
+
 }
