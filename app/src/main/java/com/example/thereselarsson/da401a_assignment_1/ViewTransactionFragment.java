@@ -19,7 +19,7 @@ import java.util.Comparator;
 
 
 public class ViewTransactionFragment extends Fragment implements DatePickerFragment.Listener {
-    //generall variables
+    //general variables
     private View rootView;
     private boolean isIncome; //if false --> = outcome
     private boolean isFiltered;
