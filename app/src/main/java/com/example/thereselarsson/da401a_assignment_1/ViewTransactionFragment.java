@@ -110,7 +110,6 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             date = savedInstanceState.getString("filterBtnText"); //denna lilla specialaren behövs då date hämtas från datePickern (vilket inte anropas då skärmen roteras)
             isIncome = savedInstanceState.getBoolean("isIncome");
             isFiltered = savedInstanceState.getBoolean("isFiltered");
-            Log.d(null, "IS_FILTERED: " + isFiltered);
             filteredIncomeItems = savedInstanceState.getParcelableArrayList("filteredIncomeItems");
             filteredOutcomeItems = savedInstanceState.getParcelableArrayList("filteredOutcomeItems");
         }
@@ -158,7 +157,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
      * ---------------------------------------------------------------------------------------
      */
     public void initiateCustomListAdapter(boolean isIncome) {
-        itemArrayList = generateItemsList(isIncome); //returns the income-list (to be used as default when the listview is loaded for the first time)
+        itemArrayList = generateItemsList(isIncome);
         customListAdapter = new CustomListAdapter(MainActivity.context, itemArrayList);
         listView = rootView.findViewById(R.id.viewTransaction_list);
         listView.setAdapter(customListAdapter);
