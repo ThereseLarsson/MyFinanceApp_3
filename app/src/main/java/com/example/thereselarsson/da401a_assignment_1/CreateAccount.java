@@ -57,6 +57,7 @@ public class CreateAccount extends AppCompatActivity {
      * otherwise, return false
      */
     private boolean validNames() {
+        //TODO: you should handle the user data using SharedPreferences (see lecture 5, slide 5-6)
         if(firstName.getText().toString().matches(".*[a-zA-Z]+.*") &&
                 lastName.getText().toString().matches(".*[a-zA-Z]+.*")) {
             return true;

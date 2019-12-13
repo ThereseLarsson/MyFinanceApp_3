@@ -195,7 +195,6 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
         }
     }
 
-    //TODO: remove this method? The title might not need to be unique? (however, methods for unique item-title exists in the database and are also used)
     /**
      * checks if the entered title (of the item) of the transaction is unique
      * if not, return false
