@@ -113,6 +113,12 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
                     setIncomeCategories();
                     isIncome = true;
                 }
+
+                //resets the UI-components
+                titleTxt.setText("");
+                datePickerBtn.setText("Pick a date");
+                date = "";
+                amountTxt.setText("");
             }
         });
     }
