@@ -17,5 +17,6 @@ Went the course: ht 2018.
 - Run MainActivity.java
 
 ### Left TODO (last updated 13/12/2019, kl. 20:45)
-DONE!
+- In your application, you should handle the user data (SharedPreferences).
+  - Relevant class: CreateAccount
 
