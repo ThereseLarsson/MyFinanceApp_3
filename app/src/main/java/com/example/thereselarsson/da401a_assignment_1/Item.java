@@ -23,11 +23,6 @@ public class Item implements Parcelable {
         this.category = category;
     }
 
-    /*public Item(int icon, String title) {
-        this.icon = icon;
-        this.title = title;
-    }*/
-
     /**
      * set-methods
      * ------------------------------------------------------------------------
@@ -110,5 +105,4 @@ public class Item implements Parcelable {
             return new Item[size];
         }
     };
-
 }

@@ -92,7 +92,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             toggleBtn.setText(savedInstanceState.getString("toggleBtnText"));
 
             //restoring local variables that holds data
-            date = savedInstanceState.getString("filterBtnText"); //denna lilla specialaren behövs då date hämtas från datePickern (vilket inte anropas då skärmen roteras)
+            date = savedInstanceState.getString("filterBtnText"); //this little special case is needed since the date-value is retrieved from the datePicker (which is not called on screen rotation)
             isIncome = savedInstanceState.getBoolean("isIncome");
             isFiltered = savedInstanceState.getBoolean("isFiltered");
             filteredItems = savedInstanceState.getParcelableArrayList("filteredItems");
@@ -163,7 +163,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
                 extras.putString("ClickedItemCategory", clickedItem.getCategory());
 
                 Intent intent = new Intent(getActivity().getApplicationContext(), DetailActivity.class);
-                intent.putExtras(extras); //skicka med Items attribut
+                intent.putExtras(extras); //sends the Item-attributes
                 startActivity(intent);
             }
         });
@@ -245,7 +245,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             }
             itemList.add(item);
         }
-        sortItemList(itemList); //sortes the list after date
+        sortItemList(itemList); //sorts the list after date
     }
 
     //creates a list of Item-objects from the outcome data
@@ -267,7 +267,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             }
             itemList.add(item);
         }
-        sortItemList(itemList); //sortes the list after date
+        sortItemList(itemList); //sorts the list after date
     }
 
     /**
@@ -293,8 +293,8 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             setHeadlineText("Outcome from " + date);
         }
 
-        filterItemsAfterDate(date); //filtrera item-listan: välj bort de items som är innan valt datum
-        setItemListContent(filteredItems); //uppdaterar listvyn med den filtrerade item-listan
+        filterItemsAfterDate(date); //filters the item-list: do not include the items BEFORE the chosen date-value
+        setItemListContent(filteredItems); //updates the listview with the filtered item-list
         isFiltered = true;
     }
 
@@ -343,9 +343,9 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         boolean lastRelevantDateFound = false;
         int index = 0;
 
-        //iterera genom / hitta index direkt för startDate, i (redan sorterad) income/outcome lista efter startDate, behåll items som kommer efter startDate
+        //iterate through / find index direclty for startDate, in (the already sorted) income/outcome-list after startDate, keep the items that occurs AFTER the startDate
         while(lastRelevantDateFound == false) {
-            if(0 <= itemList.get(index).getDate().compareTo(startDate)) { //om nuvarande datum är "större" än eller lika med startDate
+            if(0 <= itemList.get(index).getDate().compareTo(startDate)) { //if the current date is "bigger" than or equal to startDate, then we want to add the item to the filtered item-list
                 filteredItems.add(itemList.get(index));
                 index++;
             } else {
