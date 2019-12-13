@@ -29,7 +29,7 @@ public class GreetingFragment extends Fragment {
     }
 
     /**
-     * initiated the necessary components
+     * initiates the necessary components
      */
     public void initiateComponents() {
         name = Startup.db.getPersonName();
