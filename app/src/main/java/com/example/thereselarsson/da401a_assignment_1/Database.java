@@ -72,10 +72,12 @@ public class Database extends SQLiteOpenHelper {
         );
     }
 
+    //returns the total number of rows in the income table
     public int getNbrOfIncomeTableRows() {
         return (int) DatabaseUtils.queryNumEntries(getReadableDatabase(), TABLE_INCOME);
     }
 
+    //returns the total number of rows in the outcome table
     public int getNbrOfOutcomeTableRows() {
         return (int) DatabaseUtils.queryNumEntries(getReadableDatabase(), TABLE_OUTCOME);
     }
@@ -104,7 +106,7 @@ public class Database extends SQLiteOpenHelper {
     }
 
     /**
-     * checks if a user existss
+     * checks if a user exists
      */
     public boolean userExists() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -149,6 +151,7 @@ public class Database extends SQLiteOpenHelper {
      * -----------------------------------------------------------------------------
      */
 
+    //adds an income to the database (in the income table)
     public void addIncome(String title, String date, double amount, String category) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -159,6 +162,7 @@ public class Database extends SQLiteOpenHelper {
         db.insert(TABLE_INCOME, null, contentValues);
     }
 
+    //gets the total income (in kr)
     public double getTotalIncome() {
         double totalIncome = 0;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -174,14 +178,7 @@ public class Database extends SQLiteOpenHelper {
         return totalIncome;
     }
 
-    public String getTotalIncomeFromDate() {
-        String result = "";
-
-        //do something
-
-        return result;
-    }
-
+    //checks of an income exists based on its´ title
     public boolean incomeTitleExists(String title) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_INCOME, null );
@@ -233,6 +230,7 @@ public class Database extends SQLiteOpenHelper {
      * -----------------------------------------------------------------------------
      */
 
+    //adds an outcome to the database (in the outcome table)
     public void addOutcome(String title, String date, double amount, String category) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -243,6 +241,7 @@ public class Database extends SQLiteOpenHelper {
         db.insert(TABLE_OUTCOME, null, contentValues);
     }
 
+    //gets the total outcome (in kr)
     public double getTotalOutcome() {
         double totalOutcome = 0;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -258,14 +257,7 @@ public class Database extends SQLiteOpenHelper {
         return totalOutcome;
     }
 
-    public String getTotalOutcomeFromDate() {
-        String result = "";
-
-        //do something
-
-        return result;
-    }
-
+    //checks of an outcome exists based on its´ title
     public boolean outcomeTitleExists(String title) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery( "SELECT * FROM " + TABLE_OUTCOME, null );
@@ -314,7 +306,7 @@ public class Database extends SQLiteOpenHelper {
 
 
     /**
-     * Methods for printing contents of tables
+     * Methods for printing contents of tables - used for testing purposes
      * -----------------------------------------------------------------------------
      */
 

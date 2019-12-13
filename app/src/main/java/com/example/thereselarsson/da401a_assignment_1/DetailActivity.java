@@ -10,12 +10,14 @@ import android.widget.TextView;
  * shows a detailed view of an item (picked from the displayed listview located in ViewTransactionFragment)
  */
 public class DetailActivity extends AppCompatActivity {
+    //variables for the UI.components
     private TextView titleTxtView;
     private TextView dateTxtView;
     private TextView amountTxtView;
     private TextView categoryTxtView;
     private ImageView iconView;
 
+    //variables for storing data fetched from the UI
     private String title;
     private String date;
     private double amount;

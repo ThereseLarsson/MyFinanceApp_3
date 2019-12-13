@@ -76,7 +76,7 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
         initiateComponents();
         registerListeners();
 
-        if(savedInstanceState == null) { //första gången som detta fragment laddas
+        if(savedInstanceState == null) { //the very first time this fragment is loaded
             isIncome = true;
             date = "";
 
@@ -195,7 +195,7 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
         }
     }
 
-    //TODO: remove this method? The title might not need to be unique
+    //TODO: remove this method? The title might not need to be unique? (however, methods for unique item-title exists in the database and are also used)
     /**
      * checks if the entered title (of the item) of the transaction is unique
      * if not, return false
