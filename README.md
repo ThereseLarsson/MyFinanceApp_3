@@ -1,4 +1,4 @@
-# da401a_assignment_1
+# da401a_assignment_1_v2
 ## About
 Assignment 1 from a course at bachelor degree education. The implemented application provides a financial app where the user can e.g.:
 - add income / outcome consisting of title, date, amount and category from a drop down menu.
