@@ -1,4 +1,4 @@
-# da401a_assignment_1
+# da401a_assignment_1_v2
 ## About
 Assignment 1 from a course at bachelor degree education. The implemented application provides a financial app where the user can e.g.:
 - add income / outcome consisting of title, date, amount and category from a drop down menu.
@@ -16,7 +16,12 @@ Went the course: ht 2018.
 ## Run the application
 - Run MainActivity.java
 
-### Left TODO (last updated 13/12/2019, kl. 21:44)
+### Left TODO (last updated 14/12/2019, kl. 12:16)
 - In your application, you should handle the user data (SharedPreferences).
-  - Relevant class: CreateAccount
+  - Relevant class: 
+    - CreateAccount
+    - ~~Database~~
+    - GreetingFragment
+    - MainActivity
+    - Startup
 
