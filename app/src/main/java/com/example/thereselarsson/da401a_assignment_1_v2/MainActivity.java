@@ -1,4 +1,4 @@
-package com.example.thereselarsson.da401a_assignment_1;
+package com.example.thereselarsson.da401a_assignment_1_v2;
 
 import android.content.Context;
 import android.support.design.widget.NavigationView;

@@ -1,4 +1,4 @@
-package com.example.thereselarsson.da401a_assignment_1;
+package com.example.thereselarsson.da401a_assignment_1_v2;
 
 import android.content.Context;
 import android.content.Intent;
@@ -74,6 +74,8 @@ public class CreateAccount extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.newAccount_btn:
                     if(validNames()) {
+                        //testcomment
+                        //TODO: use SharedPreferences instead of database usage
                         Startup.db.addPerson(firstName.getText().toString(), lastName.getText().toString());
                         Startup.db.printTablePersonAsString(); //testing purpose
                         Startup.accountCreated = true;
