@@ -38,7 +38,7 @@ public class Database extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_INCOME + TABLE_OUTCOME);
-        onCreate(db); //recreate tables
+        onCreate(db); //recreates tables
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_INCOME + "(" +
                 INCOME_COLUMN_ID + " INTEGER PRIMARY KEY, " +
                 INCOME_COLUMN_TITLE + " TEXT, " +
-                INCOME_COLUMN_DATE + " TEXT, " + //FIXA TILL DATE-OBJEKT
+                INCOME_COLUMN_DATE + " TEXT, " + //FIXA TILL DATE-OBJEKT?
                 INCOME_COLUMN_AMOUNT + " DOUBLE, " +
                 INCOME_COLUMN_CATEGORY + " TEXT)"
         );
@@ -54,7 +54,7 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_OUTCOME + "(" +
                 OUTCOME_COLUMN_ID + " INTEGER PRIMARY KEY, " +
                 OUTCOME_COLUMN_TITLE + " TEXT, " +
-                OUTCOME_COLUMN_DATE + " TEXT, " + //FIXA TILL DATE-OBJEKT
+                OUTCOME_COLUMN_DATE + " TEXT, " + //FIXA TILL DATE-OBJEKT?
                 OUTCOME_COLUMN_AMOUNT + " DOUBLE, " +
                 OUTCOME_COLUMN_CATEGORY + " TEXT)"
         );
