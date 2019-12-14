@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        name = Startup.db.getPersonName();
+        name = Startup.sharedPreferences.getString("userName", "");
         context = getApplicationContext();
 
         /**

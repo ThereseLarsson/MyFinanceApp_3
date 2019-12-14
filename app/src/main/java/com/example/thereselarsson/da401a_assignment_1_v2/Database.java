@@ -15,13 +15,7 @@ public class Database extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "a1Database";
     private static final int DATABASE_VERSION = 1;
 
-    //table 1 - name
-    private static final String TABLE_PERSONS = "person";
-    private static final String PERSONS_COLUMN_ID = "_id";
-    private static final String PERSONS_COLUMN_FIRST_NAME = "firstName";
-    private static final String PERSONS_COLUMN_LAST_NAME = "lastName";
-
-    //table 2 - income
+    //table 1 - income
     private static final String TABLE_INCOME = "income";
     private static final String INCOME_COLUMN_ID = "_id";
     private static final String INCOME_COLUMN_TITLE = "title";
@@ -29,7 +23,7 @@ public class Database extends SQLiteOpenHelper {
     private static final String INCOME_COLUMN_AMOUNT = "amount";
     private static final String INCOME_COLUMN_CATEGORY = "category";
 
-    //table 3 - outcome
+    //table 2 - outcome
     private static final String TABLE_OUTCOME = "outcome";
     private static final String OUTCOME_COLUMN_ID = "_id";
     private static final String OUTCOME_COLUMN_TITLE = "title";
@@ -43,18 +37,12 @@ public class Database extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_PERSONS + TABLE_INCOME + TABLE_OUTCOME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_INCOME + TABLE_OUTCOME);
         onCreate(db); //recreate tables
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_PERSONS + "(" +
-                PERSONS_COLUMN_ID + " INTEGER PRIMARY KEY, " +
-                PERSONS_COLUMN_FIRST_NAME + " TEXT, " +
-                PERSONS_COLUMN_LAST_NAME + " TEXT) "
-        );
-
         db.execSQL("CREATE TABLE " + TABLE_INCOME + "(" +
                 INCOME_COLUMN_ID + " INTEGER PRIMARY KEY, " +
                 INCOME_COLUMN_TITLE + " TEXT, " +
@@ -80,70 +68,6 @@ public class Database extends SQLiteOpenHelper {
     //returns the total number of rows in the outcome table
     public int getNbrOfOutcomeTableRows() {
         return (int) DatabaseUtils.queryNumEntries(getReadableDatabase(), TABLE_OUTCOME);
-    }
-
-    /**
-     * Methods regarding Person-table
-     * -----------------------------------------------------------------------------
-     */
-
-    /**
-     * adds a person into the database
-     * @param firstName
-     * @param lastName
-     */
-    public void addPerson(String firstName, String lastName) {
-        // Gets the data repository in write mode
-        SQLiteDatabase db = getWritableDatabase();
-
-        // Create a new map of values, where column names are the keys
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(PERSONS_COLUMN_FIRST_NAME, firstName);
-        contentValues.put(PERSONS_COLUMN_LAST_NAME, lastName);
-
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(TABLE_PERSONS, null, contentValues);
-    }
-
-    /**
-     * checks if a user exists
-     */
-    public boolean userExists() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_PERSONS, null);
-        if(cursor != null) {
-            cursor.moveToFirst();
-            if(cursor.getInt(0) == 0) { //table is empty
-                cursor.close();
-                return false;
-            } else {
-                cursor.close();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * gets the users first name and last name and
-     * returns these as one string
-     */
-    public String getPersonName() {
-        String firstName = "";
-        String lastName = "";
-        String fullName = "";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_PERSONS, new String[] {"*"}, null, null, null, null, null, null );
-        if(cursor != null) {
-            if(cursor.moveToFirst()) {
-                firstName = cursor.getString(1);
-                lastName = cursor.getString(2);
-                fullName = firstName + " " + lastName;
-            }
-            cursor.close();
-        }
-        db.close();
-        return fullName;
     }
 
     /**
@@ -309,29 +233,6 @@ public class Database extends SQLiteOpenHelper {
      * Methods for printing contents of tables - used for testing purposes
      * -----------------------------------------------------------------------------
      */
-
-    /**
-     * prints the contents of the person table
-     * used for testing purposes (to see that the data is stored correctly)
-     */
-    public void printTablePersonAsString() {
-        SQLiteDatabase dbHandler = this.getReadableDatabase();
-        String tableString = String.format("TABLE %s:\n", TABLE_PERSONS);
-        Cursor allRows  = dbHandler.rawQuery("SELECT * FROM " + TABLE_PERSONS, null);
-        if (allRows.moveToFirst() ){
-            String[] columnNames = allRows.getColumnNames();
-            do {
-                for (String name: columnNames) {
-                    tableString += String.format("%s: %s\n", name,
-                            allRows.getString(allRows.getColumnIndex(name)));
-                }
-                tableString += "\n";
-
-            } while (allRows.moveToNext());
-        }
-        allRows.close();
-        Log.d(null, tableString);
-    }
 
     /**
      * prints the contents of the income table

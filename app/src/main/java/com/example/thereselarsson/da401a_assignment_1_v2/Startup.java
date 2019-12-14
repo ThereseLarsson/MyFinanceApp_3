@@ -2,8 +2,11 @@ package com.example.thereselarsson.da401a_assignment_1_v2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 
 /**
  * the first thing that loads upon app launch.
@@ -14,17 +17,19 @@ public class Startup extends AppCompatActivity {
     Intent intent;
     public static Database db;
     public static boolean accountCreated;
+    protected static SharedPreferences sharedPreferences;;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
         initiateDatabase(getApplicationContext());
+        sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
 
-        if(db.userExists()) {
-            accountCreated = true;
-        } else {
+        if(sharedPreferences.getString("userName", "").equals("")) {
             accountCreated = false;
+        } else {
+            accountCreated = true;
         }
 
         if(accountCreated) {

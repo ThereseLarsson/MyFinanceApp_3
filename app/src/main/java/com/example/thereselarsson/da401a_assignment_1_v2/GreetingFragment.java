@@ -32,7 +32,7 @@ public class GreetingFragment extends Fragment {
      * initiates the necessary components
      */
     public void initiateComponents() {
-        name = Startup.db.getPersonName();
+        name = Startup.sharedPreferences.getString("userName", "");
         greetingName = rootView.findViewById(R.id.greeting_name);
         greetingName.setText("Dear " + name);
     }

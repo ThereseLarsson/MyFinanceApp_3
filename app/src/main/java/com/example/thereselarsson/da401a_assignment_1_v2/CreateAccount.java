@@ -2,8 +2,10 @@ package com.example.thereselarsson.da401a_assignment_1_v2;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,10 @@ public class CreateAccount extends AppCompatActivity {
     private EditText firstName;
     private EditText lastName;
     private Button btn;
+
+    public CreateAccount() {
+        //empty constructor
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +51,7 @@ public class CreateAccount extends AppCompatActivity {
     /**
      * shows the user a message when they fail to create a valid account
      */
-    public void showMessage(String message) {
+    private void showMessage(String message) {
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, message, duration);
@@ -57,12 +63,30 @@ public class CreateAccount extends AppCompatActivity {
      * otherwise, return false
      */
     private boolean validNames() {
-        //TODO: you should handle the user data using SharedPreferences (see lecture 5, slide 5-6)
         if(firstName.getText().toString().matches(".*[a-zA-Z]+.*") &&
                 lastName.getText().toString().matches(".*[a-zA-Z]+.*")) {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Writes data in SharedPreferences
+     * stores the userdata (firstname and lastname of the user)
+     */
+    protected void storeUserData() {
+        String name = firstName.getText().toString() + " " + lastName.getText().toString();
+        //Startup.sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE); //is in the class Startup now
+
+        //creating an Editor object to edit (write to the file)
+        SharedPreferences.Editor editor = Startup.sharedPreferences.edit();
+
+        //storing the key and its value as the data fetched from edittext
+        editor.putString("userName", name);
+
+        //onde the changes have been made, we need to commit to apply those changes made,
+        //otherwise, it will throw an error
+        editor.commit();
     }
 
     /**
@@ -74,10 +98,7 @@ public class CreateAccount extends AppCompatActivity {
             switch (view.getId()) {
                 case R.id.newAccount_btn:
                     if(validNames()) {
-                        //testcomment
-                        //TODO: use SharedPreferences instead of database usage
-                        Startup.db.addPerson(firstName.getText().toString(), lastName.getText().toString());
-                        Startup.db.printTablePersonAsString(); //testing purpose
+                        storeUserData();
                         Startup.accountCreated = true;
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
