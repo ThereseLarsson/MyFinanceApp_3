@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">da401a_assignment_1_v2 </string>
+    <string name="app_name">MyFinanceApp</string>
 
     <!-- Strings for testing purposes -->
     <string name="test_1">SUCCESS!</string>

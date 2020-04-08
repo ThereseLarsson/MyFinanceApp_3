@@ -1,4 +1,4 @@
-package com.example.thereselarsson.da401a_assignment_1_v2;
+package com.example.thereselarsson.MyFinanceApp;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,13 +17,14 @@ public class Startup extends AppCompatActivity {
     Intent intent;
     public static Database db;
     public static boolean accountCreated;
-    protected static SharedPreferences sharedPreferences;;
+    protected static SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startup);
         initiateDatabase(getApplicationContext());
+
         sharedPreferences = getSharedPreferences("userData", MODE_PRIVATE);
 
         if(sharedPreferences.getString("userName", "").equals("")) {

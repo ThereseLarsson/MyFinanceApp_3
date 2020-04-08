@@ -1,4 +1,4 @@
-package com.example.thereselarsson.da401a_assignment_1_v2;
+package com.example.thereselarsson.MyFinanceApp;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,14 +18,11 @@ import java.util.Collections;
 import java.util.Comparator;
 
 
-/**
- * backup of the class ViewTransactionFragment 2019-12-13 kl.19:06
- */
-public class ViewTransactionFragmentBackup extends Fragment implements DatePickerFragment.Listener {
+public class ViewTransactionFragment extends Fragment implements DatePickerFragment.Listener {
+    //general variables
     private View rootView;
     private boolean isIncome; //if false --> = outcome
     private boolean isFiltered;
-    private ArrayList<Item> itemArrayList;
     private CustomListAdapter customListAdapter;
     private String date;
 
@@ -36,28 +33,20 @@ public class ViewTransactionFragmentBackup extends Fragment implements DatePicke
     private Button resetDateBtn;
     private ListView listView;
 
-    //variables for storing data from database
-    // - INCOME
+    //variables for storing data (attributes for the Item-object) from database
     private final int[] income_itemIconList = new int[] {R.drawable.icon_salary, R.drawable.icon_other}; //for storing the each items icon
-    private String[] income_itemTitleList = {}; //for storing the each items title
-    private String[] income_itemDateList = {}; //for storing the each items date
-    private double[] income_itemAmountList; //for storing the each items amount (price)
-    private String[] income_itemCategoryList = {}; //for storing the each items category
-    // - OUTCOME
     private final int[] outcome_itemIconList = new int[] {R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_acc, R.drawable.icon_other, R.drawable.icon_salary};
-    private String[] outcome_itemTitleList = {};
-    private String[] outcome_itemDateList = {};
-    private double[] outcome_itemAmountList;
-    private String[] outcome_itemCategoryList = {};
+    private String[] itemTitleList = {};
+    private String[] itemDateList = {};
+    private double[] itemAmountList = {};
+    private String[] itemCategoryList = {};
 
-    //variables for generating item-objects from the data (icon, title, date, amount and category) fetched from the database
-    private ArrayList<Item> incomeItems;
-    private ArrayList<Item> outcomeItems;
-    private ArrayList<Item> filteredIncomeItems; //used to store item-objects filtered after a specific date
-    private ArrayList<Item> filteredOutcomeItems;
+    //variables for creating item-objects (non-filtered and filtered by date) from the database-attributes
+    private ArrayList<Item> itemList;
+    private ArrayList<Item> filteredItems;
 
 
-    public ViewTransactionFragmentBackup() {
+    public ViewTransactionFragment() {
         // Required empty public constructor
     }
 
@@ -65,13 +54,6 @@ public class ViewTransactionFragmentBackup extends Fragment implements DatePicke
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_view_transaction, container, false);
-        //initiateComponents();
-        //registerListeners();
-        //isIncome = true;
-
-        //set up the custom list adapter view
-        //initiateCustomListAdapter();
-
         return rootView;
     }
 
@@ -87,8 +69,7 @@ public class ViewTransactionFragmentBackup extends Fragment implements DatePicke
         outState.putString("date", date);
         outState.putBoolean("isIncome", isIncome);
         outState.putBoolean("isFiltered", isFiltered);
-        outState.putParcelableArrayList("filteredIncomeItems", filteredIncomeItems);
-        outState.putParcelableArrayList("filteredOutcomeItems", filteredOutcomeItems);
+        outState.putParcelableArrayList("filteredItems", filteredItems);
     }
 
     @Override
@@ -98,27 +79,25 @@ public class ViewTransactionFragmentBackup extends Fragment implements DatePicke
         initiateComponents();
         registerListeners();
 
-        //första gången som detta fragment laddas
+        //the very first time this fragment/UI is loaded
         if(savedInstanceState == null) {
             isIncome = true;
             isFiltered = false;
 
-            //allows to restore (saved) values after the screen rotation is done
+        //if this fragment/UI has been loaded before - then there are values that (has been saved, and) needs to be restored
+        //allows to restore (saved) values after the screen rotation is done
         } else {
             //restoring UI-components
             headline.setText(savedInstanceState.getString("headline"));
             toggleBtn.setText(savedInstanceState.getString("toggleBtnText"));
 
             //restoring local variables that holds data
-            date = savedInstanceState.getString("filterBtnText"); //denna lilla specialaren behövs då date hämtas från datePickern (vilket inte anropas då skärmen roteras)
+            date = savedInstanceState.getString("filterBtnText"); //this little special case is needed since the date-value is retrieved from the datePicker (which is not called on screen rotation)
             isIncome = savedInstanceState.getBoolean("isIncome");
             isFiltered = savedInstanceState.getBoolean("isFiltered");
-            filteredIncomeItems = savedInstanceState.getParcelableArrayList("filteredIncomeItems");
-            filteredOutcomeItems = savedInstanceState.getParcelableArrayList("filteredOutcomeItems");
+            filteredItems = savedInstanceState.getParcelableArrayList("filteredItems");
         }
-
         initiateCustomListAdapter(isIncome); //set up the custom list adapter view
-
 
         toggleBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -126,14 +105,16 @@ public class ViewTransactionFragmentBackup extends Fragment implements DatePicke
                 if(isIncome) {
                     headline.setText("All outcome");
                     toggleBtn.setText("Toggle to show income instead");
-                    setItemListContent(outcomeItems);
+                    fetchAllOutcomeFromDatabase(); //the item-list is filled with outcome-items (which attributes are fetched from the database)
                     isIncome = false;
                 } else {
                     headline.setText("All income");
                     toggleBtn.setText("Toggle to show outcome instead");
-                    setItemListContent(incomeItems);
+                    fetchAllIncomeFromDatabase(); //the item-list is filled with income-items (which attributes are fetched from the database)
                     isIncome = true;
                 }
+                isFiltered = false;
+                setItemListContent(itemList);
             }
         });
     }
@@ -160,22 +141,20 @@ public class ViewTransactionFragmentBackup extends Fragment implements DatePicke
      * ---------------------------------------------------------------------------------------
      */
     public void initiateCustomListAdapter(boolean isIncome) {
-        itemArrayList = generateItemsList(isIncome);
-        customListAdapter = new CustomListAdapter(MainActivity.context, itemArrayList);
+        itemList = generateItemList(isIncome);
+        customListAdapter = new CustomListAdapter(MainActivity.context, itemList);
         listView = rootView.findViewById(R.id.viewTransaction_list);
         listView.setAdapter(customListAdapter);
 
         /**
          * listener for the listview
          */
-        //TODO: maybe move the method out from initiateCustomListAdapter so the itemlistener can adapt after if the listview is displaying income or outcome?
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
                 Log.d(null, "CLICKED row number: " + position);
 
-                //TODO: picks wrong item (i avseende till income/outcome), why??? BUT, it does pick from the right row
-                Item clickedItem = itemArrayList.get(position);
+                Item clickedItem = itemList.get(position);
 
                 Bundle extras = new Bundle();
                 extras.putString("ClickedItemTitle", clickedItem.getTitle());
@@ -184,29 +163,23 @@ public class ViewTransactionFragmentBackup extends Fragment implements DatePicke
                 extras.putString("ClickedItemCategory", clickedItem.getCategory());
 
                 Intent intent = new Intent(getActivity().getApplicationContext(), DetailActivity.class);
-                intent.putExtras(extras); //skicka med Items attribut
+                intent.putExtras(extras); //sends the Item-attributes
                 startActivity(intent);
             }
         });
     }
 
     //shows the items from income as default when the list is generated into the interface for the first time
-    public ArrayList<Item> generateItemsList(boolean isIncome) {
-        incomeItems = new ArrayList<Item>(); //income used as default
-        outcomeItems = new ArrayList<Item>();
-        fetchAllIncomeFromDatabase();
-        fetchAllOutcomeFromDatabase();
-
-        if(isFiltered && isIncome) {
-            return filteredIncomeItems;
-        } else  if(isFiltered && !isIncome) {
-            return filteredOutcomeItems;
-        }
-
-        if(isIncome) {
-            return incomeItems;
-        } else {
-            return outcomeItems;
+    public ArrayList<Item> generateItemList(boolean isIncome) {
+        if(isFiltered) { //if the item-list is filtered after date
+            return filteredItems;
+        } else { //if the item-list is NOT filtered after date, then we want to retrieve ALL the items from the database
+            if(isIncome) {
+                fetchAllIncomeFromDatabase();
+            } else {
+                fetchAllOutcomeFromDatabase();
+            }
+            return itemList;
         }
     }
 
@@ -224,36 +197,34 @@ public class ViewTransactionFragmentBackup extends Fragment implements DatePicke
      */
     public void fetchAllIncomeFromDatabase() {
         //retrieves the data from the database
-        income_itemTitleList = Startup.db.getIncomeValuesFromRowNbr(1);
-        income_itemDateList = Startup.db.getIncomeValuesFromRowNbr(2);
+        itemTitleList = Startup.db.getIncomeValuesFromRowNbr(1);
+        itemDateList = Startup.db.getIncomeValuesFromRowNbr(2);
+        itemCategoryList = Startup.db.getIncomeValuesFromRowNbr(4);
 
-        //amount-value needs to be converted from String to int
+        //amount-value needs to be converted from String to double
         String[] temp = Startup.db.getIncomeValuesFromRowNbr(3);
-        income_itemAmountList = new double[temp.length];
+        itemAmountList = new double[temp.length];
         for(int i = 0; i < temp.length; i++) {
-            income_itemAmountList[i] = Double.parseDouble(temp[i]);
+            itemAmountList[i] = Double.parseDouble(temp[i]);
         }
-        income_itemCategoryList = Startup.db.getIncomeValuesFromRowNbr(4);
 
-        createIncomeItemObjects();
-        sortItemList(incomeItems);
+        createIncomeItemObjects(); //creates a Item-ArrayList of the income-attributes above
     }
 
     public void fetchAllOutcomeFromDatabase() {
         //retrieves the data from the database
-        outcome_itemTitleList = Startup.db.getOutcomeValuesFromRowNbr(1);
-        outcome_itemDateList = Startup.db.getOutcomeValuesFromRowNbr(2);
+        itemTitleList = Startup.db.getOutcomeValuesFromRowNbr(1);
+        itemDateList = Startup.db.getOutcomeValuesFromRowNbr(2);
+        itemCategoryList = Startup.db.getOutcomeValuesFromRowNbr(4);
 
-        //amount-value needs to be converted from String to int
+        //amount-value needs to be converted from String to double
         String[] temp = Startup.db.getOutcomeValuesFromRowNbr(3);
-        outcome_itemAmountList = new double[temp.length];
+        itemAmountList = new double[temp.length];
         for(int i = 0; i < temp.length; i++) {
-            outcome_itemAmountList[i] = Double.parseDouble(temp[i]);
+            itemAmountList[i] = Double.parseDouble(temp[i]);
         }
-        outcome_itemCategoryList = Startup.db.getOutcomeValuesFromRowNbr(4);
 
-        createOutcomeItemObjects(); //creates a Item-ArrayList of the outcome-values above
-        sortItemList(outcomeItems); //sortes the list after date
+        createOutcomeItemObjects(); //creates a Item-ArrayList of the outcome-attributes above
     }
 
     /**
@@ -264,52 +235,49 @@ public class ViewTransactionFragmentBackup extends Fragment implements DatePicke
     //creates a list of Item-objects from the income data
     public void createIncomeItemObjects() {
         Item item;
-        incomeItems = new ArrayList<Item>();
+        itemList = new ArrayList<Item>();
 
-        for(int i = 0; i < income_itemTitleList.length; i++) {
-            if(income_itemCategoryList[i].equals("Salary")) {
-                item = new Item(income_itemIconList[0], income_itemTitleList[i], income_itemDateList[i], income_itemAmountList[i], income_itemCategoryList[i]);
+        for(int i = 0; i < itemTitleList.length; i++) {
+            if(itemCategoryList[i].equals("Salary")) {
+                item = new Item(income_itemIconList[0], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
             } else {
-                item = new Item(income_itemIconList[1], income_itemTitleList[i], income_itemDateList[i], income_itemAmountList[i], income_itemCategoryList[i]);
+                item = new Item(income_itemIconList[1], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
             }
-            incomeItems.add(item);
+            itemList.add(item);
         }
+        sortItemList(itemList); //sorts the list after date
     }
 
     //creates a list of Item-objects from the outcome data
     public void createOutcomeItemObjects() {
         Item item;
-        outcomeItems = new ArrayList<Item>();
+        itemList = new ArrayList<Item>();
 
-        for(int i = 0; i < outcome_itemTitleList.length; i++) { //längden på listan är ekvivalent med antalet items
-            if(outcome_itemCategoryList[i].equals("Food")) {
-                item = new Item(outcome_itemIconList[0], outcome_itemTitleList[i], outcome_itemDateList[i], outcome_itemAmountList[i], outcome_itemCategoryList[i]);
-            } else if (outcome_itemCategoryList[i].equals("Leisure")) {
-                item = new Item(outcome_itemIconList[1], outcome_itemTitleList[i], outcome_itemDateList[i], outcome_itemAmountList[i], outcome_itemCategoryList[i]);
-            } else if (outcome_itemCategoryList[i].equals("Travel")) {
-                item = new Item(outcome_itemIconList[2], outcome_itemTitleList[i], outcome_itemDateList[i], outcome_itemAmountList[i], outcome_itemCategoryList[i]);
-            } else if (outcome_itemCategoryList[i].equals("Accommodation")) {
-                item = new Item(outcome_itemIconList[3], outcome_itemTitleList[i], outcome_itemDateList[i], outcome_itemAmountList[i], outcome_itemCategoryList[i]);
+        for(int i = 0; i < itemTitleList.length; i++) { //längden på listan är ekvivalent med antalet items
+            if(itemCategoryList[i].equals("Food")) {
+                item = new Item(outcome_itemIconList[0], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
+            } else if (itemCategoryList[i].equals("Leisure")) {
+                item = new Item(outcome_itemIconList[1], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
+            } else if (itemCategoryList[i].equals("Travel")) {
+                item = new Item(outcome_itemIconList[2], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
+            } else if (itemCategoryList[i].equals("Accommodation")) {
+                item = new Item(outcome_itemIconList[3], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
             } else {
-                item = new Item(outcome_itemIconList[4], outcome_itemTitleList[i], outcome_itemDateList[i], outcome_itemAmountList[i], outcome_itemCategoryList[i]);
+                item = new Item(outcome_itemIconList[4], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
             }
-            outcomeItems.add(item);
+            itemList.add(item);
         }
+        sortItemList(itemList); //sorts the list after date
     }
 
     /**
      * methods for changing the content of the list view
      * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
-    public void setItemListContent(ArrayList<Item> itemList) {
-        customListAdapter = new CustomListAdapter(MainActivity.context, itemList);
+    public void setItemListContent(ArrayList<Item> list) {
+        customListAdapter = new CustomListAdapter(MainActivity.context, list);
         listView.setAdapter(customListAdapter);
     }
-
-    /*public void setItemListContentToOutcome() {
-        customListAdapter = new CustomListAdapter(MainActivity.context, outcomeItems);
-        listView.setAdapter(customListAdapter);
-    }*/
 
     /**
      * Methods for handling date picking
@@ -321,13 +289,12 @@ public class ViewTransactionFragmentBackup extends Fragment implements DatePicke
         setDate(date);
         if(isIncome) {
             setHeadlineText("Income from " + date);
-            filteredIncomeItems = filterItemsAfterDate(incomeItems, date); //filtrera item-listan: välj bort de items som är innan valt datum
-            setItemListContent(filteredIncomeItems); //uppdaterar listvyn med setItemListContentToIncome();
         } else {
             setHeadlineText("Outcome from " + date);
-            filteredOutcomeItems = filterItemsAfterDate(outcomeItems, date); //filtrera item-listan: välj bort de items som är innan valt datum
-            setItemListContent(filteredOutcomeItems); //uppdaterar listvyn med setItemListContentToOutcome();
         }
+
+        filterItemsAfterDate(date); //filters the item-list: do not include the items BEFORE the chosen date-value
+        setItemListContent(filteredItems); //updates the listview with the filtered item-list
         isFiltered = true;
     }
 
@@ -369,25 +336,22 @@ public class ViewTransactionFragmentBackup extends Fragment implements DatePicke
 
     /**
      * removes dates that occurs before a given start date
-     * @param itemList, list of items
      * @param startDate, t.ex. 18/08/2019
      */
-    public ArrayList<Item> filterItemsAfterDate(ArrayList<Item> itemList, String startDate) {
-        ArrayList<Item> filteredItemList = new ArrayList<Item>();
+    public void filterItemsAfterDate(String startDate) {
+        filteredItems = new ArrayList<Item>();
         boolean lastRelevantDateFound = false;
         int index = 0;
 
-        //iterera genom / hitta index direkt för startDate, i (redan sorterad) income/outcome lista efter startDate, behåll items som kommer efter startDate
+        //iterate through / find index direclty for startDate, in (the already sorted) income/outcome-list after startDate, keep the items that occurs AFTER the startDate
         while(lastRelevantDateFound == false) {
-            if(0 <= itemList.get(index).getDate().compareTo(startDate)) { //om nuvarande datum är "större" än eller lika med startDate
-                filteredItemList.add(itemList.get(index));
+            if(0 <= itemList.get(index).getDate().compareTo(startDate)) { //if the current date is "bigger" than or equal to startDate, then we want to add the item to the filtered item-list
+                filteredItems.add(itemList.get(index));
                 index++;
             } else {
                 lastRelevantDateFound = true;
             }
         }
-
-        return filteredItemList;
     }
 
     /**
@@ -423,13 +387,12 @@ public class ViewTransactionFragmentBackup extends Fragment implements DatePicke
                 case R.id.viewTransaction_resetDateBtn:
                     if(isIncome) {
                         fetchAllIncomeFromDatabase();
-                        setItemListContent(incomeItems);
                         setHeadlineText("All income");
                     } else {
                         fetchAllOutcomeFromDatabase();
-                        setItemListContent(outcomeItems);
                         setHeadlineText("All outcome");
                     }
+                    setItemListContent(itemList);
                     isFiltered = false;
                     break;
             }

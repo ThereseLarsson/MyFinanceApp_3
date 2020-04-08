@@ -1,4 +1,4 @@
-package com.example.thereselarsson.da401a_assignment_1_v2;
+package com.example.thereselarsson.MyFinanceApp;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

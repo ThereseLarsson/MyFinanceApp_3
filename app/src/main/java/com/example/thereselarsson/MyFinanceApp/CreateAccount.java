@@ -1,4 +1,4 @@
-package com.example.thereselarsson.da401a_assignment_1_v2;
+package com.example.thereselarsson.MyFinanceApp;
 
 import android.content.Context;
 import android.content.Intent;
