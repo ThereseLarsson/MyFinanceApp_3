@@ -19,7 +19,8 @@ import java.util.Comparator;
 
 
 /**
- * backup of the class ViewTransactionFragment 2019-12-13 kl.19:06
+ * backup of the class ViewTransactionFragment 2019-12-13 kl.19:06.
+ * Not in use anymore.
  */
 public class ViewTransactionFragmentBackup extends Fragment implements DatePickerFragment.Listener {
     private View rootView;
