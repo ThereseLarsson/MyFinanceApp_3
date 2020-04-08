@@ -144,9 +144,6 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
         spinner.setOnItemSelectedListener(spinnerActivity);
     }
 
-    /**
-     * shows the user a message when they fail to create a valid account
-     */
     public void showMessage(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
@@ -296,20 +293,6 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
                         showMessage("Please enter all data above");
                     }
                     break;
-
-                /**case R.id.enterTransaction_toggleBtn:
-                    if(isIncome) {
-                        headline.setText("Enter new outcome");
-                        toggleBtn.setText("Toggle to enter new income instead");
-                        setOutcomeCategories();
-                        isIncome = false;
-                    } else {
-                        headline.setText("Enter new income");
-                        toggleBtn.setText("Toggle to enter new outcome instead");
-                        setIncomeCategories();
-                        isIncome = true;
-                    }
-                    break; */
             }
         }
     }
