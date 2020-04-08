@@ -10,8 +10,8 @@
         android:radius="150dp"/>
     <padding
         android:bottom="5pt"
-        android:left="30pt"
-        android:right="30pt"
+        android:left="25pt"
+        android:right="25pt"
         android:top="5pt">
     </padding>
     <stroke
