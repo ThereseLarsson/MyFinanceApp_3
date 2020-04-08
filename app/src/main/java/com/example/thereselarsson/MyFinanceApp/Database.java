@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+//TODO: better, more effective solution idea (reduce code redundancy): use ONE table to store income AND income objects
+//TODO: how? add additional row 'isIncome' (boolean) to check if income or outcome.
+
 /**
  * Stores data (income and outcome transactions) entered by the user
  */
