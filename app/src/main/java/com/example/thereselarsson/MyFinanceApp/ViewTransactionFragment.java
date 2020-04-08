@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-
+//Displays the income/outcome items in a clickable listview
 public class ViewTransactionFragment extends Fragment implements DatePickerFragment.Listener {
     //general variables
     private View rootView;
@@ -126,9 +126,6 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         resetDateBtn = rootView.findViewById(R.id.viewTransaction_resetDateBtn);
     }
 
-    /**
-     * adds listeners to components
-     */
     private void registerListeners() {
         ClickListener clickListener = new ClickListener();
         toggleBtn.setOnClickListener(clickListener);
@@ -307,24 +304,15 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         datePicker.show(getActivity().getSupportFragmentManager(), "datePicker");
     }
 
-    /**
-     * sets the date
-     */
     public void setDate(String string) {
         this.date = string;
     }
 
-    /**
-     * sets the text of the headline in ViewTransactionFragment
-     */
     public void setHeadlineText(String string) {
         headline.setText(string);
     }
 
-    /**
-     * sortes the dates so they are in order
-     * dates are given on the format DD/MM/YYYY
-     */
+    //sorts the dates so they are in order, dates are given on the format DD/MM/YYYY
     public void sortItemList(ArrayList<Item> itemList) {
         Collections.sort(itemList, new Comparator<Item>() {
             @Override
@@ -362,20 +350,6 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
-                /* case R.id.viewTransaction_toggleBtn:
-                    if(isIncome) {
-                        headline.setText("All outcome");
-                        toggleBtn.setText("Toggle to show income instead");
-                        setItemListContent(outcomeItems);
-                        isIncome = false;
-                    } else {
-                        headline.setText("All income");
-                        toggleBtn.setText("Toggle to show outcome instead");
-                        setItemListContent(incomeItems);
-                        isIncome = true;
-                    }
-                    break; */
-
                 case R.id.viewTransaction_filterDateBtn:
                     if(isIncome) {
                         showDatePickerDialog();

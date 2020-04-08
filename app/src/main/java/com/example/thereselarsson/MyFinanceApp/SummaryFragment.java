@@ -36,9 +36,6 @@ public class SummaryFragment extends Fragment {
         return rootView;
     }
 
-    /**
-     * initiates the components
-     */
     public void initiateComponents() {
         totalIncomeTxt = rootView.findViewById(R.id.summary_income);
         totalOutcomeTxt = rootView.findViewById(R.id.summary_outcome);
