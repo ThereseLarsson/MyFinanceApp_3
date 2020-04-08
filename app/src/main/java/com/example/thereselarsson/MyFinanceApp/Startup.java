@@ -9,9 +9,9 @@ import android.util.Log;
 import android.view.View;
 
 /**
- * the first thing that loads upon app launch.
+ *  First thing that loads upon app launch.
  * if an account is already created --> go to main menu / MainActivity
- * otherwise, --> go to Create (new) account activity
+ * otherwise --> go to Create (new) account activity
  */
 public class Startup extends AppCompatActivity {
     Intent intent;
@@ -43,13 +43,9 @@ public class Startup extends AppCompatActivity {
         }
     }
 
-    /**
-     * initiates and returns the database
-     */
-    public static Database initiateDatabase(Context context){
+    public static void initiateDatabase(Context context){
         if(db == null) {
             db = new Database(context);
         }
-        return db;
     }
 }

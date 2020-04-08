@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-//Main Menu in the app with a navigation drawer
+//Main Menu in the app with a vertical navigation drawer
 public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener {
     private TextView userName;
     private String name;
