@@ -39,9 +39,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
-    /**
-     * Do something with the date chosen by the user
-     */
+    //Do something with the date chosen by the user
     @Override
     public void onDateSet(DatePicker view, int year, int month, int day) {
         month++;
@@ -49,13 +47,13 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         String strMonth;
         String strYear = Integer.toString(year);
 
-        if(day < 10) {
+        if(day < 10) { //make the 'day' into two-digits if not already
             strDay = "0" + Integer.toString(day);
         } else {
             strDay = Integer.toString(day);
         }
 
-        if(month < 10) { //t.ex. 9
+        if(month < 10) {
             strMonth = "0" + Integer.toString(month);
         } else {
             strMonth = Integer.toString(month);

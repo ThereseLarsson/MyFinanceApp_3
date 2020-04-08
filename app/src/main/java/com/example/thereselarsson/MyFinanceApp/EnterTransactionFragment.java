@@ -79,11 +79,11 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
             isIncome = true;
             date = "";
 
-            //allows to restore (saved) values after the screen rotation is done
+        //allows to restore (saved) values after the screen rotation is done
         } else { //probably orientation change
             titleTxt.setText(savedInstanceState.getString("title"));
             datePickerBtn.setText(savedInstanceState.getString("date"));
-            date = savedInstanceState.getString("date"); //denna lilla specialaren behövs då date hämtas från datePickern (vilket inte anropas då skärmen roteras)
+            date = savedInstanceState.getString("date"); //this is needed due to the date being retrieved from the datePicker (which isn´t called on screen rotation)
             amountTxt.setText(savedInstanceState.getString("amount"));
             category = savedInstanceState.getString("category");
 
@@ -117,9 +117,7 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
         });
     }
 
-    /**
-     * initiates the necessary components
-     */
+
     public void initiateComponents() {
         headline = rootView.findViewById(R.id.enterTransaction_headline);
         titleTxt = rootView.findViewById(R.id.enterTransaction_title);
@@ -130,9 +128,6 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
         toggleBtn = rootView.findViewById(R.id.enterTransaction_toggleBtn);
     }
 
-    /**
-     * adds listeners to components
-     */
     private void registerListeners() {
         ClickListener clickListener = new ClickListener();
         datePickerBtn.setOnClickListener(clickListener);

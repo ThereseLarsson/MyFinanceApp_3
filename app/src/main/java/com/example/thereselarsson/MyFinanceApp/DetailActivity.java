@@ -7,10 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
- * shows a detailed view of an item (picked from the displayed listview located in ViewTransactionFragment)
+ * Shows a detailed view of an item (picked from the displayed listview located in ViewTransactionFragment)
  */
 public class DetailActivity extends AppCompatActivity {
-    //variables for the UI.components
+    //variables for the UI-components
     private TextView titleTxtView;
     private TextView dateTxtView;
     private TextView amountTxtView;
@@ -32,9 +32,6 @@ public class DetailActivity extends AppCompatActivity {
         setData();
     }
 
-    /**
-     * initiates the necessary components
-     */
     public void initiateComponents() {
         iconView = findViewById(R.id.detailView_icon);
         titleTxtView = findViewById(R.id.detailView_title);
@@ -43,9 +40,7 @@ public class DetailActivity extends AppCompatActivity {
         categoryTxtView = findViewById(R.id.detailView_category);
     }
 
-    /**
-     * gets the data sent from the intent (from the ViewTransactionFragment)
-     */
+    //gets the data sent from the intent (from the ViewTransactionFragment)
     public void getData() {
         Intent intent = getIntent(); //get the intent in the target activity
         Bundle extras = intent.getExtras(); // gets the attached bundle from the intent
@@ -57,9 +52,7 @@ public class DetailActivity extends AppCompatActivity {
         category = extras.getString("ClickedItemCategory");
     }
 
-    /**
-     * uses the data retrieved from the intent to update the view of the DetailActivity
-     */
+    //uses the data retrieved from the intent to update the view of the DetailActivity
     private void setData() {
         titleTxtView.setText(title);
         dateTxtView.setText(date);
@@ -67,13 +60,13 @@ public class DetailActivity extends AppCompatActivity {
         categoryTxtView.setText(category);
 
         //sets the icon
-        //income
+        //for income
         if(categoryTxtView.getText().equals("Salary")) {
             iconView.setImageResource(R.drawable.icon_salary);
         } else if(categoryTxtView.getText().equals("Other")) {
             iconView.setImageResource(R.drawable.icon_other);
 
-            //outcome
+        //for outcome
         } else if(categoryTxtView.getText().equals("Food")) {
             iconView.setImageResource(R.drawable.icon_food);
         } else if(categoryTxtView.getText().equals("Leisure")) {
