@@ -45,7 +45,7 @@ public class CustomListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // inflate the layout for each list row
+        // inflate the layout for each row in the list
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.list_item_layout, parent, false);
         }

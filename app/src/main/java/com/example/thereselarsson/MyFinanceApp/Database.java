@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- * class for storing data entered by the user
+ * Stores data (income and outcome transactions) entered by the user
  */
 public class Database extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "a1Database";
@@ -230,7 +230,7 @@ public class Database extends SQLiteOpenHelper {
 
 
     /**
-     * Methods for printing contents of tables - used for testing purposes
+     * Methods for printing contents of tables - used solely for testing purposes
      * -----------------------------------------------------------------------------
      */
 

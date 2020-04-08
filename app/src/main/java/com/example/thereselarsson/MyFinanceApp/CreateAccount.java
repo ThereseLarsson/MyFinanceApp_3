@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * registers a new user
+ * Registers a new user
  */
 public class CreateAccount extends AppCompatActivity {
     private EditText firstName;
@@ -31,26 +31,17 @@ public class CreateAccount extends AppCompatActivity {
         registerListeners();
     }
 
-    /**
-     * initiates necessary components
-     */
     private void initiateComponents() {
         firstName = findViewById(R.id.newAccount_firstName);
         lastName = findViewById(R.id.newAccount_lastName);
         btn = findViewById(R.id.newAccount_btn);
     }
 
-    /**
-     * adds listeners to components
-     */
     private void registerListeners() {
         ClickListener clickListener = new ClickListener();
         btn.setOnClickListener(clickListener);
     }
 
-    /**
-     * shows the user a message when they fail to create a valid account
-     */
     private void showMessage(String message) {
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
@@ -72,7 +63,7 @@ public class CreateAccount extends AppCompatActivity {
 
     /**
      * Writes data in SharedPreferences
-     * stores the userdata (firstname and lastname of the user)
+     * stores the userdata (i.e. firstname and lastname of the user)
      */
     protected void storeUserData() {
         String name = firstName.getText().toString() + " " + lastName.getText().toString();

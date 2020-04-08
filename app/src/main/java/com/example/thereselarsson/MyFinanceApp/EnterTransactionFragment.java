@@ -17,11 +17,10 @@ import android.widget.Toast;
 
 
 /**
- * Provides the function to add a transaction (income or outcome)
+ * Provides the functionality to add a transaction (income or outcome)
  */
 public class EnterTransactionFragment extends Fragment implements DatePickerFragment.Listener {
     private View rootView;
-    //private DialogFragment datePickerFragment;
 
     //UI-components and variables to change when income/outcome is toggled
     private TextView headline;
