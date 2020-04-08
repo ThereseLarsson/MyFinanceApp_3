@@ -93,11 +93,7 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
             toggleBtn.setText(savedInstanceState.getString("toggleBtn"));
         }
 
-        if(isIncome) {
-            setIncomeCategories();
-        } else {
-            setOutcomeCategories();
-        }
+        setSpinnerCategories();
 
         toggleBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -105,14 +101,13 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
                 if(isIncome) {
                     headline.setText("Enter new outcome");
                     toggleBtn.setText("Toggle to enter new income instead");
-                    setOutcomeCategories();
                     isIncome = false;
                 } else {
                     headline.setText("Enter new income");
                     toggleBtn.setText("Toggle to enter new outcome instead");
-                    setIncomeCategories();
                     isIncome = true;
                 }
+                setSpinnerCategories();
 
                 //resets the UI-components
                 titleTxt.setText("");
@@ -156,26 +151,23 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * Methods for setting up categories
-     * -----------------------------------------------------------------------------------------------
-     */
-    public void setIncomeCategories() {
+    //Sets up the categories in the spinner
+    public void setSpinnerCategories() {
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.context,
-                R.array.categories_income, R.layout.spinner_item_layout);
+        ArrayAdapter<CharSequence> adapter;
+
+        if(isIncome) {
+            adapter = ArrayAdapter.createFromResource(MainActivity.context,
+                    R.array.categories_income, R.layout.spinner_item_layout);
+        } else {
+            adapter = ArrayAdapter.createFromResource(MainActivity.context,
+                    R.array.categories_outcome, R.layout.spinner_item_layout);
+        }
 
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(R.layout.spinner_item_layout);
 
         // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-    }
-
-    public void setOutcomeCategories() {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.context,
-                R.array.categories_outcome, R.layout.spinner_item_layout);
-        adapter.setDropDownViewResource(R.layout.spinner_item_layout);
         spinner.setAdapter(adapter);
     }
 
