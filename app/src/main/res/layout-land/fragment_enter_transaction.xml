@@ -72,8 +72,8 @@
 
     <Button
         android:id="@+id/enterTransaction_datePicker"
-        android:layout_width="127dp"
-        android:layout_height="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="48dp"
         android:layout_marginRight="48dp"
         android:layout_marginTop="20dp"
@@ -139,10 +139,9 @@
         android:id="@+id/enterTransaction_category"
         android:layout_width="153dp"
         android:layout_height="45dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginRight="42dp"
         android:layout_marginTop="4dp"
-        android:popupBackground="@color/colorDark"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enterTransaction_datePicker" />
