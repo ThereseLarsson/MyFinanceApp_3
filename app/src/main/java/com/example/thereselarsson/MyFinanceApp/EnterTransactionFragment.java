@@ -163,10 +163,10 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
     public void setIncomeCategories() {
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.context,
-                R.array.categories_income, android.R.layout.simple_spinner_item);
+                R.array.categories_income, R.layout.spinner_item_layout);
 
         // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(R.layout.spinner_item_layout);
 
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
@@ -174,8 +174,8 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
 
     public void setOutcomeCategories() {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MainActivity.context,
-                R.array.categories_outcome, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.categories_outcome, R.layout.spinner_item_layout);
+        adapter.setDropDownViewResource(R.layout.spinner_item_layout);
         spinner.setAdapter(adapter);
     }
 
