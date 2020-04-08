@@ -7,10 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * the greeting page that is displayed before the user has
- * chosen an option in the navigation drawer
- */
+//Greeting view before the user has chosen an option in the (vertical) navigation drawer
 public class GreetingFragment extends Fragment {
     private View rootView;
     private TextView greetingName;
@@ -28,9 +25,6 @@ public class GreetingFragment extends Fragment {
         return rootView;
     }
 
-    /**
-     * initiates the necessary components
-     */
     public void initiateComponents() {
         name = Startup.sharedPreferences.getString("userName", "");
         greetingName = rootView.findViewById(R.id.greeting_name);

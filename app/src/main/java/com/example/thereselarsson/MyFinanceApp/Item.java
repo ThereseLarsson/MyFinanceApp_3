@@ -9,10 +9,10 @@ import android.os.Parcelable;
  */
 
 public class Item implements Parcelable {
-    private int icon; //the icon for the data (based on category)
+    private int icon; //icon based on category
     private String title;
     private String date;
-    private double amount; //in the currency kr
+    private double amount; //currency kr
     private String category;
 
     public Item(int icon, String title, String date, double amount, String category) {
@@ -23,10 +23,6 @@ public class Item implements Parcelable {
         this.category = category;
     }
 
-    /**
-     * set-methods
-     * ------------------------------------------------------------------------
-     */
     public void setIcon(int icon) {
         this.icon = icon;
     }
@@ -47,10 +43,6 @@ public class Item implements Parcelable {
         this.category = category;
     }
 
-    /**
-     * get-methods
-     * ------------------------------------------------------------------------
-     */
     public int getIcon() {
         return icon;
     }
@@ -74,7 +66,6 @@ public class Item implements Parcelable {
     /**
      * methods for making the Item-object parcelable (used in ViewTransactionFragment)
      */
-
     public Item(Parcel in) {
         this.icon = in.readInt();
         this.title = in.readString();
