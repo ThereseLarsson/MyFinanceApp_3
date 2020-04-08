@@ -46,7 +46,7 @@
     <string name="summary_income_headline">Total income: </string>
     <string name="summary_outcome_headline">Total outcome: </string>
     <string name="summary_sum_headline">Sum: </string>
-    <string name="summary_line">______________________________________ </string>
+    <string name="summary_line">_____________________________ </string>
     <string name="summary_temp">TEMP </string>
 
     <!-- View transaction view -->
