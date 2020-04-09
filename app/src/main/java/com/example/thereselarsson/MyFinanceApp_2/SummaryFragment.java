@@ -2,6 +2,7 @@ package com.example.thereselarsson.MyFinanceApp_2;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,16 +48,18 @@ public class SummaryFragment extends Fragment {
      * gets the total income from the database and updates the UI
      */
     public void setTotalIncome() {
-        totalIncome = Startup.db.getTotalIncome();
+        totalIncome = Startup.db.getSum("income");
         totalIncomeTxt.setText(Double.toString(totalIncome) + " kr");
+        Log.d(null, "SUMMARY, INCOME: " + totalIncome);
     }
 
     /**
      * gets the total outcome from the database and updates the UI
      */
     public void setTotalOutcome() {
-        totalOutcome = Startup.db.getTotalOutcome();
+        totalOutcome = Startup.db.getSum("outcome");
         totalOutcomeTxt.setText(Double.toString(totalOutcome) + (" kr"));
+        Log.d(null, "SUMMARY, OUTCOME: " + totalOutcome);
     }
 
     /**

@@ -185,13 +185,13 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
     private boolean uniqueTitle() {
         title = titleTxt.getText().toString();
         if(isIncome) {
-            if(Startup.db.incomeTitleExists(title)) {
+            if(Startup.db.titleExists(title, "income")) {
                 return false;
             } else {
                 return true;
             }
         } else {
-            if(Startup.db.outcomeTitleExists(title)) {
+            if(Startup.db.titleExists(title, "outcome")) {
                 return false;
             } else {
                 return true;
@@ -204,11 +204,11 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
      * -----------------------------------------------------------------------------------------
      */
     private void addNewIncomeToDatabase() {
-        Startup.db.addIncome(title, date, amount, category);
+        Startup.db.addTransaction("income", title, date, amount, category);
     }
 
     private void addNewOutcomeToDatabase() {
-        Startup.db.addOutcome(title, date, amount, category);
+        Startup.db.addTransaction("outcome", title, date, amount, category);
     }
 
 
@@ -270,14 +270,13 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
                 case R.id.enterTransaction_confirmBtn:
                     if(validData()) {
                         if(uniqueTitle()) {
+                            Startup.db.printTableAsString(); //testing purpose
                             if(isIncome) {
                                 addNewIncomeToDatabase();
                                 showMessage("Income successfully added!");
-                                Startup.db.printTableIncomeAsString(); //testing purpose
                             } else {
                                 addNewOutcomeToDatabase();
                                 showMessage("Outcome successfully added!");
-                                Startup.db.printTableOutcomeAsString(); //testing purpose
                             }
                         } else {
                             showMessage("Please enter a unique title");

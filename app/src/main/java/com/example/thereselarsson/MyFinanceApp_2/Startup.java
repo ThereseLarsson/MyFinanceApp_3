@@ -15,7 +15,7 @@ import android.view.View;
  */
 public class Startup extends AppCompatActivity {
     Intent intent;
-    public static Database db;
+    public static Database2 db;
     public static boolean accountCreated;
     protected static SharedPreferences sharedPreferences;
 
@@ -45,7 +45,7 @@ public class Startup extends AppCompatActivity {
 
     public static void initiateDatabase(Context context){
         if(db == null) {
-            db = new Database(context);
+            db = new Database2(context);
         }
     }
 }
