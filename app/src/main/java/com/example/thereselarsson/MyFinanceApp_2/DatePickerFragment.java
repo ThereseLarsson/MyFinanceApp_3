@@ -1,4 +1,4 @@
-package com.example.thereselarsson.MyFinanceApp;
+package com.example.thereselarsson.MyFinanceApp_2;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

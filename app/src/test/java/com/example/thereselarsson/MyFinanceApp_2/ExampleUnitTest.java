@@ -1,4 +1,4 @@
-package com.example.thereselarsson.MyFinanceApp;
+package com.example.thereselarsson.MyFinanceApp_2;
 
 import org.junit.Test;
 

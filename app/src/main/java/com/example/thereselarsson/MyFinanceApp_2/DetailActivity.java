@@ -1,4 +1,4 @@
-package com.example.thereselarsson.MyFinanceApp;
+package com.example.thereselarsson.MyFinanceApp_2;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
