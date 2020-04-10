@@ -57,6 +57,10 @@ public class Database2 extends SQLiteOpenHelper {
         Log.d(null, "DATABASE_CREATED");
     }
 
+    private void initializeCursor() {
+
+    }
+
     //adds a transaction to the database
     public void addTransaction(String type, String title, String date, double amount, String category) {
         db = getWritableDatabase();
@@ -202,7 +206,7 @@ public class Database2 extends SQLiteOpenHelper {
      * prints the contents of the table
      * used for testing purposes (to see that the data is stored correctly)
      */
-    public void printTableAsString() {
+    private void printTableAsString() {
         SQLiteDatabase dbHandler = this.getReadableDatabase();
         String tableString = String.format("TABLE %s:\n", TABLE_TRANSACTIONS);
         Cursor allRows  = dbHandler.rawQuery("SELECT * FROM " + TABLE_TRANSACTIONS, null);

@@ -270,7 +270,6 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
                 case R.id.enterTransaction_confirmBtn:
                     if(validData()) {
                         if(uniqueTitle()) {
-                            Startup.db.printTableAsString(); //testing purpose
                             if(isIncome) {
                                 addNewIncomeToDatabase();
                                 showMessage("Income successfully added!");
