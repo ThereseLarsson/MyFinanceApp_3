@@ -34,7 +34,7 @@
     <string name="enterTransaction_toggleHeadline">Toggle to enter new outcome instead </string>
     <string name="enterTransaction_title">Enter title: </string>
     <string name="enterTransaction_date">Enter date: </string>
-    <string name="enterTransaction_date_button">Pick date </string>
+    <string name="enterTransaction_date_button">Pick a date </string>
     <string name="enterTransaction_category">Enter category: </string>
     <string name="enterTransaction_amount">Enter amount: </string>
     <string name="enterTransaction_amount_hint"><i>(kr) </i></string>
