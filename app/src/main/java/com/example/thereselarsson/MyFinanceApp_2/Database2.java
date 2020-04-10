@@ -18,6 +18,7 @@ public class Database2 extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "a1Database";
     private static final int DATABASE_VERSION = 1;
     private SQLiteDatabase db;
+    private Cursor cursor;
 
     //queries
     private final String selectIncomeQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE " + COLUMN_TYPE + " LIKE '%income%'";
@@ -57,8 +58,17 @@ public class Database2 extends SQLiteOpenHelper {
         Log.d(null, "DATABASE_CREATED");
     }
 
-    private void initializeCursor() {
+    private void initializeCursor(String transactionType) {
+        if(transactionType.equals("income")) {
+            cursor = db.rawQuery(selectIncomeQuery, null);
 
+        } else if(transactionType.equals("outcome")) {
+            cursor = db.rawQuery(selectOutcomeQuery, null);
+
+        } else {
+            Log.d(null, "error: invalid transaction type");
+            cursor = null;
+        }
     }
 
     //adds a transaction to the database
@@ -132,7 +142,7 @@ public class Database2 extends SQLiteOpenHelper {
     }
 
     //returns the total number of income/outcome items in the table
-    public int getNbrOfTransactions(String transactionType) {
+    private int getNbrOfTransactions(String transactionType) {
         int nbrOfTransactions = 0;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor;
@@ -173,9 +183,10 @@ public class Database2 extends SQLiteOpenHelper {
         String[] columnItems = new String[getNbrOfTransactions(transactionType)];
         int index = 0;
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor;
 
-        if(transactionType.equals("income")) {
+        //Cursor cursor;
+
+        /*if(transactionType.equals("income")) {
             cursor = db.rawQuery(selectIncomeQuery, null);
 
         } else if(transactionType.equals("outcome")) {
@@ -184,7 +195,9 @@ public class Database2 extends SQLiteOpenHelper {
         } else {
             Log.d(null, "error: invalid transaction type");
             cursor = null;
-        }
+        }*/
+
+        initializeCursor(transactionType);
 
         if(cursor != null) {
             if(cursor.moveToFirst()) {
@@ -198,7 +211,7 @@ public class Database2 extends SQLiteOpenHelper {
             cursor.close();
         }
 
-        db.close();
+        //db.close();
         return columnItems;
     }
 
