@@ -92,11 +92,10 @@ public class Database2 extends SQLiteOpenHelper {
                     sum = sum + cursor.getDouble(4);
                 } while(cursor.moveToNext());
             }
+            cursor.close();
         }
-        cursor.close();
 
         //Log.d(null, "NUMBER_OF " + transactionType + ": " + getNbrOfTransactions(transactionType));
-
         return sum;
     }
 
@@ -124,8 +123,8 @@ public class Database2 extends SQLiteOpenHelper {
                     }
                 } while(cursor.moveToNext());
             }
+            cursor.close();
         }
-        cursor.close();
         return false;
     }
 
