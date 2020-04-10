@@ -11,9 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-/**
- * Registers a new user
- */
+//Registers a new user
 public class CreateAccount extends AppCompatActivity {
     private EditText firstName;
     private EditText lastName;

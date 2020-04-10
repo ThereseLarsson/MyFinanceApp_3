@@ -15,10 +15,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-/**
- * Provides the functionality to add a transaction (income or outcome)
- */
+//Provides the functionality to add a transaction (income or outcome)
 public class EnterTransactionFragment extends Fragment implements DatePickerFragment.Listener {
     private View rootView;
 
@@ -116,7 +113,6 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
             }
         });
     }
-
 
     public void initiateComponents() {
         headline = rootView.findViewById(R.id.enterTransaction_headline);
@@ -237,9 +233,7 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
         datePickerBtn.setText(string);
     }
 
-    /**
-     * gets the selected category from the spinner
-     */
+    //gets the selected category from the spinner
     private class SpinnerActivity implements AdapterView.OnItemSelectedListener {
         // An item was selected
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -255,10 +249,7 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
         }
     }
 
-    /**
-     * Inner class that handle events from the user
-     * ---------------------------------------------------------------------------------------------
-     */
+    //Inner class that handle events from the user
     private class ClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {

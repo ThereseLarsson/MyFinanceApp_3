@@ -3,9 +3,7 @@ package com.example.thereselarsson.MyFinanceApp_2;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-/**
- * Activity used for testing purposes, not used in finished app
- */
+//Activity used for testing purposes, not used in finished app
 public class TestActivity extends AppCompatActivity {
 
     @Override

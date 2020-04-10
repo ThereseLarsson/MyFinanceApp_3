@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Fragment for displaying the user´s financial summary
- */
+//Fragment for displaying the user´s financial summary
 public class SummaryFragment extends Fragment {
     private View rootView;
     private TextView totalIncomeTxt;

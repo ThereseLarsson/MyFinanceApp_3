@@ -10,9 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * custom adapter for the listview used in the ViewTransactionFragment
- */
+//Custom adapter for the listview used in the ViewTransactionFragment
 public class CustomListAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Item> items;

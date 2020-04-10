@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Shows a detailed view of an item (picked from the displayed listview located in ViewTransactionFragment)
- */
+//Shows a detailed view of an item (picked from the displayed listview located in ViewTransactionFragment)
 public class DetailActivity extends AppCompatActivity {
     //variables for the UI-components
     private TextView titleTxtView;

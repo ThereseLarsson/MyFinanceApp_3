@@ -8,9 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-/**
- * Stores data (income and outcome transactions) entered by the user
- */
+//Stores data (income and outcome transactions) entered by the user
 public class Database extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "a1Database";
     private static final int DATABASE_VERSION = 1;
