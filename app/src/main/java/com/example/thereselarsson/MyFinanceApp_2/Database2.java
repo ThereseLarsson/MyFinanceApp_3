@@ -94,6 +94,9 @@ public class Database2 extends SQLiteOpenHelper {
             }
         }
         cursor.close();
+
+        //Log.d(null, "NUMBER_OF " + transactionType + ": " + getNbrOfTransactions(transactionType));
+
         return sum;
     }
 
@@ -126,11 +129,6 @@ public class Database2 extends SQLiteOpenHelper {
         return false;
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////// NOT FIXED YET ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    ////////////////////////// NOT TESTED YET ///////////////////////////////////////////////////////////////////////
     //returns the total number of income/outcome items in the table
     public int getNbrOfTransactions(String transactionType) {
         int nbrOfTransactions = 0;
@@ -154,11 +152,14 @@ public class Database2 extends SQLiteOpenHelper {
                     nbrOfTransactions++;
                 } while(cursor.moveToNext());
             }
+            cursor.close();
         }
-        cursor.close();
-
         return nbrOfTransactions;
     }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////// NOT FIXED YET ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * gets the values of all the items from the IncomeTable and returns them in a list
@@ -226,7 +227,28 @@ public class Database2 extends SQLiteOpenHelper {
         return null;
     }
 
-    public String[] getTransactionItemsFromColumn(String type, int indexInTable) {
+    public String[] getTransactionItemsFromColumnNbr(String type, int indexInTable) {
+        /*String currentColumnValue = "";
+        String[] columnItems = new String[getNbrOfTransactions(type)];
+        int index = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_INCOME, new String[] {"*"}, null, null, null, null, null, null );
+
+        if(cursor != null) {
+            if(cursor.moveToFirst()) {
+                do {
+                    currentColumnValue = cursor.getString(indexInTable);
+                    //Log.d(null, "column value at index " + index + " is: " + currentColumnValue);
+                    columnItems[index] = currentColumnValue;
+                    index++;
+                } while(cursor.moveToNext()) ;
+            }
+        }
+        cursor.close();
+        db.close();
+        return columnItems;*/
+
         return null;
     }
 
