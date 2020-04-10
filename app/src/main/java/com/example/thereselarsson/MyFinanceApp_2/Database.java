@@ -11,7 +11,7 @@ import android.util.Log;
 /**
  * Stores data (income and outcome transactions) entered by the user
  */
-public class Database2 extends SQLiteOpenHelper {
+public class Database extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "a1Database";
     private static final int DATABASE_VERSION = 1;
     private SQLiteDatabase db;
@@ -20,7 +20,6 @@ public class Database2 extends SQLiteOpenHelper {
     //queries
     private final String selectIncomeQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE " + COLUMN_TYPE + " LIKE '%income%'";
     private final String selectOutcomeQuery = "SELECT * FROM " + TABLE_TRANSACTIONS + " WHERE " + COLUMN_TYPE + " LIKE '%outcome%'";
-    //private final String selectOutcomeQuery = "SELECT * FROM transactions WHERE type LIKE '%outcome%'";
 
     //table + its columns
     private static final String TABLE_TRANSACTIONS = "transactions";
@@ -31,7 +30,7 @@ public class Database2 extends SQLiteOpenHelper {
     private static final String COLUMN_AMOUNT = "amount";
     private static final String COLUMN_CATEGORY = "category";
 
-    public Database2(Context context) {
+    public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         db = getWritableDatabase(); //ta bort sen? behövs denna rad?
     }

@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
 /**
  *  First thing that loads upon app launch.
@@ -15,7 +13,7 @@ import android.view.View;
  */
 public class Startup extends AppCompatActivity {
     Intent intent;
-    public static Database2 db;
+    public static Database db;
     public static boolean accountCreated;
     protected static SharedPreferences sharedPreferences;
 
@@ -45,7 +43,7 @@ public class Startup extends AppCompatActivity {
 
     public static void initiateDatabase(Context context){
         if(db == null) {
-            db = new Database2(context);
+            db = new Database(context);
         }
     }
 }
