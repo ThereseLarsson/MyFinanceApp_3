@@ -59,6 +59,8 @@ public class Database2 extends SQLiteOpenHelper {
     }
 
     private void initializeCursor(String transactionType) {
+        db = getReadableDatabase();
+
         if(transactionType.equals("income")) {
             cursor = db.rawQuery(selectIncomeQuery, null);
 
@@ -86,19 +88,7 @@ public class Database2 extends SQLiteOpenHelper {
     //gets the total income/outcome (in kr)
     public double getSum(String transactionType) {
         double sum = 0;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor;
-
-        if(transactionType.equals("income")) {
-            cursor = db.rawQuery(selectIncomeQuery, null);
-
-        } else if(transactionType.equals("outcome")) {
-            cursor = db.rawQuery(selectOutcomeQuery, null);
-
-        } else {
-            Log.d(null, "error: invalid transaction type");
-            cursor = null;
-        }
+        initializeCursor(transactionType);
 
         if(cursor != null) {
             if(cursor.moveToFirst()) {
@@ -114,19 +104,7 @@ public class Database2 extends SQLiteOpenHelper {
 
     //checks if an transaction exists based on its´ title
     public boolean titleExists(String title, String transactionType) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor;
-
-        if(transactionType.equals("income")) {
-            cursor = db.rawQuery(selectIncomeQuery, null);
-
-        } else if(transactionType.equals("outcome")) {
-            cursor = db.rawQuery(selectOutcomeQuery, null);
-
-        } else {
-            Log.d(null, "error: invalid transaction type");
-            cursor = null;
-        }
+        initializeCursor(transactionType);
 
         if(cursor != null) {
             if(cursor.moveToFirst()) {
@@ -144,19 +122,7 @@ public class Database2 extends SQLiteOpenHelper {
     //returns the total number of income/outcome items in the table
     private int getNbrOfTransactions(String transactionType) {
         int nbrOfTransactions = 0;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor;
-
-        if(transactionType.equals("income")) {
-            cursor = db.rawQuery(selectIncomeQuery, null);
-
-        } else if(transactionType.equals("outcome")) {
-            cursor = db.rawQuery(selectOutcomeQuery, null);
-
-        } else {
-            Log.d(null, "error: invalid transaction type");
-            cursor = null;
-        }
+        initializeCursor(transactionType);
 
         if(cursor != null) {
             if(cursor.moveToFirst()) {
@@ -182,20 +148,6 @@ public class Database2 extends SQLiteOpenHelper {
         String currentColumnValue = "";
         String[] columnItems = new String[getNbrOfTransactions(transactionType)];
         int index = 0;
-        SQLiteDatabase db = getReadableDatabase();
-
-        //Cursor cursor;
-
-        /*if(transactionType.equals("income")) {
-            cursor = db.rawQuery(selectIncomeQuery, null);
-
-        } else if(transactionType.equals("outcome")) {
-            cursor = db.rawQuery(selectOutcomeQuery, null);
-
-        } else {
-            Log.d(null, "error: invalid transaction type");
-            cursor = null;
-        }*/
 
         initializeCursor(transactionType);
 
@@ -211,7 +163,6 @@ public class Database2 extends SQLiteOpenHelper {
             cursor.close();
         }
 
-        //db.close();
         return columnItems;
     }
 
