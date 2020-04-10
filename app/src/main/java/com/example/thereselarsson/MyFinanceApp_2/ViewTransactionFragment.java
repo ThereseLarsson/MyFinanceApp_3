@@ -194,12 +194,12 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
      */
     public void fetchAllIncomeFromDatabase() {
         //retrieves the data from the database
-        itemTitleList = Startup.db.getIncomeValuesFromRowNbr(2);
-        itemDateList = Startup.db.getIncomeValuesFromRowNbr(3);
-        itemCategoryList = Startup.db.getIncomeValuesFromRowNbr(5);
+        itemTitleList = Startup.db.getTransactionItemsFromColumnNbr("income", 2);
+        itemDateList = Startup.db.getTransactionItemsFromColumnNbr("income", 3);
+        itemCategoryList = Startup.db.getTransactionItemsFromColumnNbr("income", 5);
 
         //amount-value needs to be converted from String to double
-        String[] temp = Startup.db.getIncomeValuesFromRowNbr(4);
+        String[] temp = Startup.db.getTransactionItemsFromColumnNbr("income", 4);
         itemAmountList = new double[temp.length];
         for(int i = 0; i < temp.length; i++) {
             itemAmountList[i] = Double.parseDouble(temp[i]);
@@ -210,12 +210,12 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
     public void fetchAllOutcomeFromDatabase() {
         //retrieves the data from the database
-        itemTitleList = Startup.db.getOutcomeValuesFromRowNbr(2);
-        itemDateList = Startup.db.getOutcomeValuesFromRowNbr(3);
-        itemCategoryList = Startup.db.getOutcomeValuesFromRowNbr(5);
+        itemTitleList = Startup.db.getTransactionItemsFromColumnNbr("outcome", 2);
+        itemDateList = Startup.db.getTransactionItemsFromColumnNbr("outcome", 3);
+        itemCategoryList = Startup.db.getTransactionItemsFromColumnNbr("outcome", 5);
 
         //amount-value needs to be converted from String to double
-        String[] temp = Startup.db.getOutcomeValuesFromRowNbr(4);
+        String[] temp = Startup.db.getTransactionItemsFromColumnNbr("outcome", 4);
         itemAmountList = new double[temp.length];
         for(int i = 0; i < temp.length; i++) {
             itemAmountList[i] = Double.parseDouble(temp[i]);

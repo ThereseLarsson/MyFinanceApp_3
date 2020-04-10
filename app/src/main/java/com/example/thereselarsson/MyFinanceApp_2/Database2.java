@@ -95,7 +95,6 @@ public class Database2 extends SQLiteOpenHelper {
             cursor.close();
         }
 
-        //Log.d(null, "NUMBER_OF " + transactionType + ": " + getNbrOfTransactions(transactionType));
         return sum;
     }
 
@@ -156,13 +155,8 @@ public class Database2 extends SQLiteOpenHelper {
         return nbrOfTransactions;
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////// NOT FIXED YET ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     /**
-     * gets the values of all the items from the IncomeTable and returns them in a list
-     *
+     * retrieves all the items of one column (income or outcome) and returns them in a list
      * row 0 - id
      * row 1 - transactionType
      * row 2 - title
@@ -170,85 +164,38 @@ public class Database2 extends SQLiteOpenHelper {
      * row 4 - amount
      * row 5- category
      */
-    public String[] getIncomeValuesFromRowNbr(int indexInTable) {
-/*        String rowValue = "";
-        String[] rowValueList = new String[getNbrOfIncomeTableRows()];
+    public String[] getTransactionItemsFromColumnNbr(String transactionType, int indexInTable) {
+        String currentColumnValue = "";
+        String[] columnItems = new String[getNbrOfTransactions(transactionType)];
         int index = 0;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_INCOME, new String[] {"*"}, null, null, null, null, null, null );
-        if(cursor != null) {
-            if(cursor.moveToFirst()) {
-                do {
-                    rowValue = cursor.getString(indexInTable);
-                    //Log.d(null, "Row value at index " + index + " is: " + rowValue);
-                    rowValueList[index] = rowValue;
-                    index++;
-                } while(cursor.moveToNext()) ;
-            }
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor;
+
+        if(transactionType.equals("income")) {
+            cursor = db.rawQuery(selectIncomeQuery, null);
+
+        } else if(transactionType.equals("outcome")) {
+            cursor = db.rawQuery(selectOutcomeQuery, null);
+
+        } else {
+            Log.d(null, "error: invalid transaction type");
+            cursor = null;
         }
-        cursor.close();
-        db.close();
-        return rowValueList;*/
-
-        return null;
-    }
-
-    /**
-     * gets the values of all the items from the OutcomeTable and returns them in a list
-     *
-     * row 0 - id
-     * row 1 - transactionType
-     * row 2 - title
-     * row 3 - date
-     * row 4 - amount
-     * row 5- category
-     */
-    public String[] getOutcomeValuesFromRowNbr(int indexInTable) {
-/*        String rowValue = "";
-        String[] rowValueList = new String[getNbrOfOutcomeTableRows()];
-        int index = 0;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_OUTCOME, new String[] {"*"}, null, null, null, null, null, null );
-        if(cursor != null) {
-            if(cursor.moveToFirst()) {
-                do {
-                    rowValue = cursor.getString(indexInTable);
-                    //Log.d(null, "Row value at index " + index + " is: " + rowValue);
-                    rowValueList[index] = rowValue;
-                    index++;
-                } while(cursor.moveToNext()) ;
-            }
-        }
-        cursor.close();
-        db.close();
-        return rowValueList;*/
-
-        return null;
-    }
-
-    public String[] getTransactionItemsFromColumnNbr(String type, int indexInTable) {
-        /*String currentColumnValue = "";
-        String[] columnItems = new String[getNbrOfTransactions(type)];
-        int index = 0;
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(TABLE_INCOME, new String[] {"*"}, null, null, null, null, null, null );
 
         if(cursor != null) {
             if(cursor.moveToFirst()) {
                 do {
                     currentColumnValue = cursor.getString(indexInTable);
-                    //Log.d(null, "column value at index " + index + " is: " + currentColumnValue);
+                    //Log.d(null, "COLUMN_VALUE_AT_INDEX " + index + " IS: " + currentColumnValue);
                     columnItems[index] = currentColumnValue;
                     index++;
-                } while(cursor.moveToNext()) ;
+                } while(cursor.moveToNext());
             }
+            cursor.close();
         }
-        cursor.close();
-        db.close();
-        return columnItems;*/
 
-        return null;
+        db.close();
+        return columnItems;
     }
 
     /**
