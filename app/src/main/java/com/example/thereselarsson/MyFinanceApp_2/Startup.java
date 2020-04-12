@@ -10,6 +10,7 @@ import android.os.Bundle;
  *  First thing that loads upon app launch.
  * if an account is already created --> go to main menu / MainActivity
  * otherwise --> go to Create (new) account activity
+ * + Initiates the database if it does not already exist
  */
 public class Startup extends AppCompatActivity {
     Intent intent;

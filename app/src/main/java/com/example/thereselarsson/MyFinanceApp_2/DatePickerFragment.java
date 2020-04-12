@@ -47,7 +47,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         String strMonth;
         String strYear = Integer.toString(year);
 
-        if(day < 10) { //make the 'day' into two-digits if not already
+        if(day < 10) { //make 'day' into a two-digit value if not already
             strDay = "0" + Integer.toString(day);
         } else {
             strDay = Integer.toString(day);

@@ -30,7 +30,7 @@ public class Database extends SQLiteOpenHelper {
 
     public Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        db = getWritableDatabase(); //ta bort sen? behövs denna rad?
+        db = getWritableDatabase();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class Database extends SQLiteOpenHelper {
                 COLUMN_AMOUNT + " DOUBLE, " +
                 COLUMN_CATEGORY + " TEXT)"
         );
-        Log.d(null, "DATABASE_CREATED");
+        Log.d(null, "DATABASE_CREATED"); //testing purpose
     }
 
     private void initializeCursor(String transactionType) {
@@ -77,7 +77,7 @@ public class Database extends SQLiteOpenHelper {
         contentValues.put(COLUMN_AMOUNT, amount);
         contentValues.put(COLUMN_CATEGORY, category);
         db.insert(TABLE_TRANSACTIONS, null, contentValues);
-        //printTableAsString();
+        //printTableAsString(); //testing purpose
     }
 
     //gets the total income/outcome (in kr)
@@ -149,7 +149,7 @@ public class Database extends SQLiteOpenHelper {
             if(cursor.moveToFirst()) {
                 do {
                     currentColumnValue = cursor.getString(indexInTable);
-                    //Log.d(null, "COLUMN_VALUE_AT_INDEX " + index + " IS: " + currentColumnValue);
+                    //Log.d(null, "COLUMN_VALUE_AT_INDEX " + index + " IS: " + currentColumnValue); //testing purpose
                     columnItems[index] = currentColumnValue;
                     index++;
                 } while(cursor.moveToNext());

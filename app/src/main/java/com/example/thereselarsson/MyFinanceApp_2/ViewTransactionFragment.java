@@ -143,9 +143,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         listView = rootView.findViewById(R.id.viewTransaction_list);
         listView.setAdapter(customListAdapter);
 
-        /**
-         * listener for the listview
-         */
+        //listener for the listview
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3) {
@@ -250,7 +248,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         Item item;
         itemList = new ArrayList<Item>();
 
-        for(int i = 0; i < itemTitleList.length; i++) { //längden på listan är ekvivalent med antalet items
+        for(int i = 0; i < itemTitleList.length; i++) { //the length of the list is equal to the number of Item-objects
             if(itemCategoryList[i].equals("Food")) {
                 item = new Item(outcome_itemIconList[0], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
             } else if (itemCategoryList[i].equals("Leisure")) {
@@ -295,9 +293,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         isFiltered = true;
     }
 
-    /**
-     * displays a date picker dialog
-     */
+    //displays a date picker dialog
     public void showDatePickerDialog() {
         DatePickerFragment datePicker = new DatePickerFragment();
         datePicker.onDateSetListener(this);
@@ -342,10 +338,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
         }
     }
 
-    /**
-     * inner class to handle clicks
-     * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-     */
+    //inner class to handle clicks
     private class ClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {

@@ -42,27 +42,21 @@ public class SummaryFragment extends Fragment {
         icon = rootView.findViewById(R.id.summary_icon);
     }
 
-    /**
-     * gets the total income from the database and updates the UI
-     */
+    //gets the total income from the database and updates the UI
     public void setTotalIncome() {
         totalIncome = Startup.db.getSum("income");
         totalIncomeTxt.setText(Double.toString(totalIncome) + " kr");
         Log.d(null, "SUMMARY, INCOME: " + totalIncome);
     }
 
-    /**
-     * gets the total outcome from the database and updates the UI
-     */
+    //gets the total outcome from the database and updates the UI
     public void setTotalOutcome() {
         totalOutcome = Startup.db.getSum("outcome");
         totalOutcomeTxt.setText(Double.toString(totalOutcome) + (" kr"));
         Log.d(null, "SUMMARY, OUTCOME: " + totalOutcome);
     }
 
-    /**
-     * gets the sum (difference between income and outcome) and updates the UI
-     */
+    //gets the sum (difference between income and outcome) and updates the UI
     public void setSum() {
         if(totalIncome > totalOutcome) {
             sum = "+" + Double.toString(totalIncome - totalOutcome) + " kr";
