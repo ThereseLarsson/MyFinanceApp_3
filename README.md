@@ -1,4 +1,4 @@
-# financeApp
+# financeApp_3
 ## About
 The implemented application provides a financial app where the user can e.g.:
 - add income / outcome items consisting of title, date, amount and category from a drop down menu.
