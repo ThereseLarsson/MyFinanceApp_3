@@ -36,6 +36,7 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
     //variables for storing data (attributes for the Item-object) from database
     private final int[] income_itemIconList = new int[] {R.drawable.icon_salary, R.drawable.icon_other}; //for storing the each items icon
     private final int[] outcome_itemIconList = new int[] {R.drawable.icon_food, R.drawable.icon_sparetime, R.drawable.icon_travel, R.drawable.icon_acc, R.drawable.icon_other, R.drawable.icon_salary};
+    private String[] itemTypeList = {};
     private String[] itemTitleList = {};
     private String[] itemDateList = {};
     private double[] itemAmountList = {};
@@ -105,13 +106,13 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
                 if(isIncome) {
                     headline.setText("All outcome");
                     toggleBtn.setText("Toggle to show income instead");
-                    fetchAllOutcomeFromDatabase(); //the item-list is filled with outcome-items (which attributes are fetched from the database)
                     isIncome = false;
+                    fetchAllTransactionItems("outcome"); //the item-list is filled with outcome-items (which attributes are fetched from the database)
                 } else {
                     headline.setText("All income");
                     toggleBtn.setText("Toggle to show outcome instead");
-                    fetchAllIncomeFromDatabase(); //the item-list is filled with income-items (which attributes are fetched from the database)
                     isIncome = true;
+                    fetchAllTransactionItems("income"); //the item-list is filled with income-items (which attributes are fetched from the database)
                 }
                 isFiltered = false;
                 setItemListContent(itemList);
@@ -170,105 +171,76 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
             return filteredItems;
         } else { //if the item-list is NOT filtered after date, then we want to retrieve ALL the items from the database
             if(isIncome) {
-                fetchAllIncomeFromDatabase();
+                fetchAllTransactionItems("income");
             } else {
-                fetchAllOutcomeFromDatabase();
+                fetchAllTransactionItems("outcome");
             }
             return itemList;
         }
     }
 
     /**
-     * methods that retrieves the data (item title, date, amount an category) from the database
-     * and places it in lists.
-     * Two methods from fetching data from the income-table and out-come table separately
+     * retrieves the attributes (item title, date, amount an category) from the database
+     * and places them in lists.
+     * From these attribute-lists, a single list of Item-objects is created
      *
      * row 0 - id
-     * row 1 - title
-     * row 2 - date
-     * row 3 - amount
-     * row 4- category
+     * row 1 - type
+     * row 2 - title
+     * row 3 - date
+     * row 4 - amount
+     * row 5- category
      * ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
      */
-    public void fetchAllIncomeFromDatabase() {
-        //retrieves the data from the database
-        itemTitleList = Startup.db.getTransactionItemsFromColumnNbr("income", 2);
-        itemDateList = Startup.db.getTransactionItemsFromColumnNbr("income", 3);
-        itemCategoryList = Startup.db.getTransactionItemsFromColumnNbr("income", 5);
+    public void fetchAllTransactionItems(String transactionType) {
+        Item item;
+        itemList = new ArrayList<Item>();
+
+        //retrieves the attributes from the database
+        itemTypeList = Startup.db.getTransactionItemsFromColumnNbr(transactionType, 1);
+        itemTitleList = Startup.db.getTransactionItemsFromColumnNbr(transactionType, 2);
+        itemDateList = Startup.db.getTransactionItemsFromColumnNbr(transactionType, 3);
+        itemCategoryList = Startup.db.getTransactionItemsFromColumnNbr(transactionType, 5);
 
         //amount-value needs to be converted from String to double
-        String[] temp = Startup.db.getTransactionItemsFromColumnNbr("income", 4);
+        String[] temp = Startup.db.getTransactionItemsFromColumnNbr(transactionType, 4);
         itemAmountList = new double[temp.length];
         for(int i = 0; i < temp.length; i++) {
             itemAmountList[i] = Double.parseDouble(temp[i]);
         }
 
-        createIncomeItemObjects(); //creates a Item-ArrayList of the income-attributes above
-    }
-
-    public void fetchAllOutcomeFromDatabase() {
-        //retrieves the data from the database
-        itemTitleList = Startup.db.getTransactionItemsFromColumnNbr("outcome", 2);
-        itemDateList = Startup.db.getTransactionItemsFromColumnNbr("outcome", 3);
-        itemCategoryList = Startup.db.getTransactionItemsFromColumnNbr("outcome", 5);
-
-        //amount-value needs to be converted from String to double
-        String[] temp = Startup.db.getTransactionItemsFromColumnNbr("outcome", 4);
-        itemAmountList = new double[temp.length];
-        for(int i = 0; i < temp.length; i++) {
-            itemAmountList[i] = Double.parseDouble(temp[i]);
-        }
-
-        createOutcomeItemObjects(); //creates a Item-ArrayList of the outcome-attributes above
-    }
-
-    /**
-     * methods that converts the lists (icon, title, date, amount and category) to a single list of Item-objects
-     * -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-     */
-
-    //creates a list of Item-objects from the income data
-    public void createIncomeItemObjects() {
-        Item item;
-        itemList = new ArrayList<Item>();
-
-        for(int i = 0; i < itemTitleList.length; i++) {
-            if(itemCategoryList[i].equals("Salary")) {
-                item = new Item(income_itemIconList[0], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
-            } else {
-                item = new Item(income_itemIconList[1], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
+        //creates an array list of Item-objects
+        if(isIncome) {
+            for(int i = 0; i < itemTitleList.length; i++) {
+                if(itemCategoryList[i].equals("Salary")) {
+                    item = new Item(income_itemIconList[0], itemTypeList[i], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
+                } else {
+                    item = new Item(income_itemIconList[1], itemTypeList[i], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
+                }
+                itemList.add(item);
             }
-            itemList.add(item);
+
+        } else {
+            for(int i = 0; i < itemTitleList.length; i++) { //the length of the list is equal to the number of Item-objects
+                if(itemCategoryList[i].equals("Food")) {
+                    item = new Item(outcome_itemIconList[0], itemTypeList[i], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
+                } else if (itemCategoryList[i].equals("Leisure")) {
+                    item = new Item(outcome_itemIconList[1], itemTypeList[i], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
+                } else if (itemCategoryList[i].equals("Travel")) {
+                    item = new Item(outcome_itemIconList[2], itemTypeList[i], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
+                } else if (itemCategoryList[i].equals("Accommodation")) {
+                    item = new Item(outcome_itemIconList[3], itemTypeList[i], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
+                } else {
+                    item = new Item(outcome_itemIconList[4], itemTypeList[i], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
+                }
+                itemList.add(item);
+            }
         }
+
         sortItemList(itemList); //sorts the list after date
     }
 
-    //creates a list of Item-objects from the outcome data
-    public void createOutcomeItemObjects() {
-        Item item;
-        itemList = new ArrayList<Item>();
-
-        for(int i = 0; i < itemTitleList.length; i++) { //the length of the list is equal to the number of Item-objects
-            if(itemCategoryList[i].equals("Food")) {
-                item = new Item(outcome_itemIconList[0], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
-            } else if (itemCategoryList[i].equals("Leisure")) {
-                item = new Item(outcome_itemIconList[1], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
-            } else if (itemCategoryList[i].equals("Travel")) {
-                item = new Item(outcome_itemIconList[2], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
-            } else if (itemCategoryList[i].equals("Accommodation")) {
-                item = new Item(outcome_itemIconList[3], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
-            } else {
-                item = new Item(outcome_itemIconList[4], itemTitleList[i], itemDateList[i], itemAmountList[i], itemCategoryList[i]);
-            }
-            itemList.add(item);
-        }
-        sortItemList(itemList); //sorts the list after date
-    }
-
-    /**
-     * methods for changing the content of the list view
-     * --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-     */
+    //method for changing the content of the list view
     public void setItemListContent(ArrayList<Item> list) {
         customListAdapter = new CustomListAdapter(MainActivity.context, list);
         listView.setAdapter(customListAdapter);
@@ -353,10 +325,10 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
 
                 case R.id.viewTransaction_resetDateBtn:
                     if(isIncome) {
-                        fetchAllIncomeFromDatabase();
+                        fetchAllTransactionItems("income");
                         setHeadlineText("All income");
                     } else {
-                        fetchAllOutcomeFromDatabase();
+                        fetchAllTransactionItems("outcome");
                         setHeadlineText("All outcome");
                     }
                     setItemListContent(itemList);

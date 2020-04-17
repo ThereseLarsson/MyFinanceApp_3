@@ -10,13 +10,15 @@ import android.os.Parcelable;
 
 public class Item implements Parcelable {
     private int icon; //icon based on category
+    private String type;
     private String title;
     private String date;
     private double amount; //currency kr
     private String category;
 
-    public Item(int icon, String title, String date, double amount, String category) {
+    public Item(int icon, String type, String title, String date, double amount, String category) {
         this.icon = icon;
+        this.type = type;
         this.title = title;
         this.date = date;
         this.amount = amount;
@@ -25,6 +27,10 @@ public class Item implements Parcelable {
 
     public void setIcon(int icon) {
         this.icon = icon;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setTitle(String title)  {
@@ -45,6 +51,10 @@ public class Item implements Parcelable {
 
     public int getIcon() {
         return icon;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getTitle() {
@@ -68,6 +78,7 @@ public class Item implements Parcelable {
      */
     public Item(Parcel in) {
         this.icon = in.readInt();
+        this.type = in.readString();
         this.title = in.readString();
         this.date = in.readString();
         this.amount = in.readDouble();
@@ -81,6 +92,7 @@ public class Item implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(icon);
+        dest.writeString(type);
         dest.writeString(title);
         dest.writeString(date);
         dest.writeDouble(amount);
