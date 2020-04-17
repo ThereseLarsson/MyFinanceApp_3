@@ -195,18 +195,9 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
         }
     }
 
-    /**
-     * Methods that connects to the database
-     * -----------------------------------------------------------------------------------------
-     */
-    private void addNewIncomeToDatabase() {
-        Startup.db.addTransaction("income", title, date, amount, category);
+    private void addNewTransactionToDatabase(String transactionType) {
+        Startup.db.addTransaction(transactionType, title, date, amount, category);
     }
-
-    private void addNewOutcomeToDatabase() {
-        Startup.db.addTransaction("outcome", title, date, amount, category);
-    }
-
 
     /**
      * Methods for handling date picking
@@ -262,10 +253,10 @@ public class EnterTransactionFragment extends Fragment implements DatePickerFrag
                     if(validData()) {
                         if(uniqueTitle()) {
                             if(isIncome) {
-                                addNewIncomeToDatabase();
+                                addNewTransactionToDatabase("income");
                                 showMessage("Income successfully added!");
                             } else {
-                                addNewOutcomeToDatabase();
+                                addNewTransactionToDatabase("outcome");
                                 showMessage("Outcome successfully added!");
                             }
                         } else {
