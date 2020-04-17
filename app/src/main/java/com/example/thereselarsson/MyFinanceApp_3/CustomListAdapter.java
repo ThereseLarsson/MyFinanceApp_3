@@ -1,4 +1,4 @@
-package com.example.thereselarsson.MyFinanceApp_2;
+package com.example.thereselarsson.MyFinanceApp_3;
 
 import android.content.Context;
 import android.view.LayoutInflater;
