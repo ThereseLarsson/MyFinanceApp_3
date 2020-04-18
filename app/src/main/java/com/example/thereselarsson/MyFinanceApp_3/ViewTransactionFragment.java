@@ -180,8 +180,8 @@ public class ViewTransactionFragment extends Fragment implements DatePickerFragm
     }
 
     /**
-     * retrieves the attributes (item title, date, amount an category) from the database
-     * and places them in lists.
+     * Retrieves the attributes (item, type, title, date, amount an category)
+     * from the database and places them in lists.
      * From these attribute-lists, a single list of Item-objects is created
      *
      * row 0 - id
